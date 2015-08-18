@@ -13,6 +13,7 @@ var soulsSpent = 0;
 //Lists
 var ancientList = "Ancients: ";
 var heroList = "Gilded heroes: ";
+var itemList = "";
 var miscList = "Misc Info: ";
 var timeList = "";
 
@@ -60,7 +61,7 @@ function calc(){
         i++;
     }
 
-    output.value = outputArray.join("");
+    output.value = outputArray.join("") + "\n\n" + itemList;// + itemList;
 
 
 }

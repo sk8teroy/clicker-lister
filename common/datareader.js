@@ -12,12 +12,18 @@ function readData(data){
 		readAncientLevels(data);
 		readAncients(data.ancients.ancients);	
 		readGilds(data.heroCollection.heroes);
+                if(data.hasOwnProperty("items")){
+                    readItems(data.items.items);
+                }
 		readMisc(data);
 		readTime(data);
 	}
 	if(abbreviated===true){
 		readAncientsAbr(data.ancients.ancients);	
 		readGilds(data.heroCollection.heroes);
+                if(data.hasOwnProperty("items")){
+                    readItems(data.items.items);
+                }
 		readMisc(data);
 		readTime(data);
 	}
@@ -63,6 +69,59 @@ function readAncients(data){
 	ancientList += ancientHolder;
 }
 
+function readItems(data){
+	// Takes in data in the form of a json string. data = data.items.items
+	itemList = "Items: ";
+        var rarity_arr = ["Common","Uncommon","Rare","Epic","Fabled","Mythical","Legendary","Transcendent"];
+        var items = "";
+	var ability;
+	
+    $.each(data, function() {
+        ability = [];
+            //Check each item's four abilities
+            for (var j=1; j<5; j++) {
+                var str = "bonusType" + j.toString();
+                if(this[str] > 0) {
+                    ability.push(
+                    applyLevelFormula(abilities[this[str]].effectDescription,
+                                      abilities[this[str]].levelAmountFormula,
+                                      this["bonus" + j + "Level"]));
+                }
+            }
+            //Add generic item information
+            items += this.name + ": ";
+            items += "Rarity: " + rarity_arr[this.rarity-1] + ", ";
+            items += "Level: " + this.level + ", Abilities: ";
+            //Add abilities between curlies
+            for(var i=0; i<ability.length;i++){
+                items += "{" + ability[i] + "}";
+            }
+            items += "\n\n";
+        }); 
+        if(items){
+            itemList += items;
+        }else{
+            itemList += "None;";
+        }
+        
+}
+function applyLevelFormula(e,formula,lvl)
+{
+    var expression = e;
+    var siyLib = [0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 249, 273, 297, 321, 345, 369, 393, 417, 441, 465, 488, 511, 534, 557, 580, 603, 626, 649, 672, 695, 717, 739, 761, 783, 805, 827, 849, 871, 893, 915, 936, 957, 978, 999, 1020, 1041, 1062, 1083, 1104, 1125, 1145, 1165, 1185, 1205, 1225, 1245, 1265, 1285, 1305, 1325, 1344, 1363, 1382, 1401, 1420, 1439, 1458, 1477, 1496, 1515, 1533, 1551, 1569, 1587, 1605, 1623, 1641, 1659, 1677, 1695, 1712, 1729, 1746, 1763, 1780, 1797, 1814, 1831, 1848, 1865, 1881, 1897, 1913, 1929, 1945, 1961, 1977, 1993, 2009, 2025];
+
+    formula == "linear1" ? expression = expression.replace("%1",lvl) :
+    formula == "linear5" ? expression = expression.replace("%1",lvl*5) :
+    formula == "linear0_25" ? expression = expression.replace("%1",lvl*.25) :
+    formula == "linear10" ? expression = expression.replace("%1",lvl*10) :
+    formula == "linear15" ? expression = expression.replace("%1",lvl*15) :
+    formula == "linear25" ? expression = expression.replace("%1",lvl*25) :
+    formula == "solomonRewards" ? expression = expression.replace("%1",lvl*5) :
+    formula == "linear10" ? expression = expression.replace("%1",lvl*10) :
+    expression = expression.replace("%1",siyLib[lvl]);
+
+    return expression;
+}
 function readAncientsAbr(data){
 
 	// Takes in data in the form of a json string. NOTE: The save file (as of 0.17a) saves ancient info
@@ -223,9 +282,11 @@ function readMisc(data){
 function arrayChopper(){
 	//Chops up output arrays in blocks up to 249 chars + a comma at the end. Always ends with comma.
     ancientArray = ancientList.match(/.{1,249};/g);
-	heroArray = heroList.match(/.{1,249},/g);
-	miscArray = miscList.match(/.{1,249},/g);
-	timeArray = timeList.match(/.{1,249},/g);
+    
+    itemArray = itemList; //.match(/.{1,249},/g);
+    heroArray = heroList.match(/.{1,249},/g);
+    miscArray = miscList.match(/.{1,249},/g);
+    timeArray = timeList.match(/.{1,249},/g);
 }
 	
 function readDamageMult(data){
