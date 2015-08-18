@@ -71,7 +71,7 @@ function readAncients(data){
 
 function readItems(data){
 	// Takes in data in the form of a json string. data = data.items.items
-	itemList = "Items: ";
+	itemList = "Items: \n";
         var rarity_arr = ["Common","Uncommon","Rare","Epic","Fabled","Mythical","Legendary","Transcendent"];
         var items = "";
 	var ability;
