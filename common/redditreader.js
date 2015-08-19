@@ -49,13 +49,13 @@ function readRedditAncients(data)
           }
       });
       if(ancientListObjects !== undefined){
-          ancientHolder = sortAncients(ancientListObjects) + "\n\n";
+          ancientHolder = sortAncients(ancientListObjects) + " \n\n";
       }
       if(maxCount){
-          ancientHolder += maxHolder.slice(0,-2) + ";\n\n"
+          ancientHolder += maxHolder.slice(0,-2) + ";  \n\n"
       }
       if(missCount){
-          ancientHolder += missHolder.slice(0,-2) + ";\n\n"
+          ancientHolder += missHolder.slice(0,-2) + ";  \n\n"
       }
       ancientList += ancientHolder; 
 }

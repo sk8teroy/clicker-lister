@@ -80,9 +80,9 @@ function calc(){
             itemList = itemList.replace("Junk Pile","**Junk Pile**:");
         }
         //Get rid of commas in place of ;
-         output.value = ancientList + heroList.slice(0,-1) + ";" +
-            "\n\n" + miscList.slice(0,-2) + ";" +
-            "\n\n" + timeList.slice(0,-2)+ ";" +
+         output.value = ancientList + heroList.slice(0,-1) + ";  " +
+            "\n\n" + miscList.slice(0,-2) + ";  " +
+            "\n\n" + timeList.slice(0,-2)+ ";  " +
             "\n\n" + itemList;
     }
 }

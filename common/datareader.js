@@ -52,7 +52,7 @@ function readItems(data){
         }
         //Add generic item information
         if(item_counter === 5){
-            items += "Junk Pile\n";
+            items += "Junk Pile:  \n";
         }
         items += this.name + ": ";
         items += "Rarity: " + rarity_arr[this.rarity-1] + ", ";
@@ -61,7 +61,7 @@ function readItems(data){
         for(var i=0; i<ability.length;i++){
             items += "{" + ability[i] + "}";
         }
-        items += "\n\n";
+        items += "  \n\n";
     }); 
         if(items !== ""){
             itemList += items;
