@@ -45,7 +45,9 @@ var ancients = [
 {name:"Iris",level:0,maxLevel:"None"},
 {name:"Revolc",level:0,maxLevel:15}
 ];
-var abilities = {
+//Full ability descriptions left here for reference
+/*
+var abilities_full = {
     1:{"name":"Abandonment","levelAmountFormula":"linear10","effectDescription":"+%1% DPS when idle (no clicks for 60 seconds)","id":1,"maxLevel":0,"scaling":"linear"},
     2:{"name":"Wrath","levelAmountFormula":"linear10","effectDescription":"+%1% Click Damage","id":2,"maxLevel":0,"scaling":"linear"},
     3:{"name":"Time","levelAmountFormula":"linear5","effectDescription":"+%1 seconds to Boss Fight timers","id":3,"maxLevel":0,"scaling":"cubic"},
@@ -70,12 +72,37 @@ var abilities = {
     22:{"name":"Greed","levelAmountFormula":"linear5","effectDescription":"+%1% Gold Dropped","id":22,"maxLevel":0,"scaling":"linear"},
     24:{"name":"Freedom","levelAmountFormula":"libAndSiy","effectDescription":"+%1% Gold gained from monsters when idle (no clicks for 60 seconds)","id":24,"maxLevel":0,"scaling":"linear"},"25":{"name":"Wisdom","levelAmountFormula":"solomonRewards","effectDescription":"+%1% Primal Hero Souls","id":25,"maxLevel":0,"scaling":"cubic"}
 };
+*/
+var abilities = {
+    1:{"name":"Abandonment","levelAmountFormula":"linear10","effectDescription":"+%1% Idle DPS","id":1,"maxLevel":0,"scaling":"linear"},
+    2:{"name":"Wrath","levelAmountFormula":"linear10","effectDescription":"+%1% Click Damage","id":2,"maxLevel":0,"scaling":"linear"},
+    3:{"name":"Time","levelAmountFormula":"linear5","effectDescription":"+%1 sec to Boss timers","id":3,"maxLevel":0,"scaling":"cubic"},
+    4:{"name":"Agitation","levelAmountFormula":"linear1","effectDescription":"+%1 sec Clickstorm","id":4,"maxLevel":0,"scaling":"linear"},
+    5:{"name":"Luck","levelAmountFormula":"linear1","effectDescription":"+%1% Double Rubies Chance","id":5,"maxLevel":7,"scaling":"cubic"},
+    6:{"name":"Vision","levelAmountFormula":"linear1","effectDescription":"+%1 Starting Zone","id":6,"maxLevel":0,"scaling":"cubic"},
+    7:{"name":"Enhancement","levelAmountFormula":"linear1","effectDescription":"+%1% to Gilded damage bonus (per Gild)","id":7,"maxLevel":0,"scaling":"linear"},
+    8:{"name":"Battery Life","levelAmountFormula":"linear1","effectDescription":"+%1 sec Metal Detector","id":8,"maxLevel":0,"scaling":"linear"},
+    9:{"name":"Thieves","levelAmountFormula":"linear1","effectDescription":"+%1 sec Golden Clicks","id":9,"maxLevel":0,"scaling":"linear"},
+    10:{"name":"Accuracy","levelAmountFormula":"linear1","effectDescription":"+%1 sec Lucky Strikes","id":10,"maxLevel":0,"scaling":"linear"},
+    11:{"name":"Rage","levelAmountFormula":"linear1","effectDescription":"+%1 sec Powersurge","id":11,"maxLevel":0,"scaling":"linear"},
+    12:{"name":"Wallops","levelAmountFormula":"linear1","effectDescription":"+%1 sec Super Clicks","id":12,"maxLevel":0,"scaling":"linear"},
+    13:{"name":"Diseases","levelAmountFormula":"linear1","effectDescription":"-%1% Boss Life","id":13,"maxLevel":7,"scaling":"cubic"},
+    14:{"name":"Death","levelAmountFormula":"linear10","effectDescription":"+%1% Hero Soul DPS (additive)","id":14,"maxLevel":0,"scaling":"linear"},
+    15:{"name":"Murder","levelAmountFormula":"linear1","effectDescription":"+%1% damage to Critical Clicks","id":15,"maxLevel":0,"scaling":"linear"},
+    16:{"name":"Discovery","levelAmountFormula":"linear10","effectDescription":"+%1% more Treasure Chests","id":16,"maxLevel":7,"scaling":"cubic"},
+    17:{"name":"Souls","levelAmountFormula":"linear1","effectDescription":"+%1% Chance of Primal Bosses","id":17,"maxLevel":7,"scaling":"cubic"},
+    18:{"name":"Chance","levelAmountFormula":"linear0_25","effectDescription":"+%1% Chance of 10x Gold","id":18,"maxLevel":7,"scaling":"cubic"},
+    19:{"name":"Thrift","levelAmountFormula":"linear1","effectDescription":"-%1% Hero Hiring and Level-Up cost","id":19,"maxLevel":7,"scaling":"cubic"},
+    20:{"name":"Wealth","levelAmountFormula":"linear15","effectDescription":"+%1% Gold from Golden Clicks","id":20,"maxLevel":0,"scaling":"linear"},
+    21:{"name":"Riches","levelAmountFormula":"linear25","effectDescription":"+%1% Gold From Treasure Chests","id":21,"maxLevel":0,"scaling":"linear"},
+    22:{"name":"Greed","levelAmountFormula":"linear5","effectDescription":"+%1% Gold Dropped","id":22,"maxLevel":0,"scaling":"linear"},
+    24:{"name":"Freedom","levelAmountFormula":"libAndSiy","effectDescription":"+%1% Idle Gold gained from monsters","id":24,"maxLevel":0,"scaling":"linear"},"25":{"name":"Wisdom","levelAmountFormula":"solomonRewards","effectDescription":"+%1% Primal Hero Souls","id":25,"maxLevel":0,"scaling":"cubic"}
+};
 var abr_ancients = [];
 
 for (var name in ancients){
 abr_ancients.push({name:ancients[name].name.substring(0,4),level:ancients[name].level});
 };
-
 
 //["None","None","Sol","Lib","Siy","Khrys","Thus","Mam","Mim","Plu","Dog","Fort","Atm","Dora","Bha","Morg","Chro","Bub","Frag","Vaag","Kuma","Chaw","Heca","Bers","Snip","Klep","Energon","Arga","Jugg","Iris"]
 // Abilities ivan:108 Alexa:109 Broyle:110 Midas:111
@@ -209,7 +236,7 @@ var heroHolder;
 var miscHolder;
 var timeHolder;
 var sortHolder;
-
+var missHolder;
 //Seeds
 var primals = {};
 var gilds = {};
@@ -225,19 +252,23 @@ var timeArray;
 var scientific = true;
 if (abbreviatedMode !== null) var abbreviated = abbreviatedMode.checked;
 var sortButtons = document.getElementsByName('sortMode');
+var platButtons = document.getElementsByName('platform');
 var sortMethod = $('input[name="sortMode"]:checked').val();
+var platform = $('input[name="platform"]:checked').val();
 
 
+function mainListener(event, func, button)
+{
 
-function mainListener(event, func, button){
+    if (abbreviatedMode !== null){
+        abbreviatedMode.addEventListener(event, func);
 
-if (abbreviatedMode !== null){
-abbreviatedMode.addEventListener(event, func);
-
-for (var l=0;l<sortButtons.length;l++)
-sortButtons[l].addEventListener(event, func);
-}
-button.addEventListener(event, func);
+        for (var l=0;l<sortButtons.length;l++)
+            sortButtons[l].addEventListener(event, func);
+        for (var l=0;l<platButtons.length;l++)
+            platButtons[l].addEventListener(event, func);
+    }
+    button.addEventListener(event, func);
 }
 
 function displayRound(num){

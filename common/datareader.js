@@ -29,6 +29,65 @@ function readData(data){
 	}
 }
 
+function readItems(data){
+	// Takes in data in the form of a json string. data = data.items.items
+	itemList = "Items: \n";
+        var rarity_arr = ["Common","Uncommon","Rare","Epic","Fabled","Mythical","Legendary","Transcendent"];
+        var items = "";
+	var ability;
+        var item_counter = 0;
+	
+    $.each(data, function() {
+        ability = [];
+        item_counter++;
+        //Check each items' four abilities
+        for (var j=1; j<5; j++) {
+            var str = "bonusType" + j.toString();
+            if(this[str] > 0) {
+                ability.push(
+                applyLevelFormula(abilities[this[str]].effectDescription,
+                                  abilities[this[str]].levelAmountFormula,
+                                  this["bonus" + j + "Level"]));
+            }
+        }
+        //Add generic item information
+        if(item_counter === 5){
+            items += "Junk Pile\n";
+        }
+        items += this.name + ": ";
+        items += "Rarity: " + rarity_arr[this.rarity-1] + ", ";
+        items += "Level: " + this.level + ", Abilities: ";
+        //Add abilities between curlies
+        for(var i=0; i<ability.length;i++){
+            items += "{" + ability[i] + "}";
+        }
+        items += "\n\n";
+    }); 
+        if(items !== ""){
+            itemList += items;
+        }else{
+            itemList += "None;";
+        }
+        
+}
+
+function applyLevelFormula(e,formula,lvl)
+{
+    var expression = e;
+    var siyLib = [0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 249, 273, 297, 321, 345, 369, 393, 417, 441, 465, 488, 511, 534, 557, 580, 603, 626, 649, 672, 695, 717, 739, 761, 783, 805, 827, 849, 871, 893, 915, 936, 957, 978, 999, 1020, 1041, 1062, 1083, 1104, 1125, 1145, 1165, 1185, 1205, 1225, 1245, 1265, 1285, 1305, 1325, 1344, 1363, 1382, 1401, 1420, 1439, 1458, 1477, 1496, 1515, 1533, 1551, 1569, 1587, 1605, 1623, 1641, 1659, 1677, 1695, 1712, 1729, 1746, 1763, 1780, 1797, 1814, 1831, 1848, 1865, 1881, 1897, 1913, 1929, 1945, 1961, 1977, 1993, 2009, 2025];
+
+    formula == "linear1" ? expression = expression.replace("%1",lvl) :
+    formula == "linear5" ? expression = expression.replace("%1",lvl*5) :
+    formula == "linear0_25" ? expression = expression.replace("%1",lvl*.25) :
+    formula == "linear10" ? expression = expression.replace("%1",lvl*10) :
+    formula == "linear15" ? expression = expression.replace("%1",lvl*15) :
+    formula == "linear25" ? expression = expression.replace("%1",lvl*25) :
+    formula == "solomonRewards" ? expression = expression.replace("%1",lvl*5) :
+    formula == "linear10" ? expression = expression.replace("%1",lvl*10) :
+    expression = expression.replace("%1",siyLib[lvl]);
+
+    return expression;
+}
 function readAncients(data){
 	ancientHolder = "";
 	// Takes in data in the form of a json string. NOTE: The save file (as of 0.17a) saves ancient info
@@ -46,8 +105,6 @@ function readAncients(data){
     $.each(data, function() {
 	// For each ancient, add new object to ancientListObjects with level and name
 	ancientListObjects.push({level:this.level, name: ancients[this.id-1].name,output:true});
-
-	
 		
 		// Adds the variable in the current ancient being checked to the total.
 		soulsSpent += this.spentHeroSouls;
@@ -69,64 +126,10 @@ function readAncients(data){
 	ancientList += ancientHolder;
 }
 
-function readItems(data){
-	// Takes in data in the form of a json string. data = data.items.items
-	itemList = "Items: \n";
-        var rarity_arr = ["Common","Uncommon","Rare","Epic","Fabled","Mythical","Legendary","Transcendent"];
-        var items = "";
-	var ability;
-	
-    $.each(data, function() {
-        ability = [];
-            //Check each item's four abilities
-            for (var j=1; j<5; j++) {
-                var str = "bonusType" + j.toString();
-                if(this[str] > 0) {
-                    ability.push(
-                    applyLevelFormula(abilities[this[str]].effectDescription,
-                                      abilities[this[str]].levelAmountFormula,
-                                      this["bonus" + j + "Level"]));
-                }
-            }
-            //Add generic item information
-            items += this.name + ": ";
-            items += "Rarity: " + rarity_arr[this.rarity-1] + ", ";
-            items += "Level: " + this.level + ", Abilities: ";
-            //Add abilities between curlies
-            for(var i=0; i<ability.length;i++){
-                items += "{" + ability[i] + "}";
-            }
-            items += "\n\n";
-        }); 
-        if(items){
-            itemList += items;
-        }else{
-            itemList += "None;";
-        }
-        
-}
-function applyLevelFormula(e,formula,lvl)
-{
-    var expression = e;
-    var siyLib = [0, 25, 50, 75, 100, 125, 150, 175, 200, 225, 249, 273, 297, 321, 345, 369, 393, 417, 441, 465, 488, 511, 534, 557, 580, 603, 626, 649, 672, 695, 717, 739, 761, 783, 805, 827, 849, 871, 893, 915, 936, 957, 978, 999, 1020, 1041, 1062, 1083, 1104, 1125, 1145, 1165, 1185, 1205, 1225, 1245, 1265, 1285, 1305, 1325, 1344, 1363, 1382, 1401, 1420, 1439, 1458, 1477, 1496, 1515, 1533, 1551, 1569, 1587, 1605, 1623, 1641, 1659, 1677, 1695, 1712, 1729, 1746, 1763, 1780, 1797, 1814, 1831, 1848, 1865, 1881, 1897, 1913, 1929, 1945, 1961, 1977, 1993, 2009, 2025];
-
-    formula == "linear1" ? expression = expression.replace("%1",lvl) :
-    formula == "linear5" ? expression = expression.replace("%1",lvl*5) :
-    formula == "linear0_25" ? expression = expression.replace("%1",lvl*.25) :
-    formula == "linear10" ? expression = expression.replace("%1",lvl*10) :
-    formula == "linear15" ? expression = expression.replace("%1",lvl*15) :
-    formula == "linear25" ? expression = expression.replace("%1",lvl*25) :
-    formula == "solomonRewards" ? expression = expression.replace("%1",lvl*5) :
-    formula == "linear10" ? expression = expression.replace("%1",lvl*10) :
-    expression = expression.replace("%1",siyLib[lvl]);
-
-    return expression;
-}
 function readAncientsAbr(data){
 
 	// Takes in data in the form of a json string. NOTE: The save file (as of 0.17a) saves ancient info
 	// under root.ancients.ancients
-
 	// Reset souls spent and ancients listed each time we read the ancients
 	soulsSpent = 0;
 	ancientList = "Ancients: ";
@@ -134,8 +137,7 @@ function readAncientsAbr(data){
 	var maxHolder = "MAX: ";
 	var maxCount = 0;
 	//Initialize ancient list
-	ancientListObjects = [];
-
+	ancientListObjects = []; 
 	
     $.each(data, function() {
 	// For each ancient, do the following. Unpurchased not listed.
@@ -144,42 +146,33 @@ function readAncientsAbr(data){
 		var objectExists=false;
 		
 		if(this.level == ancients[this.id-1].maxLevel) this.level = "MAX";
-		
+                
 		var currentLevel = this.level;
 			
 		// For each object in ancientListObjects,
 		$.each(ancientListObjects, function() {
 		
-					if(this.level=="MAX") return;
-			
-		
-			// If the objects level is the same as the ancients level
-			if(this.level==currentLevel){
-			
-
-				// Add ancient name to the list of names, state that the level exists
-				this.names += abr_ancients[ancientID-1].name + ', ';
-				objectExists=true;
-			}
-		
-		    });
+		    if(this.level=="MAX") return;
+                    // If the objects level is the same as the ancients level
+                    if(this.level==currentLevel){
+                        // Add ancient name to the list of names, state that the level exists
+                        this.names += abr_ancients[ancientID-1].name + ', ';
+                        objectExists=true;
+                    }
+		});
 		// If the level isn't found in the objectlist, add a new object with that level and name.
 		if (objectExists===false){
-		
-		if(this.level=="MAX"){ 
-		maxHolder += abr_ancients[ancientID-1].name + ', '; 
-		maxCount++;
-		}
-		
-		else ancientListObjects.push({level:this.level, names: abr_ancients[ancientID-1].name + ', '});
+                    if(this.level=="MAX"){ 
+                        maxHolder += abr_ancients[ancientID-1].name + ', '; 
+                        maxCount++;
+                    }else {
+                        ancientListObjects.push({level:this.level, names: abr_ancients[ancientID-1].name + ', '});
+                    }
 		}
 		
 		// Adds the variable in the current ancient being checked to the total.
 		soulsSpent += this.spentHeroSouls;
     });
-	
-	
-	
 	if(sortMethod=='id'){
 	// Add each objects level and names to the ancientList, slice off the trailing commas and spaces, add a closing semicolon and space.
 	$.each(ancientListObjects, function(){
@@ -200,8 +193,7 @@ function readAncientsAbr(data){
 			
 		}
 	}
-	
-	ancientList += ancientHolder;
+	ancientList += ancientHolder;// + missHolder;
 }
 
 function readGilds(data){
@@ -336,8 +328,6 @@ function readDamageMult(data){
 	souls.mult = ((souls.count*0.1) + (ancients[15].level*0.11)) + 1;
 }
 
-
-
 function readHeroes(data){
 
 	// Takes in data in the form of a json string. NOTE: The save file (as of 0.17a) saves hero info
@@ -372,23 +362,19 @@ function readUpgrades(data){
 
 }
 
-function readAncientLevels(data){
+function readAncientLevels(data)
+{
 
-	ancientCount = 0;
-	
-
-	// For each ancient,
-	$.each(ancients, function(index){
-
-		if(data.ancients.ancients[index+1]!==undefined) {
-		this.level = data.ancients.ancients[index+1].level;
-		
-		if(this.level!=0) ancientCount++;
-	}
-	});
-	
-	
-	
+    ancientCount = 0;
+    soulsSpent = 0;
+    // For each ancient,
+    $.each(ancients, function(index){
+        if(data.ancients.ancients[index+1]!==undefined) {
+            this.level = data.ancients.ancients[index+1].level;
+            soulsSpent += data.ancients.ancients[index+1].spentHeroSouls;
+            if(this.level!=0) ancientCount++;
+        }
+    });
 }
 	
 function readSeeds(data){
@@ -397,8 +383,6 @@ function readSeeds(data){
 	gilds = data.epicRoller.seed;
 	gilds = data.epicRoller.numUses;
 }
-
-
 
 function rollSeed(y){
 

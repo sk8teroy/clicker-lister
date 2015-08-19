@@ -26,21 +26,21 @@ for each (object), put (level) into an array. Then, sort array. Then, for each (
 	
 	for (var k = 0; k < levelArray.length; k++){
 	
-		if(abbreviated==true){
-		$.each(objectArray, function(){
-			if(this.level==levelArray[k]) sortHolder += this.level + ':' + (this.names).slice(0,-2) + "; ";
-			
-		});
-		}
-		if(abbreviated==false){
-		$.each(objectArray, function(){
-			if(this.level==levelArray[k] && this.output==true){
-			sortHolder += this.name + ' (' + this.level + '); ';
-			this.output=false;
-			}
-			
-		});
-		}
+            if(abbreviated==true){
+            $.each(objectArray, function(){
+                    if(this.level==levelArray[k]) sortHolder += this.level + ':' + (this.names).slice(0,-2) + "; ";
+
+            });
+            }
+            if(abbreviated==false){
+            $.each(objectArray, function(){
+                    if(this.level==levelArray[k] && this.output==true){
+                    sortHolder += this.name + ' (' + this.level + '); ';
+                    this.output=false;
+                    }
+
+            });
+            }
 	}
 
 	return sortHolder;
