@@ -34,6 +34,7 @@ function calc(){
     var myData = decryptSave(string);
 
     sortMethod = $('input[name="sortMode"]:checked').val();
+    itemOption = $('input[name="itemOption"]:checked').val();
 
     if(platform == "kong"){
         readData(myData);
