@@ -23,20 +23,28 @@ function readRedditData(data)
             readAbilities(data.items);
         }
     }
-    readMisc(data);
-    readTime(data);
+    readRedditMisc(data);
+    readRedditTime(data);
 }
 
 function readAbilities(data)
 {
-    itemList = "Items: \n";
+    itemList = "Total Item Bonuses: \n\n";
     var items = "";
     var ability = [];
     var ability_index;
     var item;
     
+    if(!data.hasOwnProperty("slots")){
+        itemList = "";
+        return;
+    }
     for(var i=1;i<5;i++){
-        item = data.items[data.slots[i]];
+        if(data.slots.hasOwnProperty(i)){
+            item = data.items[data.slots[i]];
+        }else{
+            continue;
+        }
         for (var j=1; j<5; j++) {
             ability_index = -1;
             var bonus_type = "bonusType" + j.toString();
@@ -57,7 +65,10 @@ function readAbilities(data)
         }
     }
     for(var m=0;m<ability.length;m++){
-        items += "{" + applyExpression(ability[m].type,ability[m].level) + "}\n";
+        if(platform != "kong"){
+            items += "* "
+        }
+        items += applyExpression(ability[m].type,ability[m].level) + "\n";
     }
     if(items !== ""){
         itemList += items;
@@ -88,14 +99,15 @@ function readItems(data)
         if(item_counter === 5){
             items += "Junk Pile:  \n";
         }
-        items += this.name + ": ";
-        items += "Rarity: " + rarity_arr[this.rarity-1] + ", ";
-        items += "Level: " + this.level + ", Abilities: ";
+        items += this.name.split(" of")[0] + ": ";
+        items += rarity_arr[this.rarity-1] + " ";
+        items += "Lvl " + this.level + ", ";
         //Add abilities between curlies
         for(var i=0; i<ability.length;i++){
-            items += "{" + ability[i] + "}";
+            items += ability[i] + ", ";
         }
-        items += "  \n\n";
+        items = items.slice(0,-2);
+        items += ";  \n\n";
     }); 
         if(items !== ""){
             itemList += items;
@@ -135,7 +147,7 @@ function readRedditAncients(data)
         var missCount = 0;
 	ancientListObjects = []; 
         abbreviated = false;
-        missHolder = "Locked: ";
+        missHolder = "Not Summoned: ";
         
       $.each(ancients,function() {
           if(this.name === "None"){
@@ -161,4 +173,72 @@ function readRedditAncients(data)
           ancientHolder += missHolder.slice(0,-2) + ";  \n\n"
       }
       ancientList += ancientHolder; 
+}
+
+function readRedditTime(data)
+{
+	// Reset the list at start of each call
+	timeList = "";
+	
+	// Grabs the various timestamps in the save.
+	creationTime = data.creationTimestamp;
+	prevLoginTime = data.prevLoginTimestamp;
+	startTime = data.startTimestamp;
+	// Grabs the current time, for comparisons.
+	currentTime = new Date().getTime();
+	// Compares times with current time. The positive signs are to specify integer handling. Javascript!
+	timeSinceCreation = +currentTime - +creationTime;
+	timeSinceAscension = +currentTime - +startTime;
+	
+	
+		//Adding time to array
+	
+	timeHolder = 'Time Since Start: ' + formatRedditTime(timeSinceCreation) + 'Time since ascension: ' + formatRedditTime(timeSinceAscension);
+	timeList += timeHolder;
+}
+
+function formatRedditTime(time)
+{
+    // Time coverted to seconds from milliseconds, doesn't need to be more accurate.
+    time /= 1000;
+    var days = time/(24*60*60);
+    var hours = (time/(60*60))%24;
+    var minutes = (time/60)%60; 
+    var seconds = time%60;
+    var result = "";
+    // Floor it all, removing remainders
+    days = Math.floor(days);
+    hours = Math.floor(hours);
+    minutes = Math.floor(minutes);
+    seconds = Math.floor(seconds);
+    
+    if(days) result += days + "d, ";
+    if(hours) result += hours + "h, ";
+    if(minutes) result += minutes + "m, ";
+    if(seconds) result += seconds + "s, "
+    // Return string of time.
+    /*if(abbreviated===false)*/ return result; //days + ' days, ' + hours + ' h, ' + minutes + ' m, ' + seconds + ' s';
+    /*if(abbreviated===true) return days + ' days, ' + hours + ' h';*/
+}
+
+function readRedditMisc(data)
+{
+    miscList = "";
+    var total_relics = "";
+    var ID = "";
+    if(data.hasOwnProperty("totalRelicsReceived")){
+        total_relics = "Total Relics Found: " + data.totalRelicsReceived;
+    }
+    if(data.hasOwnProperty("titanDamage")){
+        ID = "Immortal Damage: " + data.titanDamage;
+        if(total_relics != ""){
+            ID += ", ";
+        }
+    }
+    var totalSouls = +data.heroSouls + +soulsSpent;
+    miscHolder = 'Misc: HS (' + data.heroSouls +  '; Spent on Ancients: ' + soulsSpent + '; Total: ' + totalSouls + '), HZE: ' 
+            + data.highestFinishedZonePersist + ', Current Zone: ' + data.currentZoneHeight + ', Ascensions: ' + data.numWorldResets +  
+            ', ' + ID + total_relics;
+    //if (abbreviated===true) miscHolder = 'HS: ' + data.heroSouls +  ', HS on Ancients: ' + soulsSpent + ', Total HS: ' + totalSouls + ', High Zone: ' + data.highestFinishedZonePersist + ', Current Zone: ' + data.currentZoneHeight + ', Ascensions: ' + data.numWorldResets +  ', ';
+    miscList += miscHolder;
 }

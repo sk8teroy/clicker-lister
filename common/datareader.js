@@ -158,8 +158,8 @@ function readGilds(data){
 		
 		
 		// heroHolder works the same as ancientHolder. Manipulate the entry before we add it to the list, for cleanness.
-         if (abbreviated===false) heroHolder = heroes[this.id-1].name + ' (' + this.epicLevel + '),';
-        if (abbreviated===true) heroHolder = abr_heroes[this.id-1].name + '(' + this.epicLevel + '),';
+         if (abbreviated===false) heroHolder = heroes[this.id-1].name + ' (' + this.epicLevel + '), ';
+        if (abbreviated===true) heroHolder = abr_heroes[this.id-1].name + '(' + this.epicLevel + '), ';
 		// epicLevel = Gild count. Since it lists all purchased and unpurchased heroes, we only want to read the gilded heroes as of the current version.
 		if(this.epicLevel>0){
 			heroList += heroHolder;
@@ -194,30 +194,30 @@ function readTime(data){
 }
 
 function formatTime(time){
-	// Time coverted to seconds from milliseconds, doesn't need to be more accurate.
-	time /= 1000;
-	var days = time/(24*60*60);
-	var hours = (time/(60*60))%24;
-	var minutes = (time/60)%60; 
-	var seconds = time%60;
-	// Floor it all, removing remainders
-	days = Math.floor(days);
-	hours = Math.floor(hours);
-	minutes = Math.floor(minutes);
-	seconds = Math.floor(seconds);
-	
-	// Return string of time.
-	if(abbreviated===false) return days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, ' + seconds + ' seconds';
-	if(abbreviated===true) return days + ' days, ' + hours + ' hours';
+    // Time coverted to seconds from milliseconds, doesn't need to be more accurate.
+    time /= 1000;
+    var days = time/(24*60*60);
+    var hours = (time/(60*60))%24;
+    var minutes = (time/60)%60; 
+    var seconds = time%60;
+    // Floor it all, removing remainders
+    days = Math.floor(days);
+    hours = Math.floor(hours);
+    minutes = Math.floor(minutes);
+    seconds = Math.floor(seconds);
+
+    // Return string of time.
+    if(abbreviated===false) return days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, ' + seconds + ' seconds';
+    if(abbreviated===true) return days + ' days, ' + hours + ' hours';
 }
 
 function readMisc(data){
-	miscList = "";
-	var totalSouls = +data.heroSouls + +soulsSpent;
-	if (abbreviated===false) miscHolder = 'Hero Souls: ' + data.heroSouls +  ', Souls spent on Ancients: ' + soulsSpent + ', Total Souls: ' + totalSouls + ', Highest Zone: ' + data.highestFinishedZonePersist + ', Current Zone: ' + data.currentZoneHeight + ', Ascensions: ' + data.numWorldResets +  ', ';
-	if (abbreviated===true) miscHolder = 'HS: ' + data.heroSouls +  ', HS on Ancients: ' + soulsSpent + ', Total HS: ' + totalSouls + ', High Zone: ' + data.highestFinishedZonePersist + ', Current Zone: ' + data.currentZoneHeight + ', Ascensions: ' + data.numWorldResets +  ', ';
-	miscList += miscHolder;
-	}
+    miscList = "";
+    var totalSouls = +data.heroSouls + +soulsSpent;
+    if (abbreviated===false) miscHolder = 'Hero Souls: ' + data.heroSouls +  ', Souls spent on Ancients: ' + soulsSpent + ', Total Souls: ' + totalSouls + ', Highest Zone: ' + data.highestFinishedZonePersist + ', Current Zone: ' + data.currentZoneHeight + ', Ascensions: ' + data.numWorldResets +  ', ';
+    if (abbreviated===true) miscHolder = 'HS: ' + data.heroSouls +  ', HS on Ancients: ' + soulsSpent + ', Total HS: ' + totalSouls + ', High Zone: ' + data.highestFinishedZonePersist + ', Current Zone: ' + data.currentZoneHeight + ', Ascensions: ' + data.numWorldResets +  ', ';
+    miscList += miscHolder;
+}
 	
 function arrayChopper(){
 	//Chops up output arrays in blocks up to 249 chars + a comma at the end. Always ends with comma.

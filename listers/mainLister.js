@@ -75,14 +75,18 @@ function calc(){
             //Add reddit formatting for bolding
             ancientList = ancientList.replace("Ancients:","**Ancients**:");
             ancientList = ancientList.replace("Max:","**Max**:");
-            ancientList = ancientList.replace("Locked:","**Locked**:");
+            ancientList = ancientList.replace("Not Summoned:","**Not Summoned**:");
+            timeList = timeList.replace("Time Since Start:","**Time Since Start**:");
+            miscList = miscList.replace("Misc:","**Misc**:");
+            ancientList = ancientList.replace("Time since start:","**Time since start**:");
             heroList = heroList.replace("Gilded heroes:","**Gilded Heroes**:");
             itemList = itemList.replace("Items:","**Items**:");
-            itemList = itemList.replace("Junk Pile","**Junk Pile**:");
+            itemList = itemList.replace("Total Item Bonuses:","**Total Item Bonuses**:");
+            itemList = itemList.replace("Junk Pile:","**Junk Pile**:");
         }
         //Get rid of commas in place of ;
-         output.value = ancientList + heroList.slice(0,-1) + ";  " +
-            "\n\n" + miscList.slice(0,-2) + ";  " +
+         output.value = ancientList + heroList.slice(0,-2) + ";  " +
+            "\n\n" + miscList + ";  " +
             "\n\n" + timeList.slice(0,-2)+ ";  " +
             "\n\n" + itemList;
     }
