@@ -216,6 +216,10 @@ function formatRedditTime(time)
     if(hours > 0) result += hours + "h, ";
     if(minutes > 0) result += minutes + "m, ";
     if(seconds > 0 ) result += seconds + "s, ";
+    
+    if(result === ""){
+        result = "0s, ";
+    }
     // Return string of time.
     /*if(abbreviated===false)*/ return result; //days + ' days, ' + hours + ' h, ' + minutes + ' m, ' + seconds + ' s';
     /*if(abbreviated===true) return days + ' days, ' + hours + ' h';*/
