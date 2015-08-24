@@ -212,10 +212,10 @@ function formatRedditTime(time)
     minutes = Math.floor(minutes);
     seconds = Math.floor(seconds);
     
-    if(days >= 0) result += days + "d, ";
-    if(hours >= 0) result += hours + "h, ";
-    if(minutes >= 0) result += minutes + "m, ";
-    if(seconds >= 0 ) result += seconds + "s, ";
+    if(days > 0) result += days + "d, ";
+    if(hours > 0) result += hours + "h, ";
+    if(minutes > 0) result += minutes + "m, ";
+    if(seconds > 0 ) result += seconds + "s, ";
     // Return string of time.
     /*if(abbreviated===false)*/ return result; //days + ' days, ' + hours + ' h, ' + minutes + ' m, ' + seconds + ' s';
     /*if(abbreviated===true) return days + ' days, ' + hours + ' h';*/
