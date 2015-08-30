@@ -145,7 +145,7 @@ function readRedditAncients(data)
 	var maxHolder = "Max: ";
 	var maxCount = 0;
         var missCount = 0;
-	ancientListObjects = []; 
+	ancientListObjects = [];
         abbreviated = false;
         missHolder = "Not Summoned: ";
         
@@ -163,15 +163,18 @@ function readRedditAncients(data)
               ancientListObjects.push({name:this.name, level:this.level,output:true})
           }
       });
-      if(ancientListObjects !== undefined){
-          ancientHolder = sortAncients(ancientListObjects) + " \n\n";
+      if(ancientListObjects.length > 0){
+        ancientHolder = sortAncients(ancientListObjects) + " \n\n";
+        if(maxCount){
+          ancientHolder += maxHolder.slice(0,-2) + ";  \n\n";
+        }
+        if(missCount){
+          ancientHolder += missHolder.slice(0,-2) + ";  \n\n";
+        }
+      }else{
+          ancientHolder += "None;  \n\n";
       }
-      if(maxCount){
-          ancientHolder += maxHolder.slice(0,-2) + ";  \n\n"
-      }
-      if(missCount){
-          ancientHolder += missHolder.slice(0,-2) + ";  \n\n"
-      }
+
       ancientList += ancientHolder; 
 }
 
@@ -230,19 +233,27 @@ function readRedditMisc(data)
     miscList = "";
     var total_relics = "";
     var ID = "";
-    if(data.hasOwnProperty("totalRelicsReceived")){
-        total_relics = "Total Relics Found: " + data.totalRelicsReceived;
+    var cores = "";
+    var rubies = "";
+
+    if(data.hasOwnProperty("rubies")){
+        rubies = "Rubies: " + data.rubies + ", ";
     }
     if(data.hasOwnProperty("titanDamage")){
-        ID = "Immortal Damage: " + data.titanDamage;
-        if(total_relics != ""){
-            ID += ", ";
+        ID = "Immortal Damage: " + data.titanDamage + ", ";
+    }
+    if(data.hasOwnProperty("items")){
+        if(data.items.hasOwnProperty("salvagePoints")){
+            cores = "Forge Cores: " + data.items.salvagePoints + ", ";
         }
+    }
+    if(data.hasOwnProperty("totalRelicsReceived")){
+        total_relics = "Total Relics Found: " + data.totalRelicsReceived + ", ";
     }
     var totalSouls = +data.heroSouls + +soulsSpent;
     miscHolder = 'Misc: HS (' + data.heroSouls +  '; Spent on Ancients: ' + soulsSpent + '; Total: ' + totalSouls + '), HZE: ' 
             + data.highestFinishedZonePersist + ', Current Zone: ' + data.currentZoneHeight + ', Ascensions: ' + data.numWorldResets +  
-            ', ' + ID + total_relics;
+            ', ' + rubies + ID + cores + total_relics;
     //if (abbreviated===true) miscHolder = 'HS: ' + data.heroSouls +  ', HS on Ancients: ' + soulsSpent + ', Total HS: ' + totalSouls + ', High Zone: ' + data.highestFinishedZonePersist + ', Current Zone: ' + data.currentZoneHeight + ', Ascensions: ' + data.numWorldResets +  ', ';
     miscList += miscHolder;
 }

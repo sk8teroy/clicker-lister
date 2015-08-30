@@ -86,8 +86,8 @@ function calc(){
         }
         //Get rid of commas in place of ;
          output.value = ancientList + heroList.slice(0,-2) + ";  " +
-            "\n\n" + miscList + ";  " +
+            "\n\n" + miscList.slice(0,-2) + ";  " +
             "\n\n" + timeList.slice(0,-2)+ ";  " +
-            "\n\n" + itemList;
+            "\n\n" + itemList + "  ";
     }
 }
