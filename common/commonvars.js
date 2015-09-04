@@ -255,9 +255,12 @@ if (abbreviatedMode !== null) var abbreviated = abbreviatedMode.checked;
 var sortButtons = document.getElementsByName('sortMode');
 var platButtons = document.getElementsByName('platform');
 var itemButtons = document.getElementsByName('itemOption');
+var formatButtons = document.getElementsByName('formatOption');
+
 var sortMethod = $('input[name="sortMode"]:checked').val();
 var platform = $('input[name="platform"]:checked').val();
 var itemOption = $('input[name="itemOption"]:checked').val();
+var formatOption = $('input[name="formatOption"]:checked').val();
 
 function mainListener(event, func, button)
 {
@@ -270,6 +273,8 @@ function mainListener(event, func, button)
             platButtons[l].addEventListener(event, func);
         for (var l=0;l<itemButtons.length;l++)
             itemButtons[l].addEventListener(event, func);
+        for (var l=0;l<formatButtons.length;l++)
+            formatButtons[l].addEventListener(event, func);
     }
     button.addEventListener(event, func);
 }
@@ -281,26 +286,3 @@ function displayRound(num){
     return finalnum.toString() + "e" + (len-1).toString();
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

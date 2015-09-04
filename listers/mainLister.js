@@ -35,6 +35,7 @@ function calc(){
 
     sortMethod = $('input[name="sortMode"]:checked').val();
     itemOption = $('input[name="itemOption"]:checked').val();
+    formatOption = $('input[name="formatOption"]:checked').val();
 
     if(platform == "kong"){
         readData(myData);

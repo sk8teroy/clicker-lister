@@ -164,7 +164,7 @@ function readRedditAncients(data)
           }
       });
       if(ancientListObjects.length > 0){
-        ancientHolder = sortAncients(ancientListObjects) + " \n\n";
+        ancientHolder = sortRedditAncients(ancientListObjects) + " \n\n";
         if(maxCount){
           ancientHolder += maxHolder.slice(0,-2) + ";  \n\n";
         }
@@ -223,9 +223,8 @@ function formatRedditTime(time)
     if(result === ""){
         result = "0s, ";
     }
-    // Return string of time.
-    /*if(abbreviated===false)*/ return result; //days + ' days, ' + hours + ' h, ' + minutes + ' m, ' + seconds + ' s';
-    /*if(abbreviated===true) return days + ' days, ' + hours + ' h';*/
+    
+    return result;
 }
 
 function readRedditMisc(data)
@@ -237,23 +236,98 @@ function readRedditMisc(data)
     var rubies = "";
 
     if(data.hasOwnProperty("rubies")){
-        rubies = "Rubies: " + data.rubies + ", ";
+        rubies = "Rubies: " + formNum(data.rubies) + ", ";
     }
     if(data.hasOwnProperty("titanDamage")){
-        ID = "Immortal Damage: " + data.titanDamage + ", ";
+        ID = "Immortal Damage: " + formNum(data.titanDamage) + "; ";
     }
     if(data.hasOwnProperty("items")){
         if(data.items.hasOwnProperty("salvagePoints")){
-            cores = "Forge Cores: " + data.items.salvagePoints + ", ";
+            cores = "Forge Cores: " + formNum(data.items.salvagePoints) + "; ";
         }
     }
     if(data.hasOwnProperty("totalRelicsReceived")){
-        total_relics = "Total Relics Found: " + data.totalRelicsReceived + ", ";
+        total_relics = "Total Relics Found: " + data.totalRelicsReceived + "; ";
     }
     var totalSouls = +data.heroSouls + +soulsSpent;
-    miscHolder = 'Misc: HS (' + data.heroSouls +  '; Spent on Ancients: ' + soulsSpent + '; Total: ' + totalSouls + '), HZE: ' 
-            + data.highestFinishedZonePersist + ', Current Zone: ' + data.currentZoneHeight + ', Ascensions: ' + data.numWorldResets +  
-            ', ' + rubies + ID + cores + total_relics;
-    //if (abbreviated===true) miscHolder = 'HS: ' + data.heroSouls +  ', HS on Ancients: ' + soulsSpent + ', Total HS: ' + totalSouls + ', High Zone: ' + data.highestFinishedZonePersist + ', Current Zone: ' + data.currentZoneHeight + ', Ascensions: ' + data.numWorldResets +  ', ';
+    miscHolder = 'Misc: HS (' + formNum(data.heroSouls) +  '; Spent on Ancients: ' 
+            + formNum(soulsSpent) + '; Total: ' 
+            + formNum(totalSouls) + ') HZE: ' 
+            + formNum(data.highestFinishedZonePersist) + '; Current Zone: ' 
+            + formNum(data.currentZoneHeight) + '; Ascensions: ' 
+            + formNum(data.numWorldResets) +  '; ' 
+            + rubies + ID + cores + total_relics;
+
     miscList += miscHolder;
+}
+function formNum(number)
+{
+    var formatter = number;
+    var digits = number.toString().length;
+    var ACCURACY = 3; //Constant
+    
+    //Comma notation (default)
+    if(formatOption == "comma" || digits < 5){
+        formatter = number.toLocaleString();
+    }else{
+        var num = Math.round(number/(Math.pow(10,digits-ACCURACY))).toString();
+        while(num.length < ACCURACY ||num.length < 3){
+            num += "0";
+        }
+        //Scientific defaults
+        var period = 1;
+        var delimiter = 'e';
+        //Scientific
+        if(formatOption === "scientific"){
+            digits -= 1;
+        //Engineering
+        }else{
+            var mod = digits % 3;
+            delimiter = 'E';
+            if(mod == 0){
+                period = 3;
+                digits -= 3;
+            }else{
+                period = mod;
+                digits -= mod;
+            }
+        }
+        formatter = num.substring(0,period);
+        if(period < ACCURACY){
+            formatter += '.' + num.substring(period,num.length);
+        }
+        formatter += delimiter + digits;
+    }
+    return formatter;
+}
+function sortRedditAncients(objectArray){
+
+/*
+
+for each (object), put (level) into an array. Then, sort array. Then, for each (object), if level==array[i], output object. Do that for array.length
+
+*/
+	var levelArray = [];
+	sortHolder = "";
+	var i = 0;
+	$.each(objectArray, function() {
+	
+	levelArray[i] = this.level;
+	i++
+	});
+	
+	if(sortMethod=='asc') levelArray.sort(function(a, b){return a-b});
+	if(sortMethod=='desc') levelArray.sort(function(a, b){return b-a});
+	
+	for (var k = 0; k < levelArray.length; k++){
+            $.each(objectArray, function(){
+                    if(this.level==levelArray[k] && this.output==true){
+                    sortHolder += this.name + ' (' + formNum(this.level) + '); ';
+                    this.output=false;
+                    }
+
+            });
+            }
+
+	return sortHolder;
 }
