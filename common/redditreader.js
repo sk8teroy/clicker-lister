@@ -267,7 +267,7 @@ function formNum(number)
     var ACCURACY = 4; //Constant
     
     //Comma notation (default)
-    if(formatOption == "comma" || digits < 5){
+    if(formatOption == "comma" || digits < 6){
         var beg = digits % 3;
 
         if(beg > 0)
