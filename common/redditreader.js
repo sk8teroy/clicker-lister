@@ -264,7 +264,7 @@ function formNum(number)
 {
     var formatter = number;
     var digits = number.toString().length;
-    var ACCURACY = 3; //Constant
+    var ACCURACY = 4; //Constant
     
     //Comma notation (default)
     if(formatOption == "comma" || digits < 5){
