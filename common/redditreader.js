@@ -262,13 +262,21 @@ function readRedditMisc(data)
 }
 function formNum(number)
 {
-    var formatter = number;
+    var formatter = "";
     var digits = number.toString().length;
     var ACCURACY = 4; //Constant
     
     //Comma notation (default)
     if(formatOption == "comma" || digits < 5){
-        formatter = number.toLocaleString();
+        var beg = digits % 3;
+
+        if(beg > 0)
+            formatter = number.toString().substring(0,beg) + ",";
+        
+        for(var i = beg;i<number.toString().length;i+=3){
+            formatter += number.toString().substring(i,i+3) + ",";
+        }
+        formatter = formatter.slice(0,-1);
     }else{
         var num = Math.round(number/(Math.pow(10,digits-ACCURACY))).toString();
         while(num.length < ACCURACY ||num.length < 3){
