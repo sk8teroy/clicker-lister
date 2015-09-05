@@ -268,18 +268,10 @@ function formNum(number)
     
     //Comma notation (default)
     if(formatOption == "comma" || digits < 6){
-        var beg = digits % 3;
-
-        if(beg > 0)
-            formatter = number.toString().substring(0,beg) + ",";
-        
-        for(var i = beg;i<number.toString().length;i+=3){
-            formatter += number.toString().substring(i,i+3) + ",";
-        }
-        formatter = formatter.slice(0,-1);
+        formatter = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }else{
         var num = Math.round(number/(Math.pow(10,digits-ACCURACY))).toString();
-        while(num.length < ACCURACY ||num.length < 3){
+        while(num.length < ACCURACY || num.length < 3){
             num += "0";
         }
         //Scientific defaults
@@ -308,13 +300,8 @@ function formNum(number)
     }
     return formatter;
 }
-function sortRedditAncients(objectArray){
-
-/*
-
-for each (object), put (level) into an array. Then, sort array. Then, for each (object), if level==array[i], output object. Do that for array.length
-
-*/
+function sortRedditAncients(objectArray)
+{
 	var levelArray = [];
 	sortHolder = "";
 	var i = 0;
@@ -329,13 +316,12 @@ for each (object), put (level) into an array. Then, sort array. Then, for each (
 	
 	for (var k = 0; k < levelArray.length; k++){
             $.each(objectArray, function(){
-                    if(this.level==levelArray[k] && this.output==true){
-                    sortHolder += this.name + ' (' + formNum(this.level) + '); ';
-                    this.output=false;
-                    }
-
+                if(this.level==levelArray[k] && this.output==true){
+                sortHolder += this.name + ' (' + formNum(this.level) + '); ';
+                this.output=false;
+                }
             });
-            }
+        }
 
 	return sortHolder;
 }
