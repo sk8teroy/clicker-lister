@@ -252,7 +252,7 @@ function readRedditMisc(data)
     var totalSouls = +data.heroSouls + +soulsSpent;
     miscHolder = 'Misc: HS (' + formNum(data.heroSouls) +  '; Spent on Ancients: ' 
             + formNum(soulsSpent) + '; Total: ' 
-            + formNum(totalSouls) + ') HZE: ' 
+            + formNum(totalSouls + data.ancients.rerollSoulsSpent) + ') HZE: ' 
             + formNum(data.highestFinishedZonePersist) + '; Current Zone: ' 
             + formNum(data.currentZoneHeight) + '; Ascensions: ' 
             + formNum(data.numWorldResets) +  '; ' 
