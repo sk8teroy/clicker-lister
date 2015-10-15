@@ -177,8 +177,12 @@ var heroes = [
   //4 1:163 2:164 3:165 4:166
   {name: "Alabaster", cost: 1e145, damage: 1.721e122, level: 0, upgradeCosts: [1e146, 2.5e146, 1e147, 0, 8e147], upgradeIDs:[168,169,170,171]},
   //4 1:168 2:169 3:170 4:171
-  {name: "Astraea", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]}
+  {name: "Astraea", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]},
   //4 1:173 2:174 3:175 4:176
+  {name: "Test 1", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]},
+  {name: "new 1", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]},
+  {name: "new 2", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]},
+  {name: "new 3", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]}
 ];
 
 var heroUpgrades =[
