@@ -148,16 +148,14 @@ function readGilds(data){
 
 	// Takes in data in the form of a json string. NOTE: The save file (as of 0.17a) saves hero info
 	// under root.heroCollection.heroes
-
 	// Reset list at start of each call
 	heroList = "Gilded heroes: ";
 	var gildCount = 0;
 	
 	// Jquery, for each (object) in (data), do (function). The objects in .heroes are all the heroes, named after their ID. Unpurchased ARE listed, unlike ancients.
     $.each(data, function() {
-		
-		
 		// heroHolder works the same as ancientHolder. Manipulate the entry before we add it to the list, for cleanness.
+         if(this.id-1<heroes.length){
          if (abbreviated===false) heroHolder = heroes[this.id-1].name + ' (' + this.epicLevel + '), ';
         if (abbreviated===true) heroHolder = abr_heroes[this.id-1].name + '(' + this.epicLevel + '), ';
 		// epicLevel = Gild count. Since it lists all purchased and unpurchased heroes, we only want to read the gilded heroes as of the current version.
@@ -165,10 +163,11 @@ function readGilds(data){
 			heroList += heroHolder;
 			gildCount++;
 		}
+            }
     });
 	
 	if(gildCount == 0) heroList += "None, ";
-	
+    
 }
 
 function readTime(data){
