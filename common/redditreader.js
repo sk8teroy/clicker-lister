@@ -234,7 +234,8 @@ function readRedditMisc(data)
     var ID = "";
     var cores = "";
     var rubies = "";
-
+    var achievements = "";
+    
     if(data.hasOwnProperty("rubies")){
         rubies = "Rubies: " + formNum(data.rubies) + ", ";
     }
@@ -249,14 +250,23 @@ function readRedditMisc(data)
     if(data.hasOwnProperty("totalRelicsReceived")){
         total_relics = "Total Relics Found: " + data.totalRelicsReceived + "; ";
     }
+    if(data.hasOwnProperty("achievements")){
+        var counter = 0;
+        for(var i in data.achievements){
+            if(data.achievements.hasOwnProperty(i)){
+                counter++;
+            }
+        }
+        achievements = "Achievements: " + Math.floor(counter/103*100) + "%; ";
+    }
     var totalSouls = +data.heroSouls + +soulsSpent;
-    miscHolder = 'Misc: HS (' + formNum(data.heroSouls) +  '; Spent on Ancients: ' 
-            + formNum(soulsSpent) + '; Total: ' 
+    miscHolder = 'Misc: HS (' + formNum(data.heroSouls) +  '; Spent on Ancients/Rerolls: ' 
+            + formNum(soulsSpent) + '/' + formNum(data.ancients.rerollSoulsSpent) + '; Total: ' 
             + formNum(totalSouls + data.ancients.rerollSoulsSpent) + ') HZE: ' 
             + formNum(data.highestFinishedZonePersist) + '; Current Zone: ' 
             + formNum(data.currentZoneHeight) + '; Ascensions: ' 
             + formNum(data.numWorldResets) +  '; ' 
-            + rubies + ID + cores + total_relics;
+            + rubies + ID + cores + total_relics + achievements;
 
     miscList += miscHolder;
 }
