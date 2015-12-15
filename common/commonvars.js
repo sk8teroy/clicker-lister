@@ -183,7 +183,7 @@ var heroes = [
   {name: "Moloch", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]},
   {name: "Bomber Max", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]},
   {name: "Gog", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]},
-  {name: "new 3", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]}
+  {name: "Wepwawet", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]}
 ];
 
 var heroUpgrades =[
