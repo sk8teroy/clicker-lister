@@ -257,7 +257,7 @@ function readRedditMisc(data)
                 counter++;
             }
         }
-        achievements = "Achievements: " + Math.floor(counter/151*100) + "%; ";
+        achievements = "Achievements: " + Math.floor(counter/149*100) + "%; ";
     }
     var totalSouls = +data.heroSouls + +soulsSpent;
     miscHolder = 'Misc: HS (' + formNum(data.heroSouls) +  '; Spent on Ancients/Rerolls: ' 
