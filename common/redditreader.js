@@ -77,7 +77,7 @@ function readAbilities(data)
     }
 
     for(var m=0;m<ability.length;m++){
-        if(platform != "kong"){
+        if(outputFormat != "kong"){
             items += "* "
         }
 

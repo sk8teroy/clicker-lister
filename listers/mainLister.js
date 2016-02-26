@@ -7,6 +7,89 @@
   ==================================================
 */
 
+
+
+/***********************************************************************
+ * Ancients: Ancient name (ancient level) 
+ * Max: Anceints that are maxed
+ * Not summoned: Ancients taht are not summoned 
+ * 
+ * Gilded Heroes: Hero name (# of gilds)
+ * 
+ * Misc: 
+ * HS (326,188; Spent on Ancients/Rerolls: 6,752,529/9,118; Total: 7,087,835) 
+ * HZE: 1,694
+ * Current Zone: 1,263
+ * Ascensions: 83
+ * Rubies: 121
+ * Immortal Damage: 2,421,135
+ * Forge Cores: 25,307
+ * Total Relics Found: 174
+ * Achievements: 71%;  
+ *
+ * Time Since Start: 94d, 23h, 45m
+ * Time since ascension: 11h, 16s;  
+ * 
+ * Relic stuff
+ * Total Item Bonuses:
+ * +15% Primal Boss Chance
+ * +28 Sec Super Clicks
+ * +2 Starting Zone
+ * +40% Hero Soul DPS
+ * OR
+ * Items:
+ * Relic Name: relic-rarity Lvl relic-lvl, bonus1; bonus; ...
+ * Garnet Ring: Common Lvl 30, +4% Primal Boss Chance;  
+ * Copper Band: Common Lvl 31, +4% Primal Boss Chance;  
+ * Silver Azurite: Common Lvl 42, +4% Primal Boss Chance;  
+ * Handwraps: Common Lvl 50, +28 Sec Super Clicks, +3% Primal Boss Chance, +2 Starting Zone, +40% Hero Soul DPS;  
+ * 
+ * Miscellaneous Switches:
+ * Reddit style - bold or unbold option for section titles
+ * Ancient sort order controlled by ascending/descending order radio button
+ * Abilities or Itesm switch for Relic data
+ * number formatting: comma, scientific, engineering
+ * Kong style - abbreviated mode off = no max section, no unsummoned section. all ancients summoned listed with level
+ * Kong style - abbreviated mode on = no max section, no unsummoned section. all ancients summed up by value.  675:Mamm,Mimz MAX: Bubo, Kuma, etc. etc.
+ ***********************************************************************/
+
+/* **clicker hero data json**
+ * ancients - name, level, 
+ * heroes - name, #gilds
+ * relics -relic[1-4], forge cores, total relics found
+ * - name, rarity, level, relic-bonus[1-4]
+ * - relic-bonus - ancient name, +levels, effect
+ * misc
+ * - herosouls - current, spent on ancients, spent on rerolls, total
+ * - zones - hze, current
+ * - ascensions
+ * - rubies
+ * - immortal damage
+ * - achievements
+ */
+
+/* **output format json**
+ * outputformat
+ * -bold t/f
+ * -short names t/f
+ * -max output length (250 for kong, undefined for no limit
+ * -show abilities t/f
+ * -show relics t/f
+ * -sort ancients ascending/descending
+ * -numberformat
+ * -group maxed ancients t/f
+ * -group ancients by level t/f
+ * -show unsummoned ancients t/f
+ */
+
+/**
+ var obj = new Object();
+   obj.name = "Raj";
+   obj.age  = 32;
+   obj.married = false;
+   var jsonString= JSON.stringify(obj);
+*/
+
 //Misc
 var soulsSpent = 0;
 
@@ -23,8 +106,8 @@ mainListener('click',calc,calcButton);
 function calc(){
     abbreviated = abbreviatedMode.checked;
 
-    platform = $('input[name="platform"]:checked').val();
-    if(platform === "reddit"){
+    outputFormat = $('input[name="outputFormat"]:checked').val();
+    if(outputFormat === "reddit"){
         $("#abbreviatedMode").next("label").html("Bold Titles");
     }else{
         $("#abbreviatedMode").next("label").html("Abbreviated Mode");
@@ -37,7 +120,7 @@ function calc(){
     itemOption = $('input[name="itemOption"]:checked').val();
     formatOption = $('input[name="formatOption"]:checked').val();
 
-    if(platform == "kong"){
+    if(outputFormat == "kong"){
         readData(myData);
         arrayChopper();
         //Adds together the arrays. More arrays can be added after heroArray with commas separating them.
