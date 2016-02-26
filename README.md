@@ -1,8 +1,8 @@
 clicker-lister
 ==============
 
-Script that creates copy-paste stuff for Clicker Heroes.
+Creates "pretty-print" format Clicker Heroes descriptions.
 
-Contact info:
-Lilylicious can be found on [Kongregate](http://www.kongregate.com/accounts/Lilylicious), [reddit](http://www.reddit.com/user/SnickeringSaddle/) and [twitter](https://twitter.com/Lilyliciously).
+Simple Rules of Thumb calculator, forked from [DobruJ01](https://github.com/DobruJ01/clicker-lister) for www.clickerheroes.com 
 
+[Clicker-Lister](https://alexbonjour.github.io/clicker-lister/)
