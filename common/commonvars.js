@@ -187,39 +187,12 @@ var heroes = [
     {name: "Wepwawet", cost: 1e160, damage: 1.268e135, level: 0, upgradeCosts: [1e161, 2.5e161, 1e162, 0, 8e162], upgradeIDs:[173,174,175,176]}
 ];
 
-var heroUpgrades =[
-    {name:"Test", upgrades:[true,true,false,false]},
-];
-
 var abr_heroes = [];
 
 for (var name in heroes){
     abr_heroes.push({name:heroes[name].name.substring(0,4)})
 }
 
-var nonMaxAncients = [
-    {name:"Solomon",level:0},
-    {name:"Libertas",level:0},
-    {name:"Siyalatas",level:0},
-    {name:"Thusia",level:0},
-    {name:"Mammon",level:0},
-    {name:"Mimzee",level:0},
-    {name:"Pluto",level:0},
-    {name:"Bhaal",level:0},
-    {name:"Morgulis",level:0},
-    {name:"Chronos",level:0},
-    {name:"Fragsworth",level:0},
-    {name:"Argaiv",level:0},
-    {name:"Juggernaut",level:0},
-    {name:"Iris",level:0}
-];
-
-// Simulation Things
-var souls = {};
-var globalUpgrades = 1;
-var achievementDPS = 1;
-var siyMult = 1;
-var iterations = 10000;
 var ancientCount = 0;
 
 //Time
@@ -242,9 +215,6 @@ var miscHolder;
 var timeHolder;
 var sortHolder;
 var missHolder;
-//Seeds
-var primals = {};
-var gilds = {};
 
 // Arrays
 var ancientArray;
@@ -283,8 +253,3 @@ function mainListener(event, func, button)
     button.addEventListener(event, func);
 }
 
-function displayRound(num){
-    var len = num.toString().length;
-    var finalnum = (Math.floor(num/(Math.pow(10,len-1))*1000)/1000);
-    return finalnum.toString() + "e" + (len-1).toString();
-}

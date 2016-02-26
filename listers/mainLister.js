@@ -11,7 +11,7 @@
 
 /***********************************************************************
  * Ancients: Ancient name (ancient level) 
- * Max: Anceints that are maxed
+ * Max: Ancients that are maxed
  * Not summoned: Ancients taht are not summoned 
  * 
  * Gilded Heroes: Hero name (# of gilds)

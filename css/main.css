@@ -92,6 +92,10 @@ a {
     font-style: italic;
 }
 
+.titanic {
+    float: none;
+}
+
 .tooltip {
     border-bottom: thin dotted;
 }

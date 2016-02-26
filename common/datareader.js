@@ -228,53 +228,6 @@ function arrayChopper(){
     timeArray = timeList.match(/.{1,249},/g);
 }
 
-function readDamageMult(data){
-    // For each hero, 
-    $.each(heroes, function(index){
-        // Give root.heroCollection.heroes
-        this.dmgMult = data.heroCollection.heroes[index+1].damageMultiplier;
-        
-    });
-
-    
-    /*
-      Tests: Samurai at 5.004e30, level 950, 9 gilds, 354 souls. 
-      Tests: Samurai at 4.977e30, level 950, 9 gilds, 352 souls.
-      
-      
-      
-    */
-    
-    
-    globalUpgrades = 1;
-    if(heroes[4].upgrades[3]==true) globalUpgrades *= 1.25;
-    
-    if(heroes[5].upgrades[0]==true) globalUpgrades *= 1.2;
-    if(heroes[5].upgrades[1]==true) globalUpgrades *= 1.2;
-    if(heroes[5].upgrades[2]==true) globalUpgrades *= 1.2;
-    if(heroes[5].upgrades[3]==true) globalUpgrades *= 1.2;
-
-    if(heroes[7].upgrades[3]==true) globalUpgrades *= 1.25;
-    
-    if(heroes[13].upgrades[0]==true) globalUpgrades *= 1.25;
-    
-    if(heroes[19].upgrades[1]==true) globalUpgrades *= 1.2;
-    if(heroes[19].upgrades[2]==true) globalUpgrades *= 1.2;
-    
-    if(heroes[20].upgrades[3]==true) globalUpgrades *= 1.1;
-    
-    if(heroes[23].upgrades[1]==true) globalUpgrades *= 1.1;
-    
-    if(heroes[24].upgrades[0]==true) globalUpgrades *= 1.25;
-    if(heroes[24].upgrades[2]==true) globalUpgrades *= 1.25;
-    
-    if(heroes[25].upgrades[2]==true) globalUpgrades *= 1.25;
-    
-    achievementDPS = data.allDpsMultiplier/globalUpgrades;
-    
-    souls.mult = ((souls.count*0.1) + (ancients[15].level*0.11)) + 1;
-}
-
 function readHeroes(data){
 
     // Takes in data in the form of a json string. NOTE: The save file (as of 0.17a) saves hero info
@@ -288,25 +241,6 @@ function readHeroes(data){
 
 
     });
-}
-
-function readUpgrades(data){
-
-    // For each hero
-    $.each(heroes, function(index){
-        
-        this.upgrades = [];
-
-        var currentIndex = index;
-        if(this.upgradeIDs===undefined) return;
-        // For each upgradeID of each hero
-        $.each (this.upgradeIDs, function(index,value){
-            // If it's true, then set to true. If undefined, set to false.
-            if(data[value]===true) heroes[currentIndex].upgrades.push(true);
-            if(data[value]===undefined) heroes[currentIndex].upgrades.push(false);
-        });
-    });
-
 }
 
 function readAncientLevels(data)
@@ -324,31 +258,47 @@ function readAncientLevels(data)
     });
 }
 
-function readSeeds(data){
-    primals.seed = data.primalNumberGenerator.seed;
-    primals.uses = data.primalNumberGenerator.numUses;
-    gilds = data.epicRoller.seed;
-    gilds = data.epicRoller.numUses;
-}
+function sortAncients(objectArray){
 
-function rollSeed(y){
+    /*
 
-    y *= 16807 % (2147483647);
-    return y;
-}
+      for each (object), put (level) into an array. 
+      Then, sort array. 
+      Then, for each (object), if level==array[i], output object.  Do that for array.length
 
-function isPrimal(data,level){
+    */
 
-    var x = data.primalNumberGenerator.seed;
-    var n = (level - 100)/5;
+    var levelArray = [];
+    sortHolder = "";
     var i = 0;
-
-    while(i<n-1){
-        x = rollSeed(x);
+    $.each(objectArray, function() {
+        
+        levelArray[i] = this.level;
         i++
+    });
+    
+    if(sortMethod=='asc') levelArray.sort(function(a, b){return a-b});
+    if(sortMethod=='desc') levelArray.sort(function(a, b){return b-a});
+    
+    for (var k = 0; k < levelArray.length; k++){
+        
+        if(abbreviated==true){
+            $.each(objectArray, function(){
+                if(this.level==levelArray[k]) sortHolder += this.level + ':' + (this.names).slice(0,-2) + "; ";
+
+            });
+        }
+
+        if(abbreviated==false){
+            $.each(objectArray, function(){
+                if(this.level==levelArray[k] && this.output==true){
+                    sortHolder += this.name + ' (' + this.level + '); ';
+                    this.output=false;
+                }
+
+            });
+        }
     }
 
-    if(x % 100 < (25+ancients[12].level)) return true;
-    else return false;
-
+    return sortHolder;
 }
