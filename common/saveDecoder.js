@@ -39,8 +39,11 @@ function fromAntiCheatFormat(string)
 
 function unSprinkle(string)
 {
-    // Unsprinkles the save. Sprinkle adds randomized elements after every character. Split by "" to separate it all into separate spots in the array.
-    // Splitting the array isn't strictly necessary. Strings are technically an array of letters. Might try to remove the splitting and see if it still works.
+    // Unsprinkles the save. Sprinkle adds randomized elements after
+    // every character. Split by "" to separate it all into separate
+    // spots in the array.  Splitting the array isn't strictly
+    // necessary. Strings are technically an array of letters. Might
+    // try to remove the splitting and see if it still works.
 
     var array = string.split("");
     // Empty array for the result.
@@ -50,9 +53,12 @@ function unSprinkle(string)
     // Until we reach the end of the string...
     while (counter < array.length)
     {
-        // Take a letter, add it to the new array at half the value it was at from the start. 0 becomes 0. 2 becomes 1. 4 becomes 2. 6 becomes 3. etc.
+        // Take a letter, add it to the new array at half the value it
+        // was at from the start. 0 becomes 0. 2 becomes 1. 4 becomes
+        // 2. 6 becomes 3. etc.
         result[counter / 2] = array[counter];
-        // Advancing by two steps skips every other letter, effectively unsprinkling it.
+        // Advancing by two steps skips every other letter,
+        // effectively unsprinkling it.
         counter += 2;
     }
     return result.join("");
@@ -60,12 +66,16 @@ function unSprinkle(string)
 
 function getHash(string)
 {
-    // Split the string up. Again, not strictly necessary, might change at some point.
+    // Split the string up. Again, not strictly necessary, might
+    // change at some point.
     var characters = string.split();
-    // Sort the string. The hash doesn't need to be decrypted, only encrypted, thus the actual data isn't preserved.
+    // Sort the string. The hash doesn't need to be decrypted, only
+    // encrypted, thus the actual data isn't preserved.
     characters.sort();
-    // Joins the characters into a variable. Not sure if this step is necessary either.
+    // Joins the characters into a variable. Not sure if this step is
+    // necessary either.
     var sortedcharacters = characters.join();
-    // Returns and MD5 hash. Not the most secure of hashes, but functional and suitable for our uses. 
+    // Returns and MD5 hash. Not the most secure of hashes, but
+    // functional and suitable for our uses.
     return CryptoJS.MD5(sortedcharacters + SALT);
 }
