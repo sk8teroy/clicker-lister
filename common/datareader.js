@@ -42,8 +42,8 @@ function readAncients(data){
     // under root.ancients.ancients
 
     // Reset souls spent and ancients listed each time we read the ancients
-    soulsSpent = 0;
-    ancientList = "Ancients: ";
+    soulsSpent = 0; 
+   ancientList = "Ancients: ";
     
     
     
