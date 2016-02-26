@@ -11,52 +11,52 @@
   <body>
     <div class="center">
       <table width="100%" border="0">
-	<tr>
-	  <td colspan="2" align="center" valign="middle">
+        <tr>
+          <td colspan="2" align="center" valign="middle">
             <p><h1>Welcome To Clicker Lister!</h1></p>
-	  </td>
-	</tr>
-	<tr>
-	  <td colspan="2" align="center" valign="middle"><p><em>What is Clicker Lister you ask? It is a tool for Clicker Heroes that takes your save game, reads it, and then outputs various game related data in an easy to read format!</em></p></td>
-	</tr>
-	<tr>
-	  <td align="center" valign="middle"><strong>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center" valign="middle"><p><em>What is Clicker Lister you ask? It is a tool for Clicker Heroes that takes your save game, reads it, and then outputs various game related data in an easy to read format!</em></p></td>
+        </tr>
+        <tr>
+          <td align="center" valign="middle"><strong>
               <p>Input Data</p>
           </strong></td>
-	  <td align="center" valign="middle"><strong>
+          <td align="center" valign="middle"><strong>
               <p>Output Data</p>
           </strong></td>
-	</tr>
-	<tr>
-	  <td align="center" valign="middle"><span class="infotext">Paste your Clicker Heroes save into this box.</span></td>
-	  <td align="center" valign="middle"><span class="infotext">Copy the text from this box into your chat window.</span></td>
-	</tr>
-	<tr>
-	  <td align="center" valign="middle"><strong><span class="infotext">Click on the <span id="sprytrigger1" class="tooltip">spanner</span> icon at the top right ingame to export your save data to your clipboard.</strong></span></td>
-	  <td align="center" valign="middle"><strong><span class="infotext">This tool automatically splits the output data into lines of 250 characters for the Kongregate chat limit.</strong></span></td>
-	</tr>
-	<tr>
-	  <td align="center" valign="middle"><textarea id="input" cols="65" rows="15" type="text"></textarea></td>
-	  <td align="center" valign="middle"><textarea id="output" cols="65" rows="15" type="text"></textarea></td>
-	</tr>
-	<tr>
-	  <td align="center" valign="middle"><button id="calcButton" class="button">Decode Save!</button></td>
-	  <td align="center" valign="middle"><button onclick="ClearTextArea();" class="button">Clear Data!</button></td>
-	</tr>
-	<tr>
-	  <!--<td align="center" valign="middle"></td>-->
-	  <td align="center" valign="middle">
+        </tr>
+        <tr>
+          <td align="center" valign="middle"><span class="infotext">Paste your Clicker Heroes save into this box.</span></td>
+          <td align="center" valign="middle"><span class="infotext">Copy the text from this box into your chat window.</span></td>
+        </tr>
+        <tr>
+          <td align="center" valign="middle"><strong><span class="infotext">Click on the <span id="sprytrigger1" class="tooltip">spanner</span> icon at the top right ingame to export your save data to your clipboard.</strong></span></td>
+          <td align="center" valign="middle"><strong><span class="infotext">This tool automatically splits the output data into lines of 250 characters for the Kongregate chat limit.</strong></span></td>
+        </tr>
+        <tr>
+          <td align="center" valign="middle"><textarea id="input" cols="65" rows="15" type="text"></textarea></td>
+          <td align="center" valign="middle"><textarea id="output" cols="65" rows="15" type="text"></textarea></td>
+        </tr>
+        <tr>
+          <td align="center" valign="middle"><button id="calcButton" class="button">Decode Save!</button></td>
+          <td align="center" valign="middle"><button onclick="ClearTextArea();" class="button">Clear Data!</button></td>
+        </tr>
+        <tr>
+          <!--<td align="center" valign="middle"></td>-->
+          <td align="center" valign="middle">
             <input type="radio" onchange="calc()" name="platform" value = "reddit" checked>Reddit Display
             <input type="radio" onchange="calc()" name="platform"  value = "kong" >Kongregate Display
             
-	  </td>
-	  <td align="center" valign="middle">
+          </td>
+          <td align="center" valign="middle">
             <input type="radio" name="sortMode" value = "desc" checked>Descending order
             <input type="radio" name="sortMode" value = "asc">Ascending order
-	  </td>
+          </td>
 
-	</tr>
-	<tr>
+        </tr>
+        <tr>
           <td align="center" valign="middle">
             <input type="radio" onchange="calc()" name="itemOption" value = "item">Display Items
             <input type="radio" onchange="calc()" name="itemOption"  value = "ability" checked>Display Abilities
@@ -65,11 +65,11 @@
           <td align="center" valign="middle"><input type="checkbox" id="abbreviatedMode" checked><label for="abbreviatedMode">Bold Titles</label></td>
           <!--<td align="center" valign="middle"></td>
               <td align="center" valign="middle">
-		<input type="radio" onchange="calc()" name="platform" value = "reddit" checked>Reddit Display
-		<input type="radio" onchange="calc()" name="platform"  value = "kong" >Kongregate Display
+                <input type="radio" onchange="calc()" name="platform" value = "reddit" checked>Reddit Display
+                <input type="radio" onchange="calc()" name="platform"  value = "kong" >Kongregate Display
               </td>-->
-	</tr>
-	<tr>
+        </tr>
+        <tr>
           <td align="center" valign="middle">
             <input type="radio" onchange="calc()" name="formatOption" value = "comma" checked>Comma
             <input type="radio" onchange="calc()" name="formatOption"  value = "scientific">Scientific
@@ -78,17 +78,17 @@
           </td>
           <!--<td align="center" valign="middle"></td>
               <td align="center" valign="middle">
-		<input type="radio" onchange="calc()" name="itemOption" value = "item" checked>Display Items
-		<input type="radio" onchange="calc()" name="itemOption"  value = "ability" >Display Abilities
+                <input type="radio" onchange="calc()" name="itemOption" value = "item" checked>Display Items
+                <input type="radio" onchange="calc()" name="itemOption"  value = "ability" >Display Abilities
               </td>-->
-	</tr>
-	<tr>
-	  <td align="center" valign="middle"></td>
-	  
-	</tr>
-	<tr>
-	  <td colspan="2" align="center" valign="middle" class="footer"><p>By <a href="https://github.com/alexbonjour">Alex B.</a> | Forked from <a href="https://github.com/DobruJ01/clicker-lister">DobruJ01</a> with earlier work by <a href="http://www.kongregate.com/accounts/Lilylicious">Lilylicious</a> & <a href="http://www.kongregate.com/accounts/Deadmano">Deadmano</a> | <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC&nbsp;BY-SA 4.0</a> | <a href="https://github.com/alexbonjour/clicker-lister/issues">Source/Issues</a></p></td>
-	</tr>
+        </tr>
+        <tr>
+          <td align="center" valign="middle"></td>
+          
+        </tr>
+        <tr>
+          <td colspan="2" align="center" valign="middle" class="footer"><p>By <a href="https://github.com/alexbonjour">Alex B.</a> | Forked from <a href="https://github.com/DobruJ01/clicker-lister">DobruJ01</a> with earlier work by <a href="http://www.kongregate.com/accounts/Lilylicious">Lilylicious</a> & <a href="http://www.kongregate.com/accounts/Deadmano">Deadmano</a> | <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC&nbsp;BY-SA 4.0</a> | <a href="https://github.com/alexbonjour/clicker-lister/issues">Source/Issues</a></p></td>
+        </tr>
       </table>
     </div> 
     <div class="tooltipContent" id="sprytooltip1"><img src="img/spanner.png"></div>
