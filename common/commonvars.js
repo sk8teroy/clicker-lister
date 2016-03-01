@@ -6,13 +6,15 @@
 	==================================================
 */
 
+var numberOfAchievementsPossible=149; //counted 2/28/2016 in Steam.
+
 // Ancient ID's start at 3, so adding the None's make it so that we reference this array by,
 // using ID-1 (arrays start at 0) rather than ID-3.
 //
 // Example: When reading Solomon from the save, we're inside of the object of Solomon. ID there is listed as 3.
 // We store his level by doing ancients[this.id-1].level = this.level; where this.id is 3, this.id-1 is 2 which
 // references the third object in the array, Solomon.
-var ancients = [
+var ancients = [ //deprecated
     {name:"None",level:0,maxLevel:"None"},
     {name:"None",level:0,maxLevel:"None"},
     {name:"Solomon",level:0,maxLevel:"None"},
@@ -45,6 +47,39 @@ var ancients = [
     {name:"Iris",level:0,maxLevel:"None"},
     {name:"Revolc",level:0,maxLevel:15}
 ];
+
+// map from game id to object describing ancient.   Allows for game to change id scheme.
+var ancientsMap = {
+    3:{name:"Solomon",level:0,maxLevel:"None"},
+    4:{name:"Libertas",level:0,maxLevel:"None"},
+    5:{name:"Siyalatas",level:0,maxLevel:"None"},
+    6:{name:"Khrysos",level:0,maxLevel:10},
+    7:{name:"Thusia",level:0,maxLevel:"None"},
+    8:{name:"Mammon",level:0,maxLevel:"None"},
+    9:{name:"Mimzee",level:0,maxLevel:"None"},
+    10:{name:"Pluto",level:0,maxLevel:"None"},
+    11:{name:"Dogcog",level:0,maxLevel:25},
+    12:{name:"Fortuna",level:0,maxLevel:40},
+    13:{name:"Atman",level:0,maxLevel:25},
+    14:{name:"Dora",level:0,maxLevel:50},
+    15:{name:"Bhaal",level:0,maxLevel:"None"},
+    16:{name:"Morgulis",level:0,maxLevel:"None"},
+    17:{name:"Chronos",level:0,maxLevel:"None"},
+    18:{name:"Bubos",level:0,maxLevel:25},
+    19:{name:"Fragsworth",level:0,maxLevel:"None"},
+    20:{name:"Vaagur",level:0,maxLevel:15},
+    21:{name:"Kumawakamaru",level:0,maxLevel:5},
+    22:{name:"Chawedo",level:0,maxLevel:30},
+    23:{name:"Hecatoncheir",level:0,maxLevel:30},
+    24:{name:"Berserker",level:0,maxLevel:30},
+    25:{name:"Sniperino",level:0,maxLevel:30},
+    26:{name:"Kleptos",level:0,maxLevel:30},
+    27:{name:"Energon",level:0,maxLevel:30},
+    28:{name:"Argaiv",level:0,maxLevel:"None"},
+    29:{name:"Juggernaut",level:0,maxLevel:"None"},
+    30:{name:"Iris",level:0,maxLevel:"None"},
+    31:{name:"Revolc",level:0,maxLevel:15}
+};
 
 //Full ability descriptions left here for reference
 /*
@@ -110,6 +145,9 @@ for (var name in ancients){
 // Abilities ivan:108 Alexa:109 Broyle:110 Midas:111
 // 0.5% click damage TB:103 ivan:100 betty:102 fish:101 mercedes:104 george:105
 // 106:false 132:false
+
+
+// heroes used to coorelate from id in game to index into this array.   ID in game = index in array +1 aka ID -1 = index in array
 var heroes = [
     {name: "Cid", cost: 5, damage: 0, level: 0, upgradeCosts: [100, 250, 1e3, 8e3, 80e3, 400e3, 4e6]/*,upgradeIDs:[,,,,]*/}, 
     {name: "Tree Beast", cost: 50, damage: 5, level: 0, upgradeCosts: [500, 1.25e3, 5e3, 40e3, 400e3],upgradeIDs:[17,18,19,20,103]},
@@ -192,6 +230,9 @@ var abr_heroes = [];
 for (var name in heroes){
     abr_heroes.push({name:heroes[name].name.substring(0,4)})
 }
+
+var outputFormat = {};
+var clDto = {};
 
 var ancientCount = 0;
 

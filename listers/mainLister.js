@@ -53,7 +53,7 @@
  * Kong style - abbreviated mode on = no max section, no unsummoned section. all ancients summed up by value.  675:Mamm,Mimz MAX: Bubo, Kuma, etc. etc.
  ***********************************************************************/
 
-/* **clicker hero data json**
+/* **draft - clicker hero data json**
  * ancients - name, level, 
  * heroes - name, #gilds
  * relics -relic[1-4], forge cores, total relics found
@@ -68,7 +68,7 @@
  * - achievements
  */
 
-/* **output format json**
+/* **draft - output format json**
  * outputformat
  * -bold t/f
  * -short names t/f
@@ -81,14 +81,6 @@
  * -group ancients by level t/f
  * -show unsummoned ancients t/f
  */
-
-/**
- var obj = new Object();
-   obj.name = "Raj";
-   obj.age  = 32;
-   obj.married = false;
-   var jsonString= JSON.stringify(obj);
-*/
 
 //Misc
 var soulsSpent = 0;
@@ -103,7 +95,74 @@ var timeList = "";
 //Elements
 mainListener('click',calc,calcButton);
 
+function loadOutputFormatFromGui()
+{
+    outputFormat = {};
+    outputFormat.general = {};
+    outputFormat.general.boldHeadings =  $("#boldHeadings").is(':checked');
+    // outputFormat.general.maxLineLength = 0;
+    outputFormat.general.numberFormat = $("#numberFormat option:selected").text();
+    outputFormat.heroes = {};
+    outputFormat.heroes.shortNames =  $("#heroShortNames").is(':checked');
+    outputFormat.items = {};
+    outputFormat.items.showAbilities = $("#showAbilities").is(':checked'); 
+    outputFormat.items.showRelics = $("#showRelics").is(':checked'); 
+    outputFormat.ancients= {};
+    outputFormat.ancients.shortNames = $("#ancientShortNames").is(':checked'); 
+    outputFormat.ancients.ancientSortOrder = $("#ancientSortOrder option:selected").text();  
+    outputFormat.ancients.separateMaxedAncients = $("#separateMaxedAncients").is(':checked'); 
+    outputFormat.ancients.groupAncientsByLevel = $("#groupAncientsByLevel").is(':checked'); 
+    outputFormat.ancients.showUnsummonedAncients = $("#showUnsummonedAncients").is(':checked'); 
+}
+
+function fakeDto()
+{
+    clDto = {};
+    clDto.ancients = [];
+
+    oneAncient = {};
+    oneAncient.name = "AncientName1";
+    oneAncient.level = 27;
+    clDto.ancients.push(oneAncient);
+ 
+    oneAncient = {};
+    oneAncient.name = "AncientName2";
+    oneAncient.level = 35;
+    clDto.ancients.push(oneAncient);
+
+    clDto.heroes = [];
+
+    oneHero = {};
+    oneHero.name = "Hero1";
+    oneHero.numGilds = 22;
+    clDto.heroes.push(oneHero);
+    
+    oneHero = {};
+    oneHero.name = "Hero2";
+    oneHero.numGilds = 74;
+    clDto.heroes.push(oneHero);
+
+    clDto.relics = [];
+    oneRelic = {};
+    oneRelic.name = "thing of things 1";
+    oneRelic.rarity = "superduperuncommon";
+    oneRelic.level = 23;
+    oneRelic.bonuses = [];
+    
+    clDto.relics.push(oneRelic);
+    
+}
+
 function calc(){
+
+    console.log("**********************************************************************");
+//    loadOutputFormatFromGui();
+//    console.log(JSON.stringify(outputFormat));
+
+    fakeDto();
+    console.log(JSON.stringify(clDto));
+    console.log("**********************************************************************");
+
     abbreviated = abbreviatedMode.checked;
 
     outputFormat = $('input[name="outputFormat"]:checked').val();
@@ -115,6 +174,15 @@ function calc(){
 
     var string = input.value;
     var myData = decryptSave(string);
+
+    console.log("**********************************************************************");
+    console.log(myData);
+    console.log("**********************************************************************");
+    readSaveData(myData);
+    console.log(clDto);
+    console.log("**********************************************************************");
+
+    
 
     sortMethod = $('input[name="sortMode"]:checked').val();
     itemOption = $('input[name="itemOption"]:checked').val();
@@ -175,3 +243,52 @@ function calc(){
             "\n\n" + itemList + "  ";
     }
 }
+
+function updateOutputStyle(fCurrentStyle) {
+    if(fCurrentStyle=="reddit")
+    {
+        $("#customOutputOptions").hide();
+
+        $("#boldHeadings").prop('checked', true);
+        $('#numberFormat option[value="Comma"]').prop('selected', true);
+        $("#heroShortNames").prop('checked', false);
+        $("#showAbilities").prop('checked', true);
+        $("#showRelics").prop('checked', false);
+        $("#ancientShortNames").prop('checked', false);
+        $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
+        $("#separateMaxedAncients").prop('checked', true);
+        $("#groupAncientsByLevel").prop('checked', false);
+        $("#showUnsummonedAncients").prop('checked', true);
+    }
+    else if(fCurrentStyle=="kong")
+    {
+        $("#customOutputOptions").hide();
+
+        $("#boldHeadings").prop('checked', false);
+        $('#numberFormat option[value="Comma"]').prop('selected', true);
+        $("#heroShortNames").prop('checked', true);
+        $("#showAbilities").prop('checked', true);
+        $("#showRelics").prop('checked', false);
+        $("#ancientShortNames").prop('checked', true);
+        $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
+        $("#separateMaxedAncients").prop('checked', false);
+        $("#groupAncientsByLevel").prop('checked', true);
+        $("#showUnsummonedAncients").prop('checked', false);
+    }
+    else //custom
+    {
+        $("#customOutputOptions").show();
+    }
+}
+
+
+$(function(){
+    //initialize output style options appropriately.
+    $("#customOutputOptions").hide();
+    updateOutputStyle( $("input:radio[name=outputStyle]").val());
+    $("input:radio[name=outputStyle]").click(function() {
+        updateOutputStyle($(this).val());
+    });
+
+
+});
