@@ -127,6 +127,11 @@ a {
     font-size: 75%;    
 }
 
+.formatOption {
+    margin-bottom: 4px;
+}
+
+
 /* #customOutputOptions { */
 /*     visibility: hidden; */
 /* } */

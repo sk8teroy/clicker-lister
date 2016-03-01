@@ -43,74 +43,50 @@
             <div class="buttonbox">
               <div><button id="calcButton" class="button"><img id="greenarrow_img" src="img/green-arrow.png">&nbsp;Decode&nbsp;Save!</button></div>
               <div id="styleSelector">
-                <!-- <input type="radio" onchange="calc()" name="outputStyle" value = "reddit" checked>Reddit Style Display <br/> -->
-                <!-- <input type="radio" onchange="calc()" name="outputStyle" value = "kong" >Kongregate Style Display <br/> -->
-                <!-- <input type="radio" onchange="calc()" name="outputStyle" value = "custom" >Custom Display <br/> -->
                 <input type="radio" name="outputStyle" value = "reddit" checked>Reddit Style Display <br/>
                 <input type="radio" name="outputStyle" value = "kong" >Kongregate Style Display <br/>
-                <input type="radio" name="outputStyle" value = "custom" >Custom Display <br/>
+                <input type="radio" name="outputStyle" value = "custom" >Customize Options <br/>
               </div>
 
               <div id="customOutputOptions">
                 <hr>
-                <input type="checkbox" id="boldHeadings" checked>Bold Headings <br/>
+                <div class="formatOption"><input type="checkbox" id="boldHeadings" checked>Reddit-Style Bold Headings <br/></div>
 
                 <!-- todo max line length -->
                 
-                Number Format: <select id="numberFormat">
-                  <option value="Comma">Comma</option>
-                  <option value="Scientific">Scientific</option>
-                  <option value="Engineering">Engineering</option>
-                </select>  <br/>
+                <div class="formatOption">
+                  Number Format: <select id="numberFormat">
+                    <option value="Comma">Comma</option>
+                    <option value="Scientific">Scientific</option>
+                    <option value="Engineering">Engineering</option>
+                  </select>  <br/>
+                </div>
 
-                <input type="checkbox" id="heroShortNames" checked>Short Names for Heroes <br/>
+                <div class="formatOption"><input type="checkbox" id="heroShortNames" checked>Short Names for Heroes <br/></div>
 
-                <input type="checkbox" id="showAbilities" checked>Show Abilities <br/>
-                <input type="checkbox" id="showRelics">Show Relics <br/>
+                <div class="formatOption"><input type="checkbox" id="showAbilities" checked>Show Abilities <br/></div>
+                <div class="formatOption"><input type="checkbox" id="showRelics">Show Relics <br/></div>
 
-                <input type="checkbox" id="ancientShortNames" checked>Short Names for Ancients <br/>
+                <div class="formatOption"><input type="checkbox" id="ancientShortNames" checked>Short Names for Ancients <br/></div>
                 
-                Ancient Sort Order: <select id="ancientSortOrder">
-                  <option value="Descending">Descending</option>
-                  <option value="Ascending">Ascending</option>
-                </select>  <br/>
+                <div class="formatOption">
+                  Ancient Sort Order: <select id="ancientSortOrder">
+                    <option value="Descending">Descending</option>
+                    <option value="Ascending">Ascending</option>
+                  </select>  <br/>
+                </div>
 
-                <input type="checkbox" id="separateMaxedAncients" checked>Show Maxed Ancients separately <br/>
-                <input type="checkbox" id="showUnsummonedAncients" checked>Show Unsummoned Ancients <br/>
-                <input type="checkbox" id="groupAncientsByLevel" checked>Group Ancients with the same level together <br/>
+                <div class="formatOption"><input type="checkbox" id="separateMaxedAncients" checked>Show Maxed Ancients separately <br/></div>
+                <div class="formatOption"><input type="checkbox" id="showUnsummonedAncients" checked>Show Unsummoned Ancients <br/></div>
+                <div class="formatOption"><input type="checkbox" id="groupAncientsByLevel" checked>Group Ancients with the same level together <br/></div>
                 
               </div>
-<!--
-hokeypokey
-    outputFormat.general = {};
-    outputFormat.general.boldHeadings = true;
-    outputFormat.general.maxLineLength = 0;
-    outputFormat.general.numberFormat = "comma";
-    outputFormat.heroes = {};
-    outputFormat.heroes.shortNames = false;
-    outputFormat.items = {};
-    outputFormat.items.showAbilities = true;
-    outputFormat.items.showRelics = false;
-    outputFormat.ancients= {};
-    outputFormat.ancients.shortNames = false;
-    outputFormat.ancients.sortAncientsAscending = false; 
-    outputFormat.ancients.groupMaxedAncients = true;
-    outputFormat.ancients.groupAncientsByLevel = false;
-    outputFormat.ancients.showUnsummonedAncients = true;
--->
-
-
               <div><button onclick="ClearTextArea();" class="button"><img id="redx_img" src="img/red-x-icon-hi.png">&nbsp;Clear&nbsp;Data!</button></div>
             </div>
           </td>
           <td align="center" valign="middle"><textarea id="output" cols="65" rows="15" type="text"></textarea></td>
         </tr>
         <tr>
-
-<!--          <td align="center" valign="middle"><button onclick="ClearTextArea();" class="button">Clear Data!</button></td> -->
-        </tr>
-        <tr>
-          <!--<td align="center" valign="middle"></td>-->
           <td align="center" valign="middle">
             <input type="radio" onchange="calc()" name="outputFormat" value = "reddit" checked>Reddit Style Display <br/>
             <input type="radio" onchange="calc()" name="outputFormat" value = "kong" >Kongregate Style Display
@@ -137,11 +113,6 @@ hokeypokey
             <input type="radio" onchange="calc()" name="formatOption"  value = "engineering">Engineering
             
           </td>
-          <!--<td align="center" valign="middle"></td>
-              <td align="center" valign="middle">
-                <input type="radio" onchange="calc()" name="itemOption" value = "item" checked>Display Items
-                <input type="radio" onchange="calc()" name="itemOption"  value = "ability" >Display Abilities
-              </td>-->
         </tr>
         <tr>
           <td align="center" valign="middle"></td>

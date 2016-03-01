@@ -49,7 +49,7 @@ function readSaveData(data)
         {
             var hero = {};
             hero.id = this.id;
-            hero.name = heroes[hero.id-1].name;
+            hero.name = heroesMap[hero.id].name;
             hero.numGilds = this.epicLevel;
             clDto.gildedHeroes.push(hero);
         }
@@ -77,12 +77,49 @@ function readSaveData(data)
     clDto.relics.totalRelicsReceived = totalRelicsReceived ? totalRelicsReceived[0] : 0;
 
 
-/* TODO
- * relics -relic[1-4],
- * - name, rarity, level, relic-bonus[1-4]
- * - relic-bonus - ancient name, +levels, effect
- */
-
-
-    
+    clDto.relics.equipped = [];
+    var items = jsonPath(data, '$..items.items');
+    if(items)
+    {
+        var values = $.map(items[0], function(v) { 
+            console.log(v); 
+            var oneRelic = {};
+            oneRelic.name = v.name;
+            oneRelic.rarity = rarityMap[v.rarity];
+            oneRelic.level = v.level;
+            
+            oneRelic.bonus = [];
+            
+            if(v.bonusType1 > 0)
+            {
+                var bonusOne = {};
+                bonusOne.abilityId = v.bonusType1;
+                bonusOne.levels = v.bonus1Level;
+                oneRelic.bonus.push(bonusOne);
+            }
+            if(v.bonusType2 > 0)
+            {
+                var bonusTwo = {};
+                bonusTwo.abilityId = v.bonusType2;
+                bonusTwo.levels = v.bonus2Level;
+                oneRelic.bonus.push(bonusTwo);
+            }
+            if(v.bonusType3 > 0)
+            {
+                var bonusThree = {};
+                bonusThree.abilityId = v.bonusType3;
+                bonusThree.levels = v.bonus3Level;
+                oneRelic.bonus.push(bonusThree);
+            }
+            if(v.bonusType4 > 0)
+            {
+                var bonusFour = {};
+                bonusFour.abilityId = v.bonusType4;
+                bonusFour.levels = v.bonus4Level;
+                oneRelic.bonus.push(bonusFour);
+            }
+ 
+            clDto.relics.equipped.push(oneRelic);
+        });
+    }
 }

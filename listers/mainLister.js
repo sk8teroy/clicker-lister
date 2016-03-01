@@ -115,53 +115,7 @@ function loadOutputFormatFromGui()
     outputFormat.ancients.showUnsummonedAncients = $("#showUnsummonedAncients").is(':checked'); 
 }
 
-function fakeDto()
-{
-    clDto = {};
-    clDto.ancients = [];
-
-    oneAncient = {};
-    oneAncient.name = "AncientName1";
-    oneAncient.level = 27;
-    clDto.ancients.push(oneAncient);
- 
-    oneAncient = {};
-    oneAncient.name = "AncientName2";
-    oneAncient.level = 35;
-    clDto.ancients.push(oneAncient);
-
-    clDto.heroes = [];
-
-    oneHero = {};
-    oneHero.name = "Hero1";
-    oneHero.numGilds = 22;
-    clDto.heroes.push(oneHero);
-    
-    oneHero = {};
-    oneHero.name = "Hero2";
-    oneHero.numGilds = 74;
-    clDto.heroes.push(oneHero);
-
-    clDto.relics = [];
-    oneRelic = {};
-    oneRelic.name = "thing of things 1";
-    oneRelic.rarity = "superduperuncommon";
-    oneRelic.level = 23;
-    oneRelic.bonuses = [];
-    
-    clDto.relics.push(oneRelic);
-    
-}
-
 function calc(){
-
-    console.log("**********************************************************************");
-//    loadOutputFormatFromGui();
-//    console.log(JSON.stringify(outputFormat));
-
-    fakeDto();
-    console.log(JSON.stringify(clDto));
-    console.log("**********************************************************************");
 
     abbreviated = abbreviatedMode.checked;
 
