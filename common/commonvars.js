@@ -136,31 +136,37 @@ var abilities = {
     25:{"name":"Wisdom","levelAmountFormula":"solomonRewards","effectDescription":"+%1% Primal Hero Souls","id":25,"maxLevel":0,"scaling":"cubic"}
 };
 
+
+/* ancient upgrade plans
+Siyalatas, Ancient of Abandon	5	Idle	n	None	+25% to +15% idle DPS (Down 1% every 10 levels)
+Libertas, Ancient of Freedom	4	Idle	n	None	+25% to +15% idle Gold (Down 1% every 10 levels)
+Solomon, Ancient of Wisdom	3	Hero Souls	n^{1.5}	None	+5% to +1% Primal hero souls (down 1% every 20 levels)
+*/
 var abilitiesMap = {
-    1:{  "id":1  ,"name":"Abandonment"  ,"ancient":"Siyalatas"    ,"levelAmountFormula":"linear10"       ,"effectDescription":"+%1% Idle DPS"              ,"maxLevel":0 ,"scaling":"linear"} ,
-    2:{  "id":2  ,"name":"Wrath"        ,"ancient":"Fragsworth"   ,"levelAmountFormula":"linear10"       ,"effectDescription":"+%1% Click Damage"          ,"maxLevel":0 ,"scaling":"linear"} ,
-    3:{  "id":3  ,"name":"Time"         ,"ancient":"Chronos"      ,"levelAmountFormula":"linear5"        ,"effectDescription":"+%1 Sec Boss timers"        ,"maxLevel":0 ,"scaling":"cubic"}  ,
-    4:{  "id":4  ,"name":"Agitation"    ,"ancient":"Chawedo"      ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1 Sec Clickstorm"         ,"maxLevel":0 ,"scaling":"linear"} ,
-    5:{  "id":5  ,"name":"Luck"         ,"ancient":"Revolc"       ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1% Double Rubies Chance"  ,"maxLevel":7 ,"scaling":"cubic"}  ,
-    6:{  "id":6  ,"name":"Vision"       ,"ancient":"Iris"         ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1 Starting Zone"          ,"maxLevel":0 ,"scaling":"cubic"}  ,
-    7:{  "id":7  ,"name":"Enhancement"  ,"ancient":"Argaiv"       ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1% Gild Damage"           ,"maxLevel":0 ,"scaling":"linear"} ,
-    8:{  "id":8  ,"name":"Battery Life" ,"ancient":"Energon"      ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1 Sec Metal Detector"     ,"maxLevel":0 ,"scaling":"linear"} ,
-    9:{  "id":9  ,"name":"Thieves"      ,"ancient":"Kleptos"      ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1 Sec Golden Clicks"      ,"maxLevel":0 ,"scaling":"linear"} ,
-    10:{ "id":10 ,"name":"Accuracy"     ,"ancient":"Sniperino"    ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1 Sec Lucky Strikes"      ,"maxLevel":0 ,"scaling":"linear"} ,
-    11:{ "id":11 ,"name":"Rage"         ,"ancient":"Berserker"    ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1 Sec Powersurge"         ,"maxLevel":0 ,"scaling":"linear"} ,
-    12:{ "id":12 ,"name":"Wallops"      ,"ancient":"Hecatoncheir" ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1 Sec Super Clicks"       ,"maxLevel":0 ,"scaling":"linear"} ,
-    13:{ "id":13 ,"name":"Diseases"     ,"ancient":"Bubos"        ,"levelAmountFormula":"linear1"        ,"effectDescription":"-%1% Boss Life"             ,"maxLevel":7 ,"scaling":"cubic"}  ,
-    14:{ "id":14 ,"name":"Death"        ,"ancient":"Morgulis"     ,"levelAmountFormula":"linear10"       ,"effectDescription":"+%1% Hero Soul DPS"         ,"maxLevel":0 ,"scaling":"linear"} ,
-    15:{ "id":15 ,"name":"Murder"       ,"ancient":"Bhaal"        ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1% Critical Click Damage" ,"maxLevel":0 ,"scaling":"linear"} ,
-    16:{ "id":16 ,"name":"Discovery"    ,"ancient":"Dora"         ,"levelAmountFormula":"linear10"       ,"effectDescription":"+%1% Treasure Chests"       ,"maxLevel":7 ,"scaling":"cubic"}  ,
-    17:{ "id":17 ,"name":"Souls"        ,"ancient":"Atman"        ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1% Primal Boss Chance"    ,"maxLevel":7 ,"scaling":"cubic"}  ,
-    18:{ "id":18 ,"name":"Chance"       ,"ancient":"Fortuna"      ,"levelAmountFormula":"linear0_25"     ,"effectDescription":"+%1% 10x Gold Chance"       ,"maxLevel":7 ,"scaling":"cubic"}  ,
-    19:{ "id":19 ,"name":"Thrift"       ,"ancient":"Dogcog"       ,"levelAmountFormula":"linear1"        ,"effectDescription":"-%1% Hero Cost"             ,"maxLevel":7 ,"scaling":"cubic"}  ,
-    20:{ "id":20 ,"name":"Wealth"       ,"ancient":"Pluto"        ,"levelAmountFormula":"linear15"       ,"effectDescription":"+%1% Golden Clicks Gold"    ,"maxLevel":0 ,"scaling":"linear"} ,
-    21:{ "id":21 ,"name":"Riches"       ,"ancient":"Mimzee"       ,"levelAmountFormula":"linear25"       ,"effectDescription":"+%1% Treasure Chest Gold"   ,"maxLevel":0 ,"scaling":"linear"} ,
-    22:{ "id":22 ,"name":"Greed"        ,"ancient":"Mammon"       ,"levelAmountFormula":"linear5"        ,"effectDescription":"+%1% Gold Dropped"          ,"maxLevel":0 ,"scaling":"linear"} ,
-    24:{ "id":24 ,"name":"Freedom"      ,"ancient":"Libertas"     ,"levelAmountFormula":"libAndSiy"      ,"effectDescription":"+%1% Idle Gold"             ,"maxLevel":0 ,"scaling":"linear"} ,
-    25:{ "id":25 ,"name":"Wisdom"       ,"ancient":"Solomon"      ,"levelAmountFormula":"solomonRewards" ,"effectDescription":"+%1% Primal Hero Souls"     ,"maxLevel":0 ,"scaling":"cubic"}
+    1:{  "id":1  ,"name":"Abandonment"  ,"ancient":"Siyalatas"    ,"upgradePerLevel":"n/a" ,"levelAmountFormula":"linear10"       ,"effectDescription":"+%1% Idle DPS"              ,"maxLevel":0 ,"scaling":"linear"} ,
+    2:{  "id":2  ,"name":"Wrath"        ,"ancient":"Fragsworth"   ,"upgradePerLevel":20    ,"levelAmountFormula":"linear10"       ,"effectDescription":"+%1% Click Damage"          ,"maxLevel":0 ,"scaling":"linear"} ,
+    3:{  "id":3  ,"name":"Time"         ,"ancient":"Chronos"      ,"upgradePerLevel":5     ,"levelAmountFormula":"linear5"        ,"effectDescription":"+%1s Boss timers"        ,"maxLevel":0 ,"scaling":"cubic"}  ,
+    4:{  "id":4  ,"name":"Agitation"    ,"ancient":"Chawedo"      ,"upgradePerLevel":2     ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1s Clickstorm"         ,"maxLevel":0 ,"scaling":"linear"} ,
+    5:{  "id":5  ,"name":"Luck"         ,"ancient":"Revolc"       ,"upgradePerLevel":1     ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1% Double Rubies Chance"  ,"maxLevel":7 ,"scaling":"cubic"}  ,
+    6:{  "id":6  ,"name":"Vision"       ,"ancient":"Iris"         ,"upgradePerLevel":1     ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1 Starting Zone"          ,"maxLevel":0 ,"scaling":"cubic"}  ,
+    7:{  "id":7  ,"name":"Enhancement"  ,"ancient":"Argaiv"       ,"upgradePerLevel":2     ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1% Gild Damage"           ,"maxLevel":0 ,"scaling":"linear"} ,
+    8:{  "id":8  ,"name":"Battery Life" ,"ancient":"Energon"      ,"upgradePerLevel":2     ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1s Metal Detector"     ,"maxLevel":0 ,"scaling":"linear"} ,
+    9:{  "id":9  ,"name":"Thieves"      ,"ancient":"Kleptos"      ,"upgradePerLevel":2     ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1s Golden Clicks"      ,"maxLevel":0 ,"scaling":"linear"} ,
+    10:{ "id":10 ,"name":"Accuracy"     ,"ancient":"Sniperino"    ,"upgradePerLevel":2     ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1s Lucky Strikes"      ,"maxLevel":0 ,"scaling":"linear"} ,
+    11:{ "id":11 ,"name":"Rage"         ,"ancient":"Berserker"    ,"upgradePerLevel":2     ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1s Powersurge"         ,"maxLevel":0 ,"scaling":"linear"} ,
+    12:{ "id":12 ,"name":"Wallops"      ,"ancient":"Hecatoncheir" ,"upgradePerLevel":2     ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1s Super Clicks"       ,"maxLevel":0 ,"scaling":"linear"} ,
+    13:{ "id":13 ,"name":"Diseases"     ,"ancient":"Bubos"        ,"upgradePerLevel":2     ,"levelAmountFormula":"linear1"        ,"effectDescription":"-%1% Boss Life"             ,"maxLevel":7 ,"scaling":"cubic"}  ,
+    14:{ "id":14 ,"name":"Death"        ,"ancient":"Morgulis"     ,"upgradePerLevel":11    ,"levelAmountFormula":"linear10"       ,"effectDescription":"+%1% Hero Soul DPS"         ,"maxLevel":0 ,"scaling":"linear"} ,
+    15:{ "id":15 ,"name":"Murder"       ,"ancient":"Bhaal"        ,"upgradePerLevel":15    ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1% Critical Click Damage" ,"maxLevel":0 ,"scaling":"linear"} ,
+    16:{ "id":16 ,"name":"Discovery"    ,"ancient":"Dora"         ,"upgradePerLevel":20    ,"levelAmountFormula":"linear10"       ,"effectDescription":"+%1% Treasure Chests"       ,"maxLevel":7 ,"scaling":"cubic"}  ,
+    17:{ "id":17 ,"name":"Souls"        ,"ancient":"Atman"        ,"upgradePerLevel":1     ,"levelAmountFormula":"linear1"        ,"effectDescription":"+%1% Primal Boss Chance"    ,"maxLevel":7 ,"scaling":"cubic"}  ,
+    18:{ "id":18 ,"name":"Chance"       ,"ancient":"Fortuna"      ,"upgradePerLevel":0.25  ,"levelAmountFormula":"linear0_25"     ,"effectDescription":"+%1% 10x Gold Chance"       ,"maxLevel":7 ,"scaling":"cubic"}  ,
+    19:{ "id":19 ,"name":"Thrift"       ,"ancient":"Dogcog"       ,"upgradePerLevel":2     ,"levelAmountFormula":"linear1"        ,"effectDescription":"-%1% Hero Cost"             ,"maxLevel":7 ,"scaling":"cubic"}  ,
+    20:{ "id":20 ,"name":"Wealth"       ,"ancient":"Pluto"        ,"upgradePerLevel":30    ,"levelAmountFormula":"linear15"       ,"effectDescription":"+%1% Golden Clicks Gold"    ,"maxLevel":0 ,"scaling":"linear"} ,
+    21:{ "id":21 ,"name":"Riches"       ,"ancient":"Mimzee"       ,"upgradePerLevel":50    ,"levelAmountFormula":"linear25"       ,"effectDescription":"+%1% Treasure Chest Gold"   ,"maxLevel":0 ,"scaling":"linear"} ,
+    22:{ "id":22 ,"name":"Greed"        ,"ancient":"Mammon"       ,"upgradePerLevel":5     ,"levelAmountFormula":"linear5"        ,"effectDescription":"+%1% Gold Dropped"          ,"maxLevel":0 ,"scaling":"linear"} ,
+    24:{ "id":24 ,"name":"Freedom"      ,"ancient":"Libertas"     ,"upgradePerLevel":"n/a" ,"levelAmountFormula":"libAndSiy"      ,"effectDescription":"+%1% Idle Gold"             ,"maxLevel":0 ,"scaling":"linear"} ,
+    25:{ "id":25 ,"name":"Wisdom"       ,"ancient":"Solomon"      ,"upgradePerLevel":"n/a" ,"levelAmountFormula":"solomonRewards" ,"effectDescription":"+%1% Primal Hero Souls"     ,"maxLevel":0 ,"scaling":"cubic"}
 };
 
 

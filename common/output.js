@@ -9,43 +9,6 @@ function getClickerListerText()
 {
     var text = "";
 
-    //outputformatDto
-    //x  {"general":{"boldHeadings":true,
-    //x              "numberFormat":"Comma"},
-    //x   "heroes":{"shortNames":false},
-    //  "items":{"showAbilities":true,
-    //           "showRelics":false},
-    //x  "ancients":{"shortNames":false,
-    //x               "ancientSortOrder":"Descending",
-    //x               "separateMaxedAncients":true,
-    //x               "showUnsummonedAncients":true}}
-    
-    
-    //cldto
-    //  "relics":{"forgeCores":25894,
-    //            "totalRelicsReceived":177,
-    //            "equipped":[{"name":"Garnet Ring of Souls",
-    //                         "rarity":"Common",
-    //                         "level":30,
-    //                         "bonus":[{"abilityId":17,"levels":4}]},
-    //                        {"name":"Copper Band of Souls",
-    //                         "rarity":"Common",
-    //                         "level":31,
-    //                         "bonus":[{"abilityId":17,"levels":4}]},
-    //                        {"name":"Silver Azurite of Souls",
-    //                         "rarity":"Common",
-    //                         "level":42,
-    //                         "bonus":[{"abilityId":17,"levels":4}]},
-    //                        {"name":"Handwraps of Wallops",
-    //                         "rarity":"Common",
-    //                         "level":50,
-    //                         "bonus":[{"abilityId":12,"levels":28},
-    //                                  {"abilityId":17,"levels":3},
-    //                                  {"abilityId":6,"levels":2},
-    //                                  {"abilityId":14,"levels":4}]}]}}
-    
-
-
     //sort ancients in DTO
     if( outputFormatDto.ancients.ancientSortOrder == "Alphabetical" )
     {
@@ -92,7 +55,7 @@ function getClickerListerText()
     
     if(outputFormatDto.items.showAbilities)
     {
-//        text += relicAbilitiesText();
+        text += relicAbilitiesText();
     }
     
     
@@ -302,7 +265,119 @@ function relicText() {
     return text;
 }
 
+function relicAbilitiesText() {
+    text = "\n\n";
+    text += headingStyle("Total Item Bonuses");
+    text += "\n\n";
 
+    bonusToPrint = {};
+    
+    //combine bonuses (+5 Atman instead of +3 Atman; +2 Atman)
+    clDto.relics.equipped.forEach(function (oneRelic) {
+        oneRelic.bonus.forEach(function (oneBonus) {
+            if(bonusToPrint.hasOwnProperty(oneBonus.abilityId)) 
+            {
+                bonusToPrint[oneBonus.abilityId] += oneBonus.levels;
+            }
+            else
+            {
+                bonusToPrint[oneBonus.abilityId] = oneBonus.levels;
+            }
+
+        });
+    });
+
+    for (var id in bonusToPrint) {
+        ability = abilitiesMap[id];
+        text += "* +" + bonusToPrint[id] + " " + abilitiesMap[id].ancient + " ";
+        
+        
+        var boost = effectPower(abilitiesMap[id], bonusToPrint[id]);
+        effectText = abilitiesMap[id].effectDescription.replace("%1", boost);
+        
+        //todo add reddit super script here.
+        text += "(" + effectText + ")";
+
+        text += "\n";
+    }
+
+    return text;
+}
+
+function effectPower(ability, upgradeLevels) {
+    if(ability.upgradePerLevel != "n/a")
+    {
+        return upgradeLevels * ability.upgradePerLevel;
+    }
+
+   
+    if(ability.ancient == "Solomon")
+    {
+        var solomonLevel = 0;
+        clDto.ancients.forEach( function (oneAncient) {
+            if(oneAncient.name=="Solomon")
+            {
+                solomonLevel = oneAncient.level;
+            }
+        });
+                      
+        return solomonBonus(solomonLevel + upgradeLevels) - solomonBonus(solomonLevel);
+    }
+
+    if(ability.ancient == "Siyalatas")
+    {
+        var siyaLevel = 0;
+        clDto.ancients.forEach( function (oneAncient) {
+            if(oneAncient.name=="Siyalatas")
+            {
+                siyaLevel = oneAncient.level;
+            }
+        });
+
+        return siyLibBonus(siyaLevel + upgradeLevels) - siyLibBonus(siyaLevel);
+    }
+
+    if(ability.ancient == "Libertas")
+    {
+        var libLevel = 0;
+        clDto.ancients.forEach( function (oneAncient) {
+            if(oneAncient.name=="Libertas")
+            {
+                libLevel = oneAncient.level;
+            }
+        });
+
+        return siyLibBonus(libLevel + upgradeLevels) - siyLibBonus(libLevel);
+    }
+
+    return 0;
+}
+
+function siyLibBonus(level) {
+    //+25% to 15% idle DPS (Down 1% every 10 levels).
+
+    if      (level >  9 && level <= 19) return (level- 9)*24 + siyLibBonus( 9);
+    else if (level > 19 && level <= 29) return (level-19)*23 + siyLibBonus(19);
+    else if (level > 29 && level <= 39) return (level-29)*22 + siyLibBonus(29);
+    else if (level > 39 && level <= 49) return (level-39)*21 + siyLibBonus(39);
+    else if (level > 49 && level <= 59) return (level-49)*20 + siyLibBonus(49);
+    else if (level > 59 && level <= 69) return (level-59)*19 + siyLibBonus(59);
+    else if (level > 69 && level <= 79) return (level-69)*18 + siyLibBonus(69);
+    else if (level > 79 && level <= 89) return (level-79)*17 + siyLibBonus(79);
+    else if (level > 89 && level <= 99) return (level-89)*16 + siyLibBonus(89);
+    else if (level > 99)                return (level-99)*15 + siyLibBonus(99);
+
+    return level*25; //level 0-9
+}
+
+function solomonBonus(level) {
+    if      (level >= 21 && level <= 40) return (level-20)*4 + solomonBonus(20);
+    else if (level >= 41 && level <= 60) return (level-40)*3 + solomonBonus(40);
+    else if (level >= 61 && level <= 80) return (level-60)*2 + solomonBonus(60);
+    else if (level >= 81)                return (level-80)*1 + solomonBonus(80);
+    
+    return level*5; //level 0-20
+}
 
 function formatNumber(number)
 {
@@ -310,7 +385,6 @@ function formatNumber(number)
     var digits = number.toString().length;
     var ACCURACY = 4; //Constant
     
-
     if(outputFormatDto.general.numberFormat == "Comma" || digits < 6){
         formatter = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }else{
