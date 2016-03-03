@@ -12,12 +12,12 @@
     <div class="center">
       <table width="100%" border="0">
         <tr>
-          <td colspan="2" align="center" valign="middle">
+          <td colspan="3" align="center" valign="middle">
             <p><h1>Welcome To Clicker Lister!</h1></p>
           </td>
         </tr>
         <tr>
-          <td colspan="2" align="center" valign="middle"><p><em>What is Clicker Lister you ask? It is a tool for Clicker Heroes that takes your save game, reads it, and then outputs various game related data in an easy to read format!</em></p></td>
+          <td colspan="3" align="center" valign="middle"><p><em>What is Clicker Lister you ask? It is a tool for Clicker Heroes that takes your save game, reads it, and then outputs various game related data in an easy to read format!</em></p></td>
         </tr>
         <tr>
           <td align="center" valign="middle"><strong>
@@ -29,60 +29,69 @@
         </tr>
         <tr>
           <td align="center" valign="middle"><span class="infotext">Paste your Clicker Heroes save into this box.</span></td>
-          <td align="center" valign="middle"><span class="infotext">Copy the text from this box into your chat window.</span></td>
+          <td>&nbsp;</td>
+          <td align="center" valign="middle"><span class="infotext">Copy the text from this box into your chat window or post.</span></td>
         </tr>
         <tr>
           <td align="center" valign="middle"><strong><span class="infotext">Click on the <span id="sprytrigger1" class="tooltip">spanner</span> icon at the top right ingame to export your save data to your clipboard.</strong></span></td>
-          <td align="center" valign="middle"><strong><span class="infotext">This tool automatically splits the output data into lines of 250 characters for the Kongregate chat limit.</strong></span></td>
+          <td>&nbsp;</td>
         </tr>
         <tr>
           <td align="center" valign="middle"><textarea id="input" cols="65" rows="15" type="text"></textarea></td>
+          <td>
+            <div class="buttonbox">
+              <div><button id="calcButton" class="button"><img id="greenarrow_img" src="img/green-arrow.png">&nbsp;Decode&nbsp;Save!</button></div>
+              <div id="styleSelector">
+                <input type="radio" name="outputStyle" value = "reddit" checked>Reddit Style Display <br/>
+                <input type="radio" name="outputStyle" value = "kong" >Kongregate Style Display <br/>
+                <input type="radio" name="outputStyle" value = "custom" >Customize Options <br/>
+              </div>
+
+              <div id="customOutputOptions">
+                <hr>
+                <div class="formatOption"><input type="checkbox" id="boldHeadings" checked>Reddit-Style Bold Headings <br/></div>
+
+                <!-- todo max line length -->
+                
+                <div class="formatOption">
+                  Number Format: <select id="numberFormat">
+                    <option value="Comma">Comma</option>
+                    <option value="Scientific">Scientific</option>
+                    <option value="Engineering">Engineering</option>
+                  </select>  <br/>
+                </div>
+
+                <div class="formatOption"><input type="checkbox" id="heroShortNames" checked>Short Names for Heroes <br/></div>
+
+                <div class="formatOption"><input type="checkbox" id="ancientShortNames" checked>Short Names for Ancients <br/></div>
+                
+                <div class="formatOption"><input type="checkbox" id="showAbilities" checked>Show Abilities <br/></div>
+                <div class="formatOption"><input type="checkbox" id="abilitiesFormatting" checked>Markdown Formatting of Abilities <br/></div>
+                <div class="formatOption"><input type="checkbox" id="showRelics">Show Relics <br/></div>
+
+                <div class="formatOption">
+                  Ancient Sort Order: <select id="ancientSortOrder">
+                    <option value="Descending">Descending by Level</option>
+                    <option value="Ascending">Ascending by Level</option>
+                    <option value="Alphabetical">Alphabetical by Name</option>
+                  </select>  <br/>
+                </div>
+
+                <div class="formatOption"><input type="checkbox" id="separateMaxedAncients" checked>Show Maxed Ancients separately <br/></div>
+                <div class="formatOption"><input type="checkbox" id="showUnsummonedAncients" checked>Show Unsummoned Ancients <br/></div>
+                
+              </div>
+              <div><button onclick="ClearTextArea();" class="button"><img id="redx_img" src="img/red-x-icon-hi.png">&nbsp;Clear&nbsp;Data!</button></div>
+            </div>
+          </td>
           <td align="center" valign="middle"><textarea id="output" cols="65" rows="15" type="text"></textarea></td>
         </tr>
         <tr>
-          <td align="center" valign="middle"><button id="calcButton" class="button">Decode Save!</button></td>
-          <td align="center" valign="middle"><button onclick="ClearTextArea();" class="button">Clear Data!</button></td>
+          <td colspan="3" align="center" valign="middle" class="footer">
+            Check out my <a href="http://alexbonjour.github.io/rules-of-thumb/">Simple Rules of Thumb Calculator</a>
         </tr>
         <tr>
-          <!--<td align="center" valign="middle"></td>-->
-          <td align="center" valign="middle">
-            <input type="radio" onchange="calc()" name="outputFormat" value = "reddit" checked>Reddit Style Display <br/>
-            <input type="radio" onchange="calc()" name="outputFormat" value = "kong" >Kongregate Style Display
-            
-          </td>
-          <td align="center" valign="middle">
-            <input type="radio" name="sortMode" value = "desc" checked>Descending order
-            <input type="radio" name="sortMode" value = "asc">Ascending order
-          </td>
-
-        </tr>
-        <tr>
-          <td align="center" valign="middle">
-            <input type="radio" onchange="calc()" name="itemOption" value = "item">Display Items
-            <input type="radio" onchange="calc()" name="itemOption"  value = "ability" checked>Display Abilities
-            
-          </td>
-          <td align="center" valign="middle"><input type="checkbox" id="abbreviatedMode" checked><label for="abbreviatedMode">Bold Titles</label></td>
-        </tr>
-        <tr>
-          <td align="center" valign="middle">
-            <input type="radio" onchange="calc()" name="formatOption" value = "comma" checked>Comma
-            <input type="radio" onchange="calc()" name="formatOption"  value = "scientific">Scientific
-            <input type="radio" onchange="calc()" name="formatOption"  value = "engineering">Engineering
-            
-          </td>
-          <!--<td align="center" valign="middle"></td>
-              <td align="center" valign="middle">
-                <input type="radio" onchange="calc()" name="itemOption" value = "item" checked>Display Items
-                <input type="radio" onchange="calc()" name="itemOption"  value = "ability" >Display Abilities
-              </td>-->
-        </tr>
-        <tr>
-          <td align="center" valign="middle"></td>
-          
-        </tr>
-        <tr>
-          <td colspan="2" align="center" valign="middle" class="footer"><p>By <a href="https://github.com/alexbonjour">Alex B.</a> | Forked from <a href="https://github.com/DobruJ01/clicker-lister">DobruJ01</a> with earlier work by <a href="http://www.kongregate.com/accounts/Lilylicious">Lilylicious</a> & <a href="http://www.kongregate.com/accounts/Deadmano">Deadmano</a> | <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC&nbsp;BY-SA 4.0</a> | <a href="https://github.com/alexbonjour/clicker-lister/issues">Source/Issues</a></p></td>
+          <td colspan="3" align="center" valign="middle" class="footer"><p>Site By <a href="https://github.com/alexbonjour">Alex B.</a> | Forked from <a href="https://github.com/DobruJ01/clicker-lister">DobruJ01</a> with earlier work by <a href="http://www.kongregate.com/accounts/Lilylicious">Lilylicious</a> & <a href="http://www.kongregate.com/accounts/Deadmano">Deadmano</a> | <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC&nbsp;BY-SA 4.0</a> | <a href="https://github.com/alexbonjour/clicker-lister/issues">Source/Issues</a></p></td>
         </tr>
       </table>
     </div> 
@@ -90,12 +99,14 @@
 
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="common/saveDecoder.js"></script> 
-    <script src="common/commonvars.js"></script>
-    <script src="common/datareader.js"></script>
-    <script src="common/redditreader.js"></script>
-    <script src="listers/mainLister.js"></script> 
     <script src="js/SpryTooltip.js" type="text/javascript"></script>
+    <script src="js/jsonpath-0.8.0.js" type="text/javascript"></script>
+    <script src="common/commonvars.js"></script>
+    <script src="common/saveDecoder.js"></script> 
+    <script src="common/input.js"></script> 
+    <script src="common/output.js"></script> 
+
+    <script src="listers/mainLister.js"></script> 
 
     <script type="text/javascript">
 

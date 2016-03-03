@@ -53,7 +53,7 @@
  * Kong style - abbreviated mode on = no max section, no unsummoned section. all ancients summed up by value.  675:Mamm,Mimz MAX: Bubo, Kuma, etc. etc.
  ***********************************************************************/
 
-/* **clicker hero data json**
+/* **draft - clicker hero data json**
  * ancients - name, level, 
  * heroes - name, #gilds
  * relics -relic[1-4], forge cores, total relics found
@@ -68,7 +68,7 @@
  * - achievements
  */
 
-/* **output format json**
+/* **draft - output format json**
  * outputformat
  * -bold t/f
  * -short names t/f
@@ -82,14 +82,6 @@
  * -show unsummoned ancients t/f
  */
 
-/**
- var obj = new Object();
-   obj.name = "Raj";
-   obj.age  = 32;
-   obj.married = false;
-   var jsonString= JSON.stringify(obj);
-*/
-
 //Misc
 var soulsSpent = 0;
 
@@ -100,78 +92,91 @@ var itemList = "";
 var miscList = "Misc Info: ";
 var timeList = "";
 
-//Elements
-mainListener('click',calc,calcButton);
+function loadOutputFormatFromGui()
+{
+    outputFormatDto = {};
+    outputFormatDto.general = {};
+    outputFormatDto.general.boldHeadings =  $("#boldHeadings").is(':checked');
+    // outputFormatDto.general.maxLineLength = 0;
+    outputFormatDto.general.numberFormat = $("#numberFormat option:selected").val();
+    outputFormatDto.heroes = {};
+    outputFormatDto.heroes.shortNames =  $("#heroShortNames").is(':checked');
+    outputFormatDto.items = {};
+    outputFormatDto.items.showAbilities = $("#showAbilities").is(':checked'); 
+    outputFormatDto.items.abilitiesFormatting = $("#abilitiesFormatting").is(':checked'); 
+    outputFormatDto.items.showRelics = $("#showRelics").is(':checked'); 
+    outputFormatDto.ancients= {};
+    outputFormatDto.ancients.shortNames = $("#ancientShortNames").is(':checked'); 
+    outputFormatDto.ancients.ancientSortOrder = $("#ancientSortOrder option:selected").val();  
+    outputFormatDto.ancients.separateMaxedAncients = $("#separateMaxedAncients").is(':checked'); 
+    outputFormatDto.ancients.showUnsummonedAncients = $("#showUnsummonedAncients").is(':checked'); 
+}
 
 function calc(){
-    abbreviated = abbreviatedMode.checked;
 
-    outputFormat = $('input[name="outputFormat"]:checked').val();
-    if(outputFormat === "reddit"){
-        $("#abbreviatedMode").next("label").html("Bold Titles");
-    }else{
-        $("#abbreviatedMode").next("label").html("Abbreviated Mode");
+    var myData = decryptSave(input.value);
+
+    // console.log("**********************************************************************");
+    // console.log(myData);
+    // console.log("**********************************************************************");
+    readSaveData(myData);
+    loadOutputFormatFromGui();
+    // console.log(JSON.stringify(outputFormatDto));
+    // console.log(JSON.stringify(clDto));
+    // console.log(outputFormatDto);
+    // console.log(clDto);
+    // console.log("**********************************************************************");
+
+    
+    output.value = getClickerListerText();
+}
+
+function updateOutputStyle(fCurrentStyle) {
+    if(fCurrentStyle=="reddit")
+    {
+        $("#customOutputOptions").hide();
+
+        $("#boldHeadings").prop('checked', true);
+        $('#numberFormat option[value="Comma"]').prop('selected', true);
+        $("#heroShortNames").prop('checked', false);
+        $("#showAbilities").prop('checked', true);
+        $("#abilitiesFormatting").prop('checked', true);
+        $("#showRelics").prop('checked', false);
+        $("#ancientShortNames").prop('checked', false);
+        $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
+        $("#separateMaxedAncients").prop('checked', true);
+        $("#showUnsummonedAncients").prop('checked', true);
     }
+    else if(fCurrentStyle=="kong")
+    {
+        $("#customOutputOptions").hide();
 
-    var string = input.value;
-    var myData = decryptSave(string);
-
-    sortMethod = $('input[name="sortMode"]:checked').val();
-    itemOption = $('input[name="itemOption"]:checked').val();
-    formatOption = $('input[name="formatOption"]:checked').val();
-
-    if(outputFormat == "kong"){
-        readData(myData);
-        arrayChopper();
-        //Adds together the arrays. More arrays can be added after heroArray with commas separating them.
-        var outputArray = ancientArray.concat(heroArray,miscArray,timeArray);
-
-        var len = outputArray.length;
-
-        for(i=0;i<outputArray.length;i++){
-
-            // Chops off starting commas and spaces.
-            while(outputArray[i][0]==","||outputArray[i][0]==" "){
-
-                outputArray[i] = outputArray[i].substring(1);
-
-            }
-
-            // Chops off trailing commas. Leaves spaces.
-            while(outputArray[i][outputArray[i].length-1] == ','){
-
-                outputArray[i] = outputArray[i].slice(0,-1);
-
-            }
-
-        }
-        // Adds newlines between all blocks. Reconsider this for abbreviated version.
-        for (i=0;i<=len+1;i++){
-            outputArray.splice(i+1,0,'\n\n');
-            i++;
-        }
-
-        output.value = outputArray.join("") + "\n\n" + itemList;// + itemList;
-    }else{
-        readRedditData(myData);
-
-        if(abbreviatedMode.checked){
-            //Add reddit formatting for bolding
-            ancientList = ancientList.replace("Ancients:","**Ancients**:");
-            ancientList = ancientList.replace("Max:","**Max**:");
-            ancientList = ancientList.replace("Not Summoned:","**Not Summoned**:");
-            timeList = timeList.replace("Time Since Start:","**Time Since Start**:");
-            miscList = miscList.replace("Misc:","**Misc**:");
-            ancientList = ancientList.replace("Time since start:","**Time since start**:");
-            heroList = heroList.replace("Gilded heroes:","**Gilded Heroes**:");
-            itemList = itemList.replace("Items:","**Items**:");
-            itemList = itemList.replace("Total Item Bonuses:","**Total Item Bonuses**:");
-            itemList = itemList.replace("Junk Pile:","**Junk Pile**:");
-        }
-        //Get rid of commas in place of ;
-        output.value = ancientList + heroList.slice(0,-2) + ";  " +
-            "\n\n" + miscList.slice(0,-2) + ";  " +
-            "\n\n" + timeList.slice(0,-2)+ ";  " +
-            "\n\n" + itemList + "  ";
+        $("#boldHeadings").prop('checked', false);
+        $('#numberFormat option[value="Comma"]').prop('selected', true);
+        $("#heroShortNames").prop('checked', true);
+        $("#showAbilities").prop('checked', true);
+        $("#abilitiesFormatting").prop('checked', false);
+        $("#showRelics").prop('checked', false);
+        $("#ancientShortNames").prop('checked', true);
+        $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
+        $("#separateMaxedAncients").prop('checked', false);
+        $("#showUnsummonedAncients").prop('checked', false);
+    }
+    else //custom
+    {
+        $("#customOutputOptions").show();
     }
 }
+
+
+$(function(){
+    //initialize output style options appropriately.
+    $("#customOutputOptions").hide();
+    updateOutputStyle( $("input:radio[name=outputStyle]").val());
+    $("input:radio[name=outputStyle]").click(function() {
+        updateOutputStyle($(this).val());
+    });
+
+    $("#calcButton").click(calc);
+});
+
