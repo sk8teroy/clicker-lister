@@ -342,7 +342,7 @@ for (var name in heroes){
     abr_heroes.push({name:heroes[name].name.substring(0,4)})
 }
 
-var outputFormat = {};
+var outputFormatDto = {};
 var clDto = {};
 
 var ancientCount = 0;

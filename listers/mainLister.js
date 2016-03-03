@@ -97,22 +97,22 @@ mainListener('click',calc,calcButton);
 
 function loadOutputFormatFromGui()
 {
-    outputFormat = {};
-    outputFormat.general = {};
-    outputFormat.general.boldHeadings =  $("#boldHeadings").is(':checked');
-    // outputFormat.general.maxLineLength = 0;
-    outputFormat.general.numberFormat = $("#numberFormat option:selected").text();
-    outputFormat.heroes = {};
-    outputFormat.heroes.shortNames =  $("#heroShortNames").is(':checked');
-    outputFormat.items = {};
-    outputFormat.items.showAbilities = $("#showAbilities").is(':checked'); 
-    outputFormat.items.showRelics = $("#showRelics").is(':checked'); 
-    outputFormat.ancients= {};
-    outputFormat.ancients.shortNames = $("#ancientShortNames").is(':checked'); 
-    outputFormat.ancients.ancientSortOrder = $("#ancientSortOrder option:selected").text();  
-    outputFormat.ancients.separateMaxedAncients = $("#separateMaxedAncients").is(':checked'); 
-    outputFormat.ancients.groupAncientsByLevel = $("#groupAncientsByLevel").is(':checked'); 
-    outputFormat.ancients.showUnsummonedAncients = $("#showUnsummonedAncients").is(':checked'); 
+    outputFormatDto = {};
+    outputFormatDto.general = {};
+    outputFormatDto.general.boldHeadings =  $("#boldHeadings").is(':checked');
+    // outputFormatDto.general.maxLineLength = 0;
+    outputFormatDto.general.numberFormat = $("#numberFormat option:selected").text();
+    outputFormatDto.heroes = {};
+    outputFormatDto.heroes.shortNames =  $("#heroShortNames").is(':checked');
+    outputFormatDto.items = {};
+    outputFormatDto.items.showAbilities = $("#showAbilities").is(':checked'); 
+    outputFormatDto.items.showRelics = $("#showRelics").is(':checked'); 
+    outputFormatDto.ancients= {};
+    outputFormatDto.ancients.shortNames = $("#ancientShortNames").is(':checked'); 
+    outputFormatDto.ancients.ancientSortOrder = $("#ancientSortOrder option:selected").text();  
+    outputFormatDto.ancients.separateMaxedAncients = $("#separateMaxedAncients").is(':checked'); 
+    outputFormatDto.ancients.groupAncientsByLevel = $("#groupAncientsByLevel").is(':checked'); 
+    outputFormatDto.ancients.showUnsummonedAncients = $("#showUnsummonedAncients").is(':checked'); 
 }
 
 function calc(){
@@ -133,7 +133,9 @@ function calc(){
     console.log(myData);
     console.log("**********************************************************************");
     readSaveData(myData);
-    console.log(clDto);
+    loadOutputFormatFromGui();
+    console.log(JSON.stringify(outputFormatDto));
+    console.log(JSON.stringify(clDto));
     console.log("**********************************************************************");
 
     
@@ -191,7 +193,8 @@ function calc(){
             itemList = itemList.replace("Junk Pile:","**Junk Pile**:");
         }
         //Get rid of commas in place of ;
-        output.value = ancientList + heroList.slice(0,-2) + ";  " +
+        output.value = getClickerListerText() + "\n\n============\n\n\n" 
+            + ancientList + heroList.slice(0,-2) + ";  " +
             "\n\n" + miscList.slice(0,-2) + ";  " +
             "\n\n" + timeList.slice(0,-2)+ ";  " +
             "\n\n" + itemList + "  ";

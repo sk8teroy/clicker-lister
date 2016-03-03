@@ -82,7 +82,6 @@ function readSaveData(data)
     if(items)
     {
         var values = $.map(items[0], function(v) { 
-            console.log(v); 
             var oneRelic = {};
             oneRelic.name = v.name;
             oneRelic.rarity = rarityMap[v.rarity];
