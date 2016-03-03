@@ -30,12 +30,11 @@
         <tr>
           <td align="center" valign="middle"><span class="infotext">Paste your Clicker Heroes save into this box.</span></td>
           <td>&nbsp;</td>
-          <td align="center" valign="middle"><span class="infotext">Copy the text from this box into your chat window.</span></td>
+          <td align="center" valign="middle"><span class="infotext">Copy the text from this box into your chat window or post.</span></td>
         </tr>
         <tr>
           <td align="center" valign="middle"><strong><span class="infotext">Click on the <span id="sprytrigger1" class="tooltip">spanner</span> icon at the top right ingame to export your save data to your clipboard.</strong></span></td>
           <td>&nbsp;</td>
-          <td align="center" valign="middle"><strong><span class="infotext">This tool automatically splits the output data into lines of 250 characters for the Kongregate chat limit.</strong></span></td>
         </tr>
         <tr>
           <td align="center" valign="middle"><textarea id="input" cols="65" rows="15" type="text"></textarea></td>
@@ -88,40 +87,9 @@
           <td align="center" valign="middle"><textarea id="output" cols="65" rows="15" type="text"></textarea></td>
         </tr>
         <tr>
-          <td align="center" valign="middle">
-            <input type="radio" onchange="calc()" name="outputFormat" value = "reddit" checked>Reddit Style Display <br/>
-            <input type="radio" onchange="calc()" name="outputFormat" value = "kong" >Kongregate Style Display
-            
-          </td>
-          <td align="center" valign="middle">
-            <input type="radio" name="sortMode" value = "desc" checked>Descending order
-            <input type="radio" name="sortMode" value = "asc">Ascending order
-          </td>
-
-        </tr>
-        <tr>
-          <td align="center" valign="middle">
-            <input type="radio" onchange="calc()" name="itemOption" value = "item">Display Items
-            <input type="radio" onchange="calc()" name="itemOption"  value = "ability" checked>Display Abilities
-            
-          </td>
-          <td align="center" valign="middle"><input type="checkbox" id="abbreviatedMode" checked><label for="abbreviatedMode">Bold Titles</label></td>
-        </tr>
-        <tr>
-          <td align="center" valign="middle">
-            <input type="radio" onchange="calc()" name="formatOption" value = "comma" checked>Comma
-            <input type="radio" onchange="calc()" name="formatOption"  value = "scientific">Scientific
-            <input type="radio" onchange="calc()" name="formatOption"  value = "engineering">Engineering
-            
-          </td>
-        </tr>
-        <tr>
-          <td align="center" valign="middle"></td>
-          
-        </tr>
-        <tr>
           <td colspan="3" align="center" valign="middle" class="footer">
             Check out my <a href="http://alexbonjour.github.io/rules-of-thumb/">Simple Rules of Thumb Calculator</a>
+        </tr>
         <tr>
           <td colspan="3" align="center" valign="middle" class="footer"><p>Site By <a href="https://github.com/alexbonjour">Alex B.</a> | Forked from <a href="https://github.com/DobruJ01/clicker-lister">DobruJ01</a> with earlier work by <a href="http://www.kongregate.com/accounts/Lilylicious">Lilylicious</a> & <a href="http://www.kongregate.com/accounts/Deadmano">Deadmano</a> | <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC&nbsp;BY-SA 4.0</a> | <a href="https://github.com/alexbonjour/clicker-lister/issues">Source/Issues</a></p></td>
         </tr>
@@ -134,12 +102,9 @@
     <script src="js/SpryTooltip.js" type="text/javascript"></script>
     <script src="js/jsonpath-0.8.0.js" type="text/javascript"></script>
     <script src="common/commonvars.js"></script>
+    <script src="common/saveDecoder.js"></script> 
     <script src="common/input.js"></script> 
     <script src="common/output.js"></script> 
-
-    <script src="common/saveDecoder.js"></script> 
-    <script src="common/datareader.js"></script>
-    <script src="common/redditreader.js"></script>
 
     <script src="listers/mainLister.js"></script> 
 
