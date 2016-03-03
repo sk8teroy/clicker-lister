@@ -57,8 +57,8 @@ function getClickerListerText()
     {
         text += relicAbilitiesText();
     }
-    
-    
+  
+    text += "\n\n" + headingStyle("Made with") + " http://tiny.cc/lister";
 
     return text;
 }
