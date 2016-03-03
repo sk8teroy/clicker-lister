@@ -193,7 +193,7 @@ function heroText()
             text += oneHero.name;
         }
         
-        text += "(" + formatNumber(oneHero.numGilds) + "); ";
+        text += " (" + formatNumber(oneHero.numGilds) + "); ";
     });
 
     return text;
