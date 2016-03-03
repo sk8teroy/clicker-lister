@@ -10,44 +10,18 @@ function getClickerListerText()
     var text = "";
 
     //outputformatDto
-    // {"general":{"boldHeadings":true,
-    //             "numberFormat":"Comma"},
-    //  "heroes":{"shortNames":false},
+    //x  {"general":{"boldHeadings":true,
+    //x              "numberFormat":"Comma"},
+    //x   "heroes":{"shortNames":false},
     //  "items":{"showAbilities":true,
     //           "showRelics":false},
-    //  "ancients":{"shortNames":false,
-    //              "ancientSortOrder":"Descending",
-    //              "separateMaxedAncients":true,
-    //              "groupAncientsByLevel":false,
-    //              "showUnsummonedAncients":true}}
+    //x  "ancients":{"shortNames":false,
+    //x               "ancientSortOrder":"Descending",
+    //x               "separateMaxedAncients":true,
+    //x               "showUnsummonedAncients":true}}
     
     
     //cldto
-    // {"misc":{"rubies":125,
-    //          "immortalDamage":2732096,
-    //          "ascensions":85,
-    //          "achievementCount":107,
-    //          "herosouls":{"current":901514,
-    //                       "rerollSpend":9118},
-    //          "zones":{"hze":1694,
-    //                   "current":1082}},
-    //  "gildedHeroes":[{"id":30,"name":"Phthalo","numGilds":160}],
-    //  "ancients":[{"id":3,"name":"Solomon","level":635,"spentHeroSouls":4072518},
-    //              {"id":4,"name":"Libertas","level":742,"spentHeroSouls":275656},
-    //              {"id":5,"name":"Siyalatas","level":800,"spentHeroSouls":320400},
-    //              {"id":8,"name":"Mammon","level":742,"spentHeroSouls":275660},
-    //              {"id":9,"name":"Mimzee","level":742,"spentHeroSouls":275722},
-    //              {"id":11,"name":"Dogcog","level":25,"spentHeroSouls":1124},
-    //              {"id":12,"name":"Fortuna","level":40,"spentHeroSouls":835},
-    //              {"id":13,"name":"Atman","level":25,"spentHeroSouls":1562},
-    //              {"id":14,"name":"Dora","level":50,"spentHeroSouls":1774},
-    //              {"id":16,"name":"Morgulis","level":542539,"spentHeroSouls":544238},
-    //              {"id":17,"name":"Chronos","level":71,"spentHeroSouls":19490},
-    //              {"id":18,"name":"Bubos","level":25,"spentHeroSouls":359},
-    //              {"id":21,"name":"Kumawakamaru","level":5,"spentHeroSouls":142},
-    //              {"id":28,"name":"Argaiv","level":800,"spentHeroSouls":321599},
-    //              {"id":30,"name":"Iris","level":363,"spentHeroSouls":1011081},
-    //              {"id":31,"name":"Revolc","level":15,"spentHeroSouls":17149}],
     //  "relics":{"forgeCores":25894,
     //            "totalRelicsReceived":177,
     //            "equipped":[{"name":"Garnet Ring of Souls",
@@ -70,11 +44,89 @@ function getClickerListerText()
     //                                  {"abilityId":6,"levels":2},
     //                                  {"abilityId":14,"levels":4}]}]}}
     
-    //ancient text
-    text += headingStyle("Ancients");
-    clDto.ancients.forEach( function (elem) {
-        text += elem.name + " (" + elem.level + "); ";
-    });
+
+
+    //sort ancients in DTO
+    if( outputFormatDto.ancients.ancientSortOrder == "Alphabetical" )
+    {
+        //sort ancients alphabetically
+        clDto.ancients.sort(function(a, b){
+            return a.name == b.name ? 0 : +(a.name > b.name) || -1;
+        });
+    }
+    else if( outputFormatDto.ancients.ancientSortOrder == "Ascending" )
+    {
+        clDto.ancients.sort(function(a, b){
+            return a.level == b.level ? 0 : +(a.level > b.level) || -1;
+        });
+    }
+    else if( outputFormatDto.ancients.ancientSortOrder == "Descending" )
+    {
+        clDto.ancients.sort(function(a, b){
+            return a.level == b.level ? 0 : +(a.level < b.level) || -1;
+        });
+    }
+    
+    text += ancientText();
+
+    if(outputFormatDto.ancients.separateMaxedAncients)
+    {
+        text += maxText();
+    }
+
+    if(outputFormatDto.ancients.showUnsummonedAncients)
+    {
+        text += unsummonedText();
+    }
+
+    text += heroText();
+    
+    text += miscText();
+
+    text += timeText();
+
+    if(outputFormatDto.items.showRelics)
+    {
+        text += relicText();
+    }
+    
+    if(outputFormatDto.items.showAbilities)
+    {
+//        text += relicAbilitiesText();
+    }
+    
+    
+
+    return text;
+}
+
+function oneAncientText(oneAncient, showLevel)
+{
+    text = "";
+
+    if(outputFormatDto.ancients.shortNames)
+    {
+        text += oneAncient.name.substring(0,4);
+    }
+    else
+    {
+        text += oneAncient.name;
+    }
+
+    if(showLevel)
+    {
+        if(oneAncient.isMax)
+        {
+            text += " (MAX)";
+        }
+        else
+        {
+            text += " (" + formatNumber(oneAncient.level) + ")";
+        }
+    }
+    
+    text += "; ";
+    
     return text;
 }
 
@@ -82,3 +134,246 @@ function headingStyle(headingText)
 {
     return outputFormatDto.general.boldHeadings ? "**" + headingText + "**: " : headingText + ": ";
 }
+
+function ancientText()
+{
+    var text = headingStyle("Ancients");
+    clDto.ancients.forEach( function (oneAncient) {
+        if(!outputFormatDto.ancients.separateMaxedAncients
+           || 
+           !oneAncient.isMax)
+        {
+            text += oneAncientText(oneAncient, true);
+        }    
+    });
+    
+    return text;
+}
+
+function maxText()
+{
+    text = "\n\n";
+    text += headingStyle("Max");
+    maxedAncients = [];
+    clDto.ancients.forEach( function (oneAncient) {
+        if(outputFormatDto.ancients.separateMaxedAncients
+           && 
+           oneAncient.isMax)
+        {
+            maxedAncients.push(oneAncient);
+        }   
+    });
+    
+    maxedAncients.sort(function(a, b){
+        return a.name == b.name ? 0 : +(a.name > b.name) || -1;
+    });
+    
+    maxedAncients.forEach( function (oneAncient) {
+        text += oneAncientText(oneAncient, false);            
+    });
+    return text;
+}
+
+function unsummonedText()
+{
+    text = "\n\n";
+    text += headingStyle("Not Summoned");
+    
+    unsummonedNames = [];
+    for (var key in ancientsMap) {
+        if (ancientsMap.hasOwnProperty(key)) {
+            unsummonedNames.push(ancientsMap[key].name);
+        }
+    }
+    
+    //unsummonedNames contains all ancient names now.
+    clDto.ancients.forEach( function (oneAncient) {
+        var index = unsummonedNames.indexOf(oneAncient.name);
+        if( index >= 0 )
+        {
+            unsummonedNames.splice(index,1);
+        }
+    });
+    //unsummonedNames contains only unsummonedNames ancients now.
+    
+    unsummonedNames.sort(function(a, b){
+        return a == b ? 0 : +(a > b) || -1;
+    });
+    
+    unsummonedNames.forEach( function (oneName) {
+        if(outputFormatDto.ancients.shortNames)
+        {
+            text += oneName.substring(0,4);
+        }
+        else
+        {
+            text += oneName;
+        }
+        text += "; ";
+    });
+    
+    return text;
+}
+
+function heroText()
+{
+    text ="\n\n";
+    text += headingStyle("Gilded Heroes");
+    
+    clDto.gildedHeroes.forEach( function (oneHero) {
+        if(outputFormatDto.heroes.shortNames)
+        {
+            text += oneHero.name.substring(0,4);
+        }
+        else
+        {
+            text += oneHero.name;
+        }
+        
+        text += "(" + formatNumber(oneHero.numGilds) + "); ";
+    });
+
+    return text;
+}
+
+function miscText()
+{
+    text ="\n\n";
+    text += headingStyle("Misc");
+
+    text += "HS (" + formatNumber(clDto.misc.herosouls.current) + "; ";
+    text += "Spent on Ancients/Rerolls: ";
+
+    ancientSpend = 0;
+    clDto.ancients.forEach( function (oneAncient) {
+        ancientSpend += oneAncient.spentHeroSouls;
+    });
+
+    text += formatNumber(ancientSpend) + "/" + formatNumber(clDto.misc.herosouls.rerollSpend) + "; ";
+    text += "Total: " + formatNumber(ancientSpend + clDto.misc.herosouls.rerollSpend + clDto.misc.herosouls.current) + ") ";
+    
+    text += "HZE: " + formatNumber(clDto.misc.zones.hze) + "; ";
+    text += "Current Zone: " + formatNumber(clDto.misc.zones.current) + "; ";
+    text += "Ascensions: " + formatNumber(clDto.misc.ascensions) + "; ";
+    text += "Rubies: " + formatNumber(clDto.misc.rubies) + "; ";
+    text += "Immortal Damage: " + formatNumber(clDto.misc.immortalDamage) + "; ";
+    text += "Forge Cores: " + formatNumber(clDto.relics.forgeCores) + "; ";
+    text += "Total Relics Found: " + formatNumber(clDto.relics.totalRelicsReceived) + "; ";
+    text += "Achievements: " + Math.floor(clDto.misc.achievementCount/numberOfAchievementsPossible*100) +"%; ";
+    
+    return text;
+}
+
+function timeText() {
+    text = "\n\n";
+    text += headingStyle("Time");
+
+    currentTime = new Date().getTime();
+    timeSinceCreation = +currentTime - +clDto.misc.time.creation;
+    timeSinceAscension = +currentTime - +clDto.misc.time.ascension;
+
+    
+    text += "Total Elapsed: " + formatElapsedTime(timeSinceCreation) + "; ";
+    text += "This Ascension: " + formatElapsedTime(timeSinceAscension) + "; ";
+    
+    return text;
+}
+
+function relicText() {
+    text = "\n\n";
+
+    count = 1;
+
+    clDto.relics.equipped.forEach(function (oneRelic) {
+        text += headingStyle("Relic " + count); 
+        text += oneRelic.name.split(" of")[0] + ": ";
+        text += oneRelic.rarity + " ";
+        text += "Level " + oneRelic.level + ", Bonus: ";
+
+        oneRelic.bonus.forEach(function (oneBonus) {
+            text += "+" + oneBonus.levels + " " + abilitiesMap[oneBonus.abilityId].ancient + "; ";
+        });
+
+        text += "\n\n";
+
+        count++;
+    });
+
+    return text;
+}
+
+
+
+function formatNumber(number)
+{
+    var formatter = "";
+    var digits = number.toString().length;
+    var ACCURACY = 4; //Constant
+    
+
+    if(outputFormatDto.general.numberFormat == "Comma" || digits < 6){
+        formatter = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }else{
+        var num = Math.round(number/(Math.pow(10,digits-ACCURACY))).toString();
+        while(num.length < ACCURACY || num.length < 3){
+            num += "0";
+        }
+        
+        //Scientific defaults
+        var period = 1;
+        var delimiter = 'e';
+        //Scientific
+        if(outputFormatDto.general.numberFormat == "Scientific") {
+            digits -= 1;
+        }else{ //Engineering
+            var mod = digits % 3;
+            delimiter = 'E';
+            if(mod == 0){
+                period = 3;
+                digits -= 3;
+            }else{
+                period = mod;
+                digits -= mod;
+            }
+        }
+        formatter = num.substring(0,period);
+        if(period < ACCURACY){
+            formatter += '.' + num.substring(period,num.length);
+        }
+        formatter += delimiter + digits;
+    }
+    return formatter;
+}
+
+function formatElapsedTime(time) {
+    text = "";
+
+
+    time /= 1000; //seconds
+
+    var days = time/(24*60*60);
+    var hours = (time/(60*60))%24;
+    var minutes = (time/60)%60; 
+    var seconds = time%60;
+    // Floor it all, removing remainders
+    days = Math.floor(days);
+    hours = Math.floor(hours);
+    minutes = Math.floor(minutes);
+    seconds = Math.floor(seconds);
+
+    if(days > 0) {
+        text += days + "d ";
+    }
+    
+    text += hours.toString().paddingLeft("00") 
+        + ":" + minutes.toString().paddingLeft("00") 
+        + ":" + seconds.toString().paddingLeft("00");
+
+    return text;
+}
+
+String.prototype.paddingLeft = function (paddingValue) {
+   return String(paddingValue + this).slice(-paddingValue.length);
+};
+
+

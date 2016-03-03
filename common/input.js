@@ -23,6 +23,14 @@ function readSaveData(data)
     var achievements = jsonPath(data, '$..achievements[*]');
     clDto.misc.achievementCount = achievements ? achievements.length : 0;
 
+    clDto.misc.time = {};
+    var creationTime = jsonPath(data, '$..creationTimestamp')
+    clDto.misc.time.creation = creationTime ? creationTime[0] : 0;
+    
+    var ascensionTime = jsonPath(data, '$..startTimestamp');
+    clDto.misc.time.ascension = ascensionTime ? ascensionTime[0] : 0;
+
+
     //misc.herosouls
     clDto.misc.herosouls = {};
 
@@ -64,9 +72,18 @@ function readSaveData(data)
         ancient.level = this.level;
         ancient.spentHeroSouls = this.spentHeroSouls;
         
+        if(ancientsMap[this.id].maxLevel == "None")
+        {
+            ancient.isMax = false;
+        }
+        else
+        {
+            ancient.isMax = this.level == ancientsMap[this.id].maxLevel;
+        }
+        
         clDto.ancients.push(ancient);
     });
-   
+
     //relics
     clDto.relics = {};
 

@@ -309,44 +309,7 @@ function readRedditMisc(data)
 
 function formNum(number)
 {
-    var formatter = "";
-    var digits = number.toString().length;
-    var ACCURACY = 4; //Constant
-    
-    //Comma notation (default)
-    if(formatOption == "comma" || digits < 6){
-        formatter = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }else{
-        var num = Math.round(number/(Math.pow(10,digits-ACCURACY))).toString();
-        while(num.length < ACCURACY || num.length < 3){
-            num += "0";
-        }
-        
-        //Scientific defaults
-        var period = 1;
-        var delimiter = 'e';
-        //Scientific
-        if(formatOption === "scientific"){
-            digits -= 1;
-            //Engineering
-        }else{
-            var mod = digits % 3;
-            delimiter = 'E';
-            if(mod == 0){
-                period = 3;
-                digits -= 3;
-            }else{
-                period = mod;
-                digits -= mod;
-            }
-        }
-        formatter = num.substring(0,period);
-        if(period < ACCURACY){
-            formatter += '.' + num.substring(period,num.length);
-        }
-        formatter += delimiter + digits;
-    }
-    return formatter;
+    return formatNumber(number);
 }
 
 function sortRedditAncients(objectArray)

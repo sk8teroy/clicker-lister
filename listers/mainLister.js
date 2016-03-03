@@ -101,7 +101,7 @@ function loadOutputFormatFromGui()
     outputFormatDto.general = {};
     outputFormatDto.general.boldHeadings =  $("#boldHeadings").is(':checked');
     // outputFormatDto.general.maxLineLength = 0;
-    outputFormatDto.general.numberFormat = $("#numberFormat option:selected").text();
+    outputFormatDto.general.numberFormat = $("#numberFormat option:selected").val();
     outputFormatDto.heroes = {};
     outputFormatDto.heroes.shortNames =  $("#heroShortNames").is(':checked');
     outputFormatDto.items = {};
@@ -109,9 +109,8 @@ function loadOutputFormatFromGui()
     outputFormatDto.items.showRelics = $("#showRelics").is(':checked'); 
     outputFormatDto.ancients= {};
     outputFormatDto.ancients.shortNames = $("#ancientShortNames").is(':checked'); 
-    outputFormatDto.ancients.ancientSortOrder = $("#ancientSortOrder option:selected").text();  
+    outputFormatDto.ancients.ancientSortOrder = $("#ancientSortOrder option:selected").val();  
     outputFormatDto.ancients.separateMaxedAncients = $("#separateMaxedAncients").is(':checked'); 
-    outputFormatDto.ancients.groupAncientsByLevel = $("#groupAncientsByLevel").is(':checked'); 
     outputFormatDto.ancients.showUnsummonedAncients = $("#showUnsummonedAncients").is(':checked'); 
 }
 
@@ -134,8 +133,10 @@ function calc(){
     console.log("**********************************************************************");
     readSaveData(myData);
     loadOutputFormatFromGui();
-    console.log(JSON.stringify(outputFormatDto));
-    console.log(JSON.stringify(clDto));
+    // console.log(JSON.stringify(outputFormatDto));
+    // console.log(JSON.stringify(clDto));
+    console.log(outputFormatDto);
+    console.log(clDto);
     console.log("**********************************************************************");
 
     
@@ -214,7 +215,6 @@ function updateOutputStyle(fCurrentStyle) {
         $("#ancientShortNames").prop('checked', false);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
         $("#separateMaxedAncients").prop('checked', true);
-        $("#groupAncientsByLevel").prop('checked', false);
         $("#showUnsummonedAncients").prop('checked', true);
     }
     else if(fCurrentStyle=="kong")
@@ -229,7 +229,6 @@ function updateOutputStyle(fCurrentStyle) {
         $("#ancientShortNames").prop('checked', true);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
         $("#separateMaxedAncients").prop('checked', false);
-        $("#groupAncientsByLevel").prop('checked', true);
         $("#showUnsummonedAncients").prop('checked', false);
     }
     else //custom
