@@ -139,9 +139,6 @@ function maxText()
 
 function unsummonedText()
 {
-    text = "\n\n";
-    text += headingStyle("Not Summoned");
-    
     unsummonedNames = [];
     for (var key in ancientsMap) {
         if (ancientsMap.hasOwnProperty(key)) {
@@ -159,21 +156,28 @@ function unsummonedText()
     });
     //unsummonedNames contains only unsummonedNames ancients now.
     
-    unsummonedNames.sort(function(a, b){
-        return a == b ? 0 : +(a > b) || -1;
-    });
-    
-    unsummonedNames.forEach( function (oneName) {
-        if(outputFormatDto.ancients.shortNames)
-        {
-            text += oneName.substring(0,4);
-        }
-        else
-        {
-            text += oneName;
-        }
-        text += "; ";
-    });
+    text = "";
+    if(unsummonedNames.length > 0)
+    {
+        text += "\n\n";
+        text += headingStyle("Not Summoned");
+        
+        unsummonedNames.sort(function(a, b){
+            return a == b ? 0 : +(a > b) || -1;
+        });
+        
+        unsummonedNames.forEach( function (oneName) {
+            if(outputFormatDto.ancients.shortNames)
+            {
+                text += oneName.substring(0,4);
+            }
+            else
+            {
+                text += oneName;
+            }
+            text += "; ";
+        });
+    }
     
     return text;
 }
