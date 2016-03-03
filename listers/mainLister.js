@@ -106,6 +106,7 @@ function loadOutputFormatFromGui()
     outputFormatDto.heroes.shortNames =  $("#heroShortNames").is(':checked');
     outputFormatDto.items = {};
     outputFormatDto.items.showAbilities = $("#showAbilities").is(':checked'); 
+    outputFormatDto.items.abilitiesFormatting = $("#abilitiesFormatting").is(':checked'); 
     outputFormatDto.items.showRelics = $("#showRelics").is(':checked'); 
     outputFormatDto.ancients= {};
     outputFormatDto.ancients.shortNames = $("#ancientShortNames").is(':checked'); 
@@ -211,6 +212,7 @@ function updateOutputStyle(fCurrentStyle) {
         $('#numberFormat option[value="Comma"]').prop('selected', true);
         $("#heroShortNames").prop('checked', false);
         $("#showAbilities").prop('checked', true);
+        $("#abilitiesFormatting").prop('checked', true);
         $("#showRelics").prop('checked', false);
         $("#ancientShortNames").prop('checked', false);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
@@ -225,6 +227,7 @@ function updateOutputStyle(fCurrentStyle) {
         $('#numberFormat option[value="Comma"]').prop('selected', true);
         $("#heroShortNames").prop('checked', true);
         $("#showAbilities").prop('checked', true);
+        $("#abilitiesFormatting").prop('checked', false);
         $("#showRelics").prop('checked', false);
         $("#ancientShortNames").prop('checked', true);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);

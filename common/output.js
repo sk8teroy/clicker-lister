@@ -296,7 +296,17 @@ function relicAbilitiesText() {
         effectText = abilitiesMap[id].effectDescription.replace("%1", boost);
         
         //todo add reddit super script here.
-        text += "(" + effectText + ")";
+        if(outputFormatDto.items.abilitiesFormatting)
+        {
+            superscript = "\\(" + effectText + "\\)";
+            superscript.split(" ").forEach( function (littleString) {
+                text += "^^" + littleString + " ";
+            });
+        }
+        else
+        {
+            text += "(" + effectText + ")";
+        }
 
         text += "\n";
     }
