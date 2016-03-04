@@ -248,14 +248,14 @@ function timeText() {
 
 function relicText() {
     text = "\n\n";
-
-    count = 1;
+    text += headingStyle("Relics");
+    text += "\n\n";
 
     clDto.relics.equipped.forEach(function (oneRelic) {
-        text += headingStyle("Relic " + count); 
+        text += "* ";
         text += oneRelic.name.split(" of")[0] + ": ";
         text += oneRelic.rarity + " ";
-        text += "Level " + oneRelic.level + ", Bonus: ";
+        text += "Lvl " + oneRelic.level + " ";
 
         oneRelic.bonus.forEach(function (oneBonus) {
             text += "+" + oneBonus.levels + " ";
@@ -263,9 +263,7 @@ function relicText() {
             text += "; ";
         });
 
-        text += "\n\n";
-
-        count++;
+        text += "\n";
     });
 
     return text;
