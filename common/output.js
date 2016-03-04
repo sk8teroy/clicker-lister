@@ -240,8 +240,8 @@ function timeText() {
     timeSinceAscension = +currentTime - +clDto.misc.time.ascension;
 
     
-    text += "Days Since Start: " + formatElapsedTime(timeSinceCreation, true) + "; ";
-    text += "Time Since Ascension: " + formatElapsedTime(timeSinceAscension, false) + "; ";
+    text += "Since Start: " + formatElapsedTime(timeSinceCreation, true) + "; ";
+    text += "Since Ascension: " + formatElapsedTime(timeSinceAscension, false) + "; ";
     
     return text;
 }
