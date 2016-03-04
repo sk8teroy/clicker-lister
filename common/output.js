@@ -58,7 +58,7 @@ function getClickerListerText()
         text += relicAbilitiesText();
     }
   
-    text += "\n\n" + headingStyle("Made with") + " [clicker-lister](http://alexbonjour.github.io/clicker-lister)";
+//    text += "\n\n" + headingStyle("Made with") + " [clicker-lister](http://alexbonjour.github.io/clicker-lister)";
 
     return text;
 }
