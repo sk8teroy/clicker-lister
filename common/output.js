@@ -291,15 +291,27 @@ function relicAbilitiesText() {
         });
     });
 
+
+    //ugly... pushing to array of objects to be able to sort them...
+    bonusInArray = [];
     for (var id in bonusToPrint) {
-        ability = abilitiesMap[id];
-        text += "* +" + bonusToPrint[id] + " " + abilitiesMap[id].ancient + " ";
+        onething = {};
+        onething.id = id;
+        onething.level = bonusToPrint[id];
+        bonusInArray.push(onething);
+    }
+    
+    bonusInArray.sort(function(a, b){
+        return abilitiesMap[a.id].sortOrder == abilitiesMap[b.id].sortOrder ? 0 : +(abilitiesMap[a.id].sortOrder > abilitiesMap[b.id].sortOrder) || -1;
+    });
+
+    bonusInArray.forEach( function (oneBonus) {
+        ability = abilitiesMap[oneBonus.id];
+        text += "* +" + oneBonus.level + " " + ability.ancient + " ";
         
+        var boost = effectPower(ability, oneBonus.level);
+        effectText = ability.effectDescription.replace("%1", boost);
         
-        var boost = effectPower(abilitiesMap[id], bonusToPrint[id]);
-        effectText = abilitiesMap[id].effectDescription.replace("%1", boost);
-        
-        //todo add reddit super script here.
         if(outputFormatDto.items.abilitiesFormatting)
         {
             superscript = "\\(" + effectText + "\\)";
@@ -313,7 +325,7 @@ function relicAbilitiesText() {
         }
 
         text += "\n";
-    }
+    });
 
     return text;
 }
