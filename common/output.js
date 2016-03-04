@@ -240,8 +240,8 @@ function timeText() {
     timeSinceAscension = +currentTime - +clDto.misc.time.ascension;
 
     
-    text += "Time Since Start: " + formatElapsedTime(timeSinceCreation) + "; ";
-    text += "Time Since Ascension: " + formatElapsedTime(timeSinceAscension) + "; ";
+    text += "Days Since Start: " + formatElapsedTime(timeSinceCreation, true) + "; ";
+    text += "Time Since Ascension: " + formatElapsedTime(timeSinceAscension, false) + "; ";
     
     return text;
 }
@@ -445,7 +445,7 @@ function formatNumber(number)
     return formatter;
 }
 
-function formatElapsedTime(time) {
+function formatElapsedTime(time, daysOnly) {
     text = "";
 
 
@@ -462,13 +462,16 @@ function formatElapsedTime(time) {
     seconds = Math.floor(seconds);
 
     if(days > 0) {
-        text += days + "d ";
+        text += days + " Days";
     }
     
-    text += hours.toString().paddingLeft("00") 
-        + ":" + minutes.toString().paddingLeft("00") 
-        + ":" + seconds.toString().paddingLeft("00");
-
+    if(!daysOnly)
+    {
+        text += hours.toString().paddingLeft("00") 
+            + ":" + minutes.toString().paddingLeft("00") 
+            + ":" + seconds.toString().paddingLeft("00");
+    }
+    
     return text;
 }
 
