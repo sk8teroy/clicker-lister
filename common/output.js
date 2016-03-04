@@ -258,7 +258,9 @@ function relicText() {
         text += "Level " + oneRelic.level + ", Bonus: ";
 
         oneRelic.bonus.forEach(function (oneBonus) {
-            text += "+" + oneBonus.levels + " " + abilitiesMap[oneBonus.abilityId].ancient + "; ";
+            text += "+" + oneBonus.levels + " ";
+            text += outputFormatDto.ancients.shortNames ? abilitiesMap[oneBonus.abilityId].ancient.substring(0,4) : abilitiesMap[oneBonus.abilityId].ancient;
+            text += "; ";
         });
 
         text += "\n\n";
@@ -271,7 +273,7 @@ function relicText() {
 
 function relicAbilitiesText() {
     text = "\n\n";
-    text += headingStyle("Total Item Bonuses");
+    text += headingStyle("Total Relic Bonuses");
     text += "\n\n";
 
     bonusToPrint = {};
@@ -307,7 +309,9 @@ function relicAbilitiesText() {
 
     bonusInArray.forEach( function (oneBonus) {
         ability = abilitiesMap[oneBonus.id];
-        text += "* +" + oneBonus.level + " " + ability.ancient + " ";
+        text += "* +" + oneBonus.level + " ";
+        text += outputFormatDto.ancients.shortNames ? ability.ancient.substring(0,4) : ability.ancient;
+        text += " ";
         
         var boost = effectPower(ability, oneBonus.level);
         effectText = ability.effectDescription.replace("%1", boost);
