@@ -462,9 +462,10 @@ function formatElapsedTime(time, daysOnly) {
     seconds = Math.floor(seconds);
 
     if(days > 0) {
-        text += days + " Days";
+        text += days;
+        text += (days>1 ? " days" : " day");
     }
-    
+ 
     if(!daysOnly)
     {
         text += hours.toString().paddingLeft("00") 
