@@ -71,7 +71,7 @@ var abilitiesMap = {
 
 var heroesMap = {  //game-id:info about hereos
     1:{name: "Cid", cost: 5, damage: 0, level: 0, upgradeCosts: [100, 250, 1e3, 8e3, 80e3, 400e3, 4e6]/*,upgradeIDs:[,,,,]*/}, 
-    2:{name: "Tree Beast", cost: 50, damage: 5, level: 0, upgradeCosts: [500, 1.25e3, 5e3, 40e3, 400e3],upgradeIDs:[17,18,19,20,103]},
+    2:{name: "Treebeast", cost: 50, damage: 5, level: 0, upgradeCosts: [500, 1.25e3, 5e3, 40e3, 400e3],upgradeIDs:[17,18,19,20,103]},
     // 1:17 2:18 3:19 4:20, 5:103
     3:{name: "Ivan", cost: 250, damage: 22, level: 0, upgradeCosts: [2.5e3, 6.25e3, 25e3, 200e3, 2e6, 10e6], upgradeIDs:[21,22,23,108,100,24]},
     // 1:21 2:22 3:23 4:108 5:100 6:24
@@ -121,7 +121,7 @@ var heroesMap = {  //game-id:info about hereos
     //4 1:120 2:121 3:122 4:123
     26:{name: "Frostleaf", cost: 2100e24, damage: 74698e18, level: 0, upgradeCosts: [21e27, 52.499e27, 209e27, 1.679e30], upgradeIDs:[124,125,126,127]},
     //4 1:124 2:125 3:126 4:127
-    27:{name: "DreadKnight", cost: 1e40, damage: 1.46e32, level: 0, upgradeCosts: [1e41, 2.5e41, 1e42, 0, 8e42], upgradeIDs:[133,134,135,136]},
+    27:{name: "Dread Knight", cost: 1e40, damage: 1.46e32, level: 0, upgradeCosts: [1e41, 2.5e41, 1e42, 0, 8e42], upgradeIDs:[133,134,135,136]},
     //4 1:133 2:134 3:135 4:136
     28:{name: "Atlas", cost: 1e55, damage: 1.075e45, level: 0, upgradeCosts: [1e56, 2.5e56, 1e57, 0, 8e57], upgradeIDs:[138,139,140,141]},
     //4 1:138 2:139 3:140 4:141
