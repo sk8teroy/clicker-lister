@@ -468,9 +468,10 @@ function formatElapsedTime(time, daysOnly) {
  
     if(!daysOnly)
     {
-        text += hours.toString().paddingLeft("00") 
-            + ":" + minutes.toString().paddingLeft("00") 
-            + ":" + seconds.toString().paddingLeft("00");
+        text += " " + hours + "h " + minutes + "m";
+//        text += hours.toString().paddingLeft("00") 
+//            + ":" + minutes.toString().paddingLeft("00") 
+//            + ":" + seconds.toString().paddingLeft("00");
     }
     
     return text;
