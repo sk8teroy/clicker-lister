@@ -47,7 +47,7 @@ function readSaveData(data)
     clDto.misc.zones.hze = highestFinishedZonePersist ? highestFinishedZonePersist[0] : 0;
 
     var currentZoneHeight  = jsonPath(data, '$..currentZoneHeight');
-    clDto.misc.zones.current = currentZoneHeight ? currentZoneHeight[0] +1 : 1;
+    clDto.misc.zones.current = currentZoneHeight ? currentZoneHeight[0] : 1;
     
 
     // //heroes - name, #gilds (only added if gilded)
