@@ -62,6 +62,33 @@ function getClickerListerText()
 
     return text;
 }
+function headingStyle(headingText)
+{
+    return outputFormatDto.general.boldHeadings ? "**" + headingText + "**: " : headingText + ": ";
+}
+
+function ancientText()
+{
+    var text = headingStyle("Ancients");
+
+    if(clDto.ancients.length == 0)
+    {
+        text += "None;";
+    }
+    else
+    {
+        clDto.ancients.forEach( function (oneAncient) {
+            if(!outputFormatDto.ancients.separateMaxedAncients
+               || 
+               !oneAncient.isMax)
+            {
+                text += oneAncientText(oneAncient, true);
+            }    
+        });
+    }
+    
+    return text;
+}
 
 function oneAncientText(oneAncient, showLevel)
 {
@@ -93,28 +120,13 @@ function oneAncientText(oneAncient, showLevel)
     return text;
 }
 
-function headingStyle(headingText)
-{
-    return outputFormatDto.general.boldHeadings ? "**" + headingText + "**: " : headingText + ": ";
-}
-
-function ancientText()
-{
-    var text = headingStyle("Ancients");
-    clDto.ancients.forEach( function (oneAncient) {
-        if(!outputFormatDto.ancients.separateMaxedAncients
-           || 
-           !oneAncient.isMax)
-        {
-            text += oneAncientText(oneAncient, true);
-        }    
-    });
-    
-    return text;
-}
-
 function maxText()
 {
+    if(clDto.ancients.length == 0)
+    {
+        return "";
+    }
+
     text = "\n\n";
     text += headingStyle("Max");
     maxedAncients = [];
@@ -139,6 +151,11 @@ function maxText()
 
 function unsummonedText()
 {
+    if(clDto.ancients.length == 0)
+    {
+        return "";
+    }
+
     unsummonedNames = [];
     for (var key in ancientsMap) {
         if (ancientsMap.hasOwnProperty(key)) {
@@ -186,20 +203,27 @@ function heroText()
 {
     text ="\n\n";
     text += headingStyle("Gilded Heroes");
-    
-    clDto.gildedHeroes.forEach( function (oneHero) {
-        if(outputFormatDto.heroes.shortNames)
-        {
-            text += oneHero.name.substring(0,4);
-        }
-        else
-        {
-            text += oneHero.name;
-        }
-        
-        text += " (" + formatNumber(oneHero.numGilds) + "); ";
-    });
 
+
+    if(clDto.gildedHeroes.length == 0)
+    {
+        text += "None;";
+    }
+    else
+    {
+        clDto.gildedHeroes.forEach( function (oneHero) {
+            if(outputFormatDto.heroes.shortNames)
+            {
+                text += oneHero.name.substring(0,4);
+            }
+            else
+            {
+                text += oneHero.name;
+            }
+            
+            text += " (" + formatNumber(oneHero.numGilds) + "); ";
+        });
+    }
     return text;
 }
 
@@ -463,14 +487,16 @@ function formatElapsedTime(time, daysOnly) {
     minutes = Math.floor(minutes);
     seconds = Math.floor(seconds);
 
-    if(days > 0) {
+    if(days > 0 || daysOnly) //if days only, you always want day to be output.
+    {
         text += days;
-        text += (days>1 ? " days" : " day");
+        text += (days==1 ? " day" : " days");
     }
  
     if(!daysOnly)
     {
-        text += " " + hours + "h " + minutes + "m";
+        text += days==0 ? "" : " ";
+        text += hours + "h " + minutes + "m";
 //        text += hours.toString().paddingLeft("00") 
 //            + ":" + minutes.toString().paddingLeft("00") 
 //            + ":" + seconds.toString().paddingLeft("00");
@@ -479,8 +505,8 @@ function formatElapsedTime(time, daysOnly) {
     return text;
 }
 
-String.prototype.paddingLeft = function (paddingValue) {
-   return String(paddingValue + this).slice(-paddingValue.length);
-};
+// String.prototype.paddingLeft = function (paddingValue) {
+//    return String(paddingValue + this).slice(-paddingValue.length);
+// };
 
 
