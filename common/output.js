@@ -130,13 +130,27 @@ function oneAncientText(oneAncient, showLevel)
 
     if(showLevel)
     {
-        if(oneAncient.isMax)
+        if(outputFormatDto.ancients.shortNames)
         {
-            text += " (MAX)";
+            if(oneAncient.isMax)
+            {
+                text += ":MAX";
+            }
+            else
+            {
+                text += ":" + formatNumber(oneAncient.level);
+            }
         }
         else
         {
-            text += " (" + formatNumber(oneAncient.level) + ")";
+            if(oneAncient.isMax)
+            {
+                text += " (MAX)";
+            }
+            else
+            {
+                text += " (" + formatNumber(oneAncient.level) + ")";
+            }
         }
     }
     
@@ -240,13 +254,14 @@ function heroText()
             if(outputFormatDto.heroes.shortNames)
             {
                 text += oneHero.name.substring(0,4);
+                text += ":" + formatNumber(oneHero.numGilds) + "; ";
             }
             else
             {
                 text += oneHero.name;
+                text += " (" + formatNumber(oneHero.numGilds) + "); ";
             }
             
-            text += " (" + formatNumber(oneHero.numGilds) + "); ";
         });
     }
     return text;
