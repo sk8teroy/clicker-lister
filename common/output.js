@@ -482,6 +482,11 @@ function solomonBonus(level) {
 
 function formatNumber(number)
 {
+    if(outputFormatDto.general.numberFormat == "JustNumbers")
+    {
+        return number;
+    }
+
     var formatter = "";
     var digits = number.toString().length;
     var ACCURACY = 4; //Constant
