@@ -49,7 +49,16 @@
 
               <div id="customOutputOptions">
                 <hr>
-                <div class="formatOption"><input type="checkbox" id="boldHeadings" checked>Reddit-Style Bold Headings <br/></div>
+                <div class="formatOption"><input type="checkbox" id="showRelics">Relics <br/></div>
+                <div class="formatOption"><input type="checkbox" id="showRelicBonusAncients" checked>Total Relic Bonuses - Ancients <br/></div>
+                <div class="formatOption"><input type="checkbox" id="showRelicBonusAbilities" checked>Total Relic Bonuses - Abilities <br/></div>
+                <div class="formatOption"><input type="checkbox" id="showUnsummonedAncients" checked>Unsummoned Ancients <br/></div>
+
+                <div class="formatOption"><input type="checkbox" id="separateMaxedAncients" checked>Show Maxed Ancients separately <br/></div>
+                <div class="formatOption"><input type="checkbox" id="heroShortNames" checked>Short Names for Heroes <br/></div>
+                <div class="formatOption"><input type="checkbox" id="ancientShortNames" checked>Short Names for Ancients <br/></div>
+
+                <div class="formatOption"><input type="checkbox" id="redditMarkDown" checked>Reddit-Style Mark Down <br/></div>
 
                 <!-- todo max line length -->
                 
@@ -61,14 +70,6 @@
                   </select>  <br/>
                 </div>
 
-                <div class="formatOption"><input type="checkbox" id="heroShortNames" checked>Short Names for Heroes <br/></div>
-
-                <div class="formatOption"><input type="checkbox" id="ancientShortNames" checked>Short Names for Ancients <br/></div>
-                
-                <div class="formatOption"><input type="checkbox" id="showAbilities" checked>Show Abilities <br/></div>
-                <div class="formatOption"><input type="checkbox" id="abilitiesFormatting" checked>Markdown Formatting of Abilities <br/></div>
-                <div class="formatOption"><input type="checkbox" id="showRelics">Show Relics <br/></div>
-
                 <div class="formatOption">
                   Ancient Sort Order: <select id="ancientSortOrder">
                     <option value="Descending">Descending by Level</option>
@@ -77,8 +78,6 @@
                   </select>  <br/>
                 </div>
 
-                <div class="formatOption"><input type="checkbox" id="separateMaxedAncients" checked>Show Maxed Ancients separately <br/></div>
-                <div class="formatOption"><input type="checkbox" id="showUnsummonedAncients" checked>Show Unsummoned Ancients <br/></div>
                 
               </div>
               <div><button onclick="ClearTextArea();" class="button"><img id="redx_img" src="img/red-x-icon-hi.png">&nbsp;Clear&nbsp;Data!</button></div>

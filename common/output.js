@@ -53,7 +53,7 @@ function getClickerListerText()
         text += relicText();
     }
     
-    if(outputFormatDto.items.showAbilities)
+    if(outputFormatDto.items.showRelicBonusAncients || outputFormatDto.items.showRelicBonusAbilities)
     {
         text += relicAbilitiesText();
     }
@@ -64,7 +64,7 @@ function getClickerListerText()
 }
 function headingStyle(headingText)
 {
-    return outputFormatDto.general.boldHeadings ? "**" + headingText + "**: " : headingText + ": ";
+    return outputFormatDto.general.redditMarkDown ? "**" + headingText + "**: " : headingText + ": ";
 }
 
 function ancientText()
@@ -343,25 +343,35 @@ function relicAbilitiesText() {
         return abilitiesMap[a.id].sortOrder == abilitiesMap[b.id].sortOrder ? 0 : +(abilitiesMap[a.id].sortOrder > abilitiesMap[b.id].sortOrder) || -1;
     });
 
+
+
     bonusInArray.forEach( function (oneBonus) {
         ability = abilitiesMap[oneBonus.id];
-        text += "* +" + oneBonus.level + " ";
-        text += outputFormatDto.ancients.shortNames ? ability.ancient.substring(0,4) : ability.ancient;
-        text += " ";
-        
-        var boost = effectPower(ability, oneBonus.level);
-        effectText = ability.effectDescription.replace("%1", boost);
-        
-        if(outputFormatDto.items.abilitiesFormatting)
+
+        text += "* ";
+        if(outputFormatDto.items.showRelicBonusAncients)
         {
-            superscript = "\\(" + effectText + "\\)";
-            superscript.split(" ").forEach( function (littleString) {
-                text += "^^" + littleString + " ";
-            });
-        }
-        else
+            text += "+" + oneBonus.level + " ";
+            text += outputFormatDto.ancients.shortNames ? ability.ancient.substring(0,4) : ability.ancient;
+            text += " ";
+        }        
+
+        if(outputFormatDto.items.showRelicBonusAbilities)
         {
-            text += "(" + effectText + ")";
+            var boost = effectPower(ability, oneBonus.level);
+            effectText = ability.effectDescription.replace("%1", boost);
+            
+            if(outputFormatDto.general.redditMarkDown)
+            {
+                superscript = outputFormatDto.items.showRelicBonusAncients ? "\\(" + effectText + "\\)" : effectText;
+                superscript.split(" ").forEach( function (littleString) {
+                    text += "^^" + littleString + " ";
+                });
+            }
+            else
+            {
+                text += outputFormatDto.items.showRelicBonusAncients ? "(" + effectText + ")" : effectText;
+            }
         }
 
         text += "\n";

@@ -96,14 +96,14 @@ function loadOutputFormatFromGui()
 {
     outputFormatDto = {};
     outputFormatDto.general = {};
-    outputFormatDto.general.boldHeadings =  $("#boldHeadings").is(':checked');
+    outputFormatDto.general.redditMarkDown =  $("#redditMarkDown").is(':checked');
     // outputFormatDto.general.maxLineLength = 0;
     outputFormatDto.general.numberFormat = $("#numberFormat option:selected").val();
     outputFormatDto.heroes = {};
     outputFormatDto.heroes.shortNames =  $("#heroShortNames").is(':checked');
     outputFormatDto.items = {};
-    outputFormatDto.items.showAbilities = $("#showAbilities").is(':checked'); 
-    outputFormatDto.items.abilitiesFormatting = $("#abilitiesFormatting").is(':checked'); 
+    outputFormatDto.items.showRelicBonusAncients = $("#showRelicBonusAncients").is(':checked'); 
+    outputFormatDto.items.showRelicBonusAbilities = $("#showRelicBonusAbilities").is(':checked'); 
     outputFormatDto.items.showRelics = $("#showRelics").is(':checked'); 
     outputFormatDto.ancients= {};
     outputFormatDto.ancients.shortNames = $("#ancientShortNames").is(':checked'); 
@@ -136,11 +136,11 @@ function updateOutputStyle(fCurrentStyle) {
     {
         $("#customOutputOptions").hide();
 
-        $("#boldHeadings").prop('checked', true);
+        $("#redditMarkDown").prop('checked', true);
         $('#numberFormat option[value="Comma"]').prop('selected', true);
         $("#heroShortNames").prop('checked', false);
-        $("#showAbilities").prop('checked', true);
-        $("#abilitiesFormatting").prop('checked', true);
+        $("#showRelicBonusAncients").prop('checked', true);
+        $("#showRelicBonusAbilities").prop('checked', true);
         $("#showRelics").prop('checked', false);
         $("#ancientShortNames").prop('checked', false);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
@@ -151,11 +151,11 @@ function updateOutputStyle(fCurrentStyle) {
     {
         $("#customOutputOptions").hide();
 
-        $("#boldHeadings").prop('checked', false);
+        $("#redditMarkDown").prop('checked', false);
         $('#numberFormat option[value="Comma"]').prop('selected', true);
         $("#heroShortNames").prop('checked', true);
-        $("#showAbilities").prop('checked', true);
-        $("#abilitiesFormatting").prop('checked', false);
+        $("#showRelicBonusAncients").prop('checked', true);
+        $("#showRelicBonusAbilities").prop('checked', false);
         $("#showRelics").prop('checked', false);
         $("#ancientShortNames").prop('checked', true);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
