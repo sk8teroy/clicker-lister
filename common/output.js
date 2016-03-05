@@ -60,8 +60,33 @@ function getClickerListerText()
   
 //    text += "\n\n" + headingStyle("Made with") + " [clicker-lister](http://alexbonjour.github.io/clicker-lister)";
 
-    return text;
+    return wrapText(text);
 }
+
+function wrapText(text)
+{
+    if(!outputFormatDto.general.maxLineLength250)
+    {
+        return text;
+    }
+    wrappedText = "";
+
+    text.split("\n").forEach( function (oneLine) {
+        if(oneLine.length <= 250)
+        {
+            wrappedText += oneLine + "\n";
+        }
+        else
+        {
+            splitLineHere = oneLine.substring(0,250).lastIndexOf(" ");
+            wrappedText += oneLine.substring(0,splitLineHere) + "\n";
+            wrappedText += oneLine.substring(splitLineHere) + "\n";
+        }
+    });
+    
+    return wrappedText;;
+}
+
 function headingStyle(headingText)
 {
     return outputFormatDto.general.redditMarkDown ? "**" + headingText + "**: " : headingText + ": ";
