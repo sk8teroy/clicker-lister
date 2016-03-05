@@ -108,10 +108,14 @@ function ancientText()
                !oneAncient.isMax)
             {
                 text += oneAncientText(oneAncient, true);
+                text += ", ";
             }    
         });
     }
-    
+
+    text = text.substring(0,text.length-2);
+    text += ";";
+
     return text;
 }
 
@@ -154,8 +158,6 @@ function oneAncientText(oneAncient, showLevel)
         }
     }
     
-    text += "; ";
-    
     return text;
 }
 
@@ -183,8 +185,9 @@ function maxText()
     });
     
     maxedAncients.forEach( function (oneAncient) {
-        text += oneAncientText(oneAncient, false);            
+        text += oneAncientText(oneAncient, false) + ", ";            
     });
+    text = text.substring(0,text.length-2) + ";";
     return text;
 }
 
@@ -231,10 +234,11 @@ function unsummonedText()
             {
                 text += oneName;
             }
-            text += "; ";
+            text += ", ";
         });
     }
-    
+
+    text = text.substring(0,text.length-2) + ";";
     return text;
 }
 
@@ -254,16 +258,18 @@ function heroText()
             if(outputFormatDto.heroes.shortNames)
             {
                 text += oneHero.name.substring(0,4);
-                text += ":" + formatNumber(oneHero.numGilds) + "; ";
+                text += ":" + formatNumber(oneHero.numGilds) + ", ";
             }
             else
             {
                 text += oneHero.name;
-                text += " (" + formatNumber(oneHero.numGilds) + "); ";
+                text += " (" + formatNumber(oneHero.numGilds) + "), ";
             }
             
         });
     }
+
+    text = text.substring(0,text.length-2) + ";";
     return text;
 }
 
@@ -325,15 +331,16 @@ function relicText() {
         text += "* ";
         text += oneRelic.name.split(" of")[0] + ": ";
         text += oneRelic.rarity + " ";
-        text += "Lvl " + oneRelic.level + " ";
+        text += "Lvl " + oneRelic.level + ", ";
 
         oneRelic.bonus.forEach(function (oneBonus) {
             text += "+" + oneBonus.levels + " ";
             ancientName = abilitiesMap[oneBonus.abilityId].ancient;
             text += outputFormatDto.ancients.shortNames ? ancientName.substring(0,4) : ancientName;
-            text += "; ";
+            text += ", ";
         });
 
+        text = text.substring(0,text.length-2) + ";";
         text += "\n";
     });
 
