@@ -273,8 +273,14 @@ function timeText() {
 function relicText() {
     text = "\n\n";
     text += headingStyle("Relics");
-    text += "\n\n";
 
+    if(clDto.relics.equipped.length==0)
+    {
+        text += "None;";
+        return text;
+    }
+
+    text += "\n\n";
     clDto.relics.equipped.forEach(function (oneRelic) {
         text += "* ";
         text += oneRelic.name.split(" of")[0] + ": ";
@@ -283,7 +289,8 @@ function relicText() {
 
         oneRelic.bonus.forEach(function (oneBonus) {
             text += "+" + oneBonus.levels + " ";
-            text += outputFormatDto.ancients.shortNames ? abilitiesMap[oneBonus.abilityId].ancient.substring(0,4) : abilitiesMap[oneBonus.abilityId].ancient;
+            ancientName = abilitiesMap[oneBonus.abilityId].ancient;
+            text += outputFormatDto.ancients.shortNames ? ancientName.substring(0,4) : ancientName;
             text += "; ";
         });
 
@@ -296,6 +303,13 @@ function relicText() {
 function relicAbilitiesText() {
     text = "\n\n";
     text += headingStyle("Total Relic Bonuses");
+
+    if(clDto.relics.equipped.length==0)
+    {
+        text += "None;";
+        return text;
+    }
+
     text += "\n\n";
 
     bonusToPrint = {};
