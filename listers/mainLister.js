@@ -154,14 +154,14 @@ function updateOutputStyle(fCurrentStyle) {
 
         $("#redditMarkDown").prop('checked', false);
         $("#maxLineLength250").prop('checked', true);
-        $('#numberFormat option[value="Comma"]').prop('selected', true);
+        $('#numberFormat option[value="JustNumbers"]').prop('selected', true);
         $("#heroShortNames").prop('checked', true);
         $("#showRelicBonusAncients").prop('checked', true);
         $("#showRelicBonusAbilities").prop('checked', false);
         $("#showRelics").prop('checked', false);
         $("#ancientShortNames").prop('checked', true);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
-        $("#separateMaxedAncients").prop('checked', false);
+        $("#separateMaxedAncients").prop('checked', true);
         $("#showUnsummonedAncients").prop('checked', false);
     }
     else //custom
