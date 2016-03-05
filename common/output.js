@@ -99,19 +99,18 @@ function ancientText()
     if(clDto.ancients.length == 0)
     {
         text += "None;";
+        return text;
     }
-    else
-    {
-        clDto.ancients.forEach( function (oneAncient) {
-            if(!outputFormatDto.ancients.separateMaxedAncients
-               || 
-               !oneAncient.isMax)
-            {
-                text += oneAncientText(oneAncient, true);
-                text += ", ";
-            }    
-        });
-    }
+
+    clDto.ancients.forEach( function (oneAncient) {
+        if(!outputFormatDto.ancients.separateMaxedAncients
+           || 
+           !oneAncient.isMax)
+        {
+            text += oneAncientText(oneAncient, true);
+            text += ", ";
+        }    
+    });
 
     text = text.substring(0,text.length-2);
     text += ";";
@@ -251,25 +250,25 @@ function heroText()
     if(clDto.gildedHeroes.length == 0)
     {
         text += "None;";
-    }
-    else
-    {
-        clDto.gildedHeroes.forEach( function (oneHero) {
-            if(outputFormatDto.heroes.shortNames)
-            {
-                text += oneHero.name.substring(0,4);
-                text += ":" + formatNumber(oneHero.numGilds) + ", ";
-            }
-            else
-            {
-                text += oneHero.name;
-                text += " (" + formatNumber(oneHero.numGilds) + "), ";
-            }
-            
-        });
+        return text;
     }
 
+    clDto.gildedHeroes.forEach( function (oneHero) {
+        if(outputFormatDto.heroes.shortNames)
+        {
+            text += oneHero.name.substring(0,4);
+            text += ":" + formatNumber(oneHero.numGilds) + ", ";
+        }
+        else
+        {
+            text += oneHero.name;
+            text += " (" + formatNumber(oneHero.numGilds) + "), ";
+        }
+        
+    });
+
     text = text.substring(0,text.length-2) + ";";
+
     return text;
 }
 
