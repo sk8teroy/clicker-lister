@@ -563,6 +563,9 @@ function formatElapsedTime(time, daysOnly) {
     seconds = Math.floor(seconds);
     
     days = days < 0 ? 0 : days;
+    hours = hours < 0 ? 0 : hours;
+    minutes = minutes < 0 ? 0 : minutes;
+    seconds = seconds < 0 ? 0 : seconds;
 
     if(days > 0 || daysOnly) //if days only, you always want day to be output.
     {
