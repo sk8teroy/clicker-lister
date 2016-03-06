@@ -350,7 +350,8 @@ function relicText() {
 
     text += "\n\n";
     clDto.relics.equipped.forEach(function (oneRelic) {
-        text += "* ";
+
+        text += outputFormatDto.general.redditMarkDown ? "* " : "";
         text += oneRelic.name.split(" of")[0] + ": ";
         text += oneRelic.rarity + " ";
         text += "Lvl " + oneRelic.level + ", ";
@@ -417,7 +418,7 @@ function relicAbilitiesText() {
     bonusInArray.forEach( function (oneBonus) {
         ability = abilitiesMap[oneBonus.id];
 
-        text += "* ";
+        text += outputFormatDto.general.redditMarkDown ? "* " : "";
         if(outputFormatDto.items.showRelicBonusAncients)
         {
             text += "+" + oneBonus.level + " ";
