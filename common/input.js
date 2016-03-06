@@ -95,10 +95,17 @@ function readSaveData(data)
 
 
     clDto.relics.equipped = [];
+    var slots = jsonPath(data, '$..items.slots');
     var items = jsonPath(data, '$..items.items');
-    if(items)
+    if(slots&&items)
     {
-        var values = $.map(items[0], function(v) { 
+        relicsInSlots1to4 = [];
+        for(i=1; i<=4; i++)
+        {
+            relicsInSlots1to4.push(items[0][slots[0][i]]);
+        }
+
+        relicsInSlots1to4.forEach( function(v) {
             var oneRelic = {};
             oneRelic.name = v.name;
             oneRelic.rarity = rarityMap[v.rarity];
