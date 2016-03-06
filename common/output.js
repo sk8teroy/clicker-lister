@@ -279,25 +279,47 @@ function miscText()
     text += headingStyle("Misc");
 
     text += "HS (" + formatNumber(clDto.misc.herosouls.current) + "; ";
-    text += "Spent on Ancients/Rerolls: ";
 
     ancientSpend = 0;
     clDto.ancients.forEach( function (oneAncient) {
         ancientSpend += oneAncient.spentHeroSouls;
     });
 
-    text += formatNumber(ancientSpend) + "/" + formatNumber(clDto.misc.herosouls.rerollSpend) + "; ";
+    if(outputFormatDto.general.minMiscSection)
+    {
+        text += "Spent on Ancients: ";
+        text += formatNumber(ancientSpend) + "; ";
+    }
+    else
+    {
+        text += "Spent on Ancients/Rerolls: ";
+        text += formatNumber(ancientSpend) + "/" + formatNumber(clDto.misc.herosouls.rerollSpend) + "; ";
+    }
+
     text += "Total: " + formatNumber(ancientSpend + clDto.misc.herosouls.rerollSpend + clDto.misc.herosouls.current) + ") ";
     
     text += "HZE: " + formatNumber(clDto.misc.zones.hze) + "; ";
     text += "Current Zone: " + formatNumber(clDto.misc.zones.current) + "; ";
     text += "Ascensions: " + formatNumber(clDto.misc.ascensions) + "; ";
-    text += "Rubies: " + formatNumber(clDto.misc.rubies) + "; ";
-    text += "Immortal Damage: " + formatNumber(clDto.misc.immortalDamage) + "; ";
-    text += "Forge Cores: " + formatNumber(clDto.relics.forgeCores) + "; ";
-    text += "Total Relics Found: " + formatNumber(clDto.relics.totalRelicsReceived) + "; ";
-    text += "Achievements: " + Math.floor(clDto.misc.achievementCount/numberOfAchievementsPossible*100) +"%; ";
-    
+
+    if(outputFormatDto.general.minMiscSection)
+    {
+        text += "ID: " 
+    }
+    else
+    {
+        text += "Immortal Damage: " 
+    }
+    text += formatNumber(clDto.misc.immortalDamage) + "; ";
+
+    if(!outputFormatDto.general.minMiscSection)
+    {
+        text += "Rubies: " + formatNumber(clDto.misc.rubies) + "; ";
+        text += "Forge Cores: " + formatNumber(clDto.relics.forgeCores) + "; ";
+        text += "Total Relics Found: " + formatNumber(clDto.relics.totalRelicsReceived) + "; ";
+        text += "Achievements: " + Math.floor(clDto.misc.achievementCount/numberOfAchievementsPossible*100) +"%; ";
+    }
+
     return text;
 }
 

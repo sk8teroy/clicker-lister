@@ -59,6 +59,7 @@ function loadOutputFormatFromGui()
     outputFormatDto.general = {};
     outputFormatDto.general.redditMarkDown =  $("#redditMarkDown").is(':checked');
     outputFormatDto.general.maxLineLength250 = $("#maxLineLength250").is(':checked');
+    outputFormatDto.general.minMiscSection = $("#minMiscSection").is(':checked');
     outputFormatDto.general.numberFormat = $("#numberFormat option:selected").val();
     outputFormatDto.heroes = {};
     outputFormatDto.heroes.shortNames =  $("#heroShortNames").is(':checked');
@@ -99,6 +100,7 @@ function updateOutputStyle(fCurrentStyle) {
 
         $("#redditMarkDown").prop('checked', true);
         $("#maxLineLength250").prop('checked', false);
+        $("#minMiscSection").prop('checked', false);
         $('#numberFormat option[value="Comma"]').prop('selected', true);
         $("#heroShortNames").prop('checked', false);
         $("#showRelicBonusAncients").prop('checked', true);
@@ -115,6 +117,7 @@ function updateOutputStyle(fCurrentStyle) {
 
         $("#redditMarkDown").prop('checked', false);
         $("#maxLineLength250").prop('checked', true);
+        $("#minMiscSection").prop('checked', true);
         $('#numberFormat option[value="JustNumbers"]').prop('selected', true);
         $("#heroShortNames").prop('checked', true);
         $("#showRelicBonusAncients").prop('checked', true);
