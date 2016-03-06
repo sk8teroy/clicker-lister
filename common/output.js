@@ -186,6 +186,7 @@ function maxText()
     maxedAncients.forEach( function (oneAncient) {
         text += oneAncientText(oneAncient, false) + ", ";            
     });
+
     text = text.substring(0,text.length-2) + ";";
     return text;
 }
