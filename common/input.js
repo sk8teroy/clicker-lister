@@ -102,7 +102,10 @@ function readSaveData(data)
         relicsInSlots1to4 = [];
         for(i=1; i<=4; i++)
         {
-            relicsInSlots1to4.push(items[0][slots[0][i]]);
+            if(slots[0].hasOwnProperty(i))
+            {
+                relicsInSlots1to4.push(items[0][slots[0][i]]);
+            }
         }
 
         relicsInSlots1to4.forEach( function(v) {
