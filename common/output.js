@@ -167,8 +167,6 @@ function maxText()
         return "";
     }
 
-    text = "\n\n";
-    text += headingStyle("Max");
     maxedAncients = [];
     clDto.ancients.forEach( function (oneAncient) {
         if(outputFormatDto.ancients.separateMaxedAncients
@@ -179,6 +177,14 @@ function maxText()
         }   
     });
     
+    if(maxedAncients.length == 0)
+    {
+        return "";
+    }
+
+    text = "\n\n";
+    text += headingStyle("Max");
+
     maxedAncients.sort(function(a, b){
         return a.name == b.name ? 0 : +(a.name > b.name) || -1;
     });
