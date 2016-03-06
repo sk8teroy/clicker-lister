@@ -53,45 +53,6 @@
  * Kong style - abbreviated mode on = no max section, no unsummoned section. all ancients summed up by value.  675:Mamm,Mimz MAX: Bubo, Kuma, etc. etc.
  ***********************************************************************/
 
-/* **draft - clicker hero data json**
- * ancients - name, level, 
- * heroes - name, #gilds
- * relics -relic[1-4], forge cores, total relics found
- * - name, rarity, level, relic-bonus[1-4]
- * - relic-bonus - ancient name, +levels, effect
- * misc
- * - herosouls - current, spent on ancients, spent on rerolls, total
- * - zones - hze, current
- * - ascensions
- * - rubies
- * - immortal damage
- * - achievements
- */
-
-/* **draft - output format json**
- * outputformat
- * -bold t/f
- * -short names t/f
- * -max output length (250 for kong, undefined for no limit
- * -show abilities t/f
- * -show relics t/f
- * -sort ancients ascending/descending
- * -numberformat
- * -group maxed ancients t/f
- * -group ancients by level t/f
- * -show unsummoned ancients t/f
- */
-
-//Misc
-var soulsSpent = 0;
-
-//Lists
-var ancientList = "Ancients: ";
-var heroList = "Gilded heroes: ";
-var itemList = "";
-var miscList = "Misc Info: ";
-var timeList = "";
-
 function loadOutputFormatFromGui()
 {
     outputFormatDto = {};
