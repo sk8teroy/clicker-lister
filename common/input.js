@@ -64,9 +64,7 @@ function readSaveData(data)
     });
 
     //ancients + Level
-    //old way - ancients array
-    clDto.ancients = [];
-    //new way ancients map, key = name
+    //ancientMap, key = name
     clDto.ancientMap = {};
     $.each(data.ancients.ancients, function() {
         var ancient = {};
@@ -85,7 +83,6 @@ function readSaveData(data)
         }
         
         clDto.ancientMap[ancient.name] = ancient;
-        clDto.ancients.push(ancient);
     });
 
     //relics

@@ -17,30 +17,18 @@ function getClickerListerText()
     //sort ancients 
     if( outputFormatDto.ancients.ancientSortOrder == "Alphabetical" )
     {
-        // clDto.ancients.sort(function(a, b){
-        //     return a.name == b.name ? 0 : +(a.name > b.name) || -1;
-        // });
-
         sortedAncientNames.sort(function(a, b){
             return a == b ? 0 : +(a > b) || -1;
         });
     }
     else if( outputFormatDto.ancients.ancientSortOrder == "Ascending" )
     {
-        // clDto.ancients.sort(function(a, b){
-        //     return a.level == b.level ? 0 : +(a.level > b.level) || -1;
-        // });
-
         sortedAncientNames.sort(function(a, b){
             return clDto.ancientMap[a].level == clDto.ancientMap[b].level ? 0 : +(clDto.ancientMap[a].level > clDto.ancientMap[b].level) || -1;
         });
     }
     else if( outputFormatDto.ancients.ancientSortOrder == "Descending" )
     {
-        // clDto.ancients.sort(function(a, b){
-        //     return a.level == b.level ? 0 : +(a.level < b.level) || -1;
-        // });
-
         sortedAncientNames.sort(function(a, b){
             return clDto.ancientMap[a].level == clDto.ancientMap[b].level ? 0 : +(clDto.ancientMap[a].level < clDto.ancientMap[b].level) || -1;
         });
