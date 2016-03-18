@@ -9,28 +9,44 @@ function getClickerListerText()
 {
     var text = "";
 
-    //sort ancients in DTO
+    var sortedAncientNames = [];
+    for (var key in clDto.ancientMap) {
+        sortedAncientNames.push(key);
+    }
+    
+    //sort ancients 
     if( outputFormatDto.ancients.ancientSortOrder == "Alphabetical" )
     {
-        //sort ancients alphabetically
-        clDto.ancients.sort(function(a, b){
-            return a.name == b.name ? 0 : +(a.name > b.name) || -1;
+        // clDto.ancients.sort(function(a, b){
+        //     return a.name == b.name ? 0 : +(a.name > b.name) || -1;
+        // });
+
+        sortedAncientNames.sort(function(a, b){
+            return a == b ? 0 : +(a > b) || -1;
         });
     }
     else if( outputFormatDto.ancients.ancientSortOrder == "Ascending" )
     {
-        clDto.ancients.sort(function(a, b){
-            return a.level == b.level ? 0 : +(a.level > b.level) || -1;
+        // clDto.ancients.sort(function(a, b){
+        //     return a.level == b.level ? 0 : +(a.level > b.level) || -1;
+        // });
+
+        sortedAncientNames.sort(function(a, b){
+            return clDto.ancientMap[a].level == clDto.ancientMap[b].level ? 0 : +(clDto.ancientMap[a].level > clDto.ancientMap[b].level) || -1;
         });
     }
     else if( outputFormatDto.ancients.ancientSortOrder == "Descending" )
     {
-        clDto.ancients.sort(function(a, b){
-            return a.level == b.level ? 0 : +(a.level < b.level) || -1;
+        // clDto.ancients.sort(function(a, b){
+        //     return a.level == b.level ? 0 : +(a.level < b.level) || -1;
+        // });
+
+        sortedAncientNames.sort(function(a, b){
+            return clDto.ancientMap[a].level == clDto.ancientMap[b].level ? 0 : +(clDto.ancientMap[a].level < clDto.ancientMap[b].level) || -1;
         });
     }
     
-    text += ancientText();
+    text += ancientText(sortedAncientNames);
 
     if(outputFormatDto.ancients.separateMaxedAncients)
     {
@@ -100,17 +116,18 @@ function headingStyle(headingText)
     return outputFormatDto.general.redditMarkDown ? "**" + headingText + "**: " : headingText + ": ";
 }
 
-function ancientText()
+function ancientText(sortedAncientNames)
 {
     var text = headingStyle("Ancients");
 
-    if(clDto.ancients.length == 0)
+    if(sortedAncientNames.length == 0)
     {
         text += "None;";
         return text;
     }
 
-    clDto.ancients.forEach( function (oneAncient) {
+    sortedAncientNames.forEach( function (oneName) {
+        oneAncient = clDto.ancientMap[oneName];
         if(!outputFormatDto.ancients.separateMaxedAncients
            || 
            !oneAncient.isMax)
@@ -170,20 +187,23 @@ function oneAncientText(oneAncient, showLevel)
 
 function maxText()
 {
-    if(clDto.ancients.length == 0)
+    if(numberOfAncientsSummoned() == 0)
     {
         return "";
     }
 
     maxedAncients = [];
-    clDto.ancients.forEach( function (oneAncient) {
+    
+    for (var key in clDto.ancientMap) {
         if(outputFormatDto.ancients.separateMaxedAncients
            && 
-           oneAncient.isMax)
+           clDto.ancientMap.hasOwnProperty(key)
+           &&
+           clDto.ancientMap[key].isMax)
         {
-            maxedAncients.push(oneAncient);
+            maxedAncients.push(clDto.ancientMap[key]);
         }   
-    });
+    }
     
     if(maxedAncients.length == 0)
     {
@@ -207,7 +227,7 @@ function maxText()
 
 function unsummonedText()
 {
-    if(clDto.ancients.length == 0)
+    if(numberOfAncientsSummoned() == 0)
     {
         return "";
     }
@@ -220,13 +240,13 @@ function unsummonedText()
     }
     
     //unsummonedNames contains all ancient names now.
-    clDto.ancients.forEach( function (oneAncient) {
-        var index = unsummonedNames.indexOf(oneAncient.name);
+    for (var key in clDto.ancientMap) {
+        var index = unsummonedNames.indexOf(key);
         if( index >= 0 )
         {
             unsummonedNames.splice(index,1);
         }
-    });
+    }
     //unsummonedNames contains only unsummonedNames ancients now.
     
     text = "";
@@ -296,9 +316,10 @@ function miscText()
     text += "HS (" + formatNumber(clDto.misc.herosouls.current) + "; ";
 
     ancientSpend = 0;
-    clDto.ancients.forEach( function (oneAncient) {
-        ancientSpend += oneAncient.spentHeroSouls;
-    });
+    for (var key in clDto.ancientMap) {
+        if(clDto.ancientMap.hasOwnProperty(key))
+            ancientSpend += clDto.ancientMap[key].spentHeroSouls;
+    }
 
     if(outputFormatDto.general.minMiscSection)
     {
@@ -354,55 +375,34 @@ function timeText() {
 }
 
 function vsIdleText() {
+    siyaName = ancientsMap[5].name;
+    argName = ancientsMap[28].name;
+    morgName = ancientsMap[16].name;
+    libName = ancientsMap[4].name;
+    mamName = ancientsMap[8].name;
+    mimName = ancientsMap[9].name;
+    soloName = ancientsMap[3].name;
+
+    if(!clDto.ancientMap.hasOwnProperty(siyaName)) {
+        return "";
+    }
+
     text = "\n\n";
     text += headingStyle("Vs. Idle") + "[Calculator](http://alexbonjour.github.io/rules-of-thumb)";
-    
-    var siyaAncient = 0;
-    var argAncient = 0;
-    var morgAncient = 0;
-    var libAncient = 0;
-    var mamAncient = 0;
-    var mimAncient = 0;
-    var soloAncient = 0;
 
-    clDto.ancients.forEach( function (oneAncient) {
-        if(oneAncient.name == ancientsMap[5].name) //Siya
-            siyaAncient = oneAncient;
-        
-        if(oneAncient.name == ancientsMap[28].name) //Argaiv
-            argAncient = oneAncient;
 
-        if(oneAncient.name == ancientsMap[16].name) //Morg
-            morgAncient = oneAncient;
+    siyaLevel = clDto.ancientMap[siyaName].level;
 
-        if(oneAncient.name == ancientsMap[4].name) //Lib
-            libAncient = oneAncient;
-
-        if(oneAncient.name == ancientsMap[8].name) //Mam
-            mamAncient = oneAncient;
-
-        if(oneAncient.name == ancientsMap[9].name) //Mimm
-            mimAncient = oneAncient;
-
-        if(oneAncient.name == ancientsMap[3].name) //Solo
-            soloAncient = oneAncient;
-    });
-
-    if(!siyaAncient) {
-        text += "Summon Siyalatas to see this information.\n";
-        return text;
-    }
-        
     text += "\n\n" + "Ancient | Level | Delta % | Delta Levels" + "\n";
     text += "---|---|---|---" + "\n";
     
-    text += deltaLine(siyaAncient.level, "Siyalatas", siyaAncient.level);
-    text += deltaLine(siyaAncient.level, "Argaiv", argAncient ? argAncient.level : 0);
-    text += deltaLine(idle_or_hybrid_morg_calc(siyaAncient.level), "Morgulis", morgAncient ? morgAncient.level : 0);
-    text += deltaLine(gold_calc(siyaAncient.level), "Libertas", libAncient ? libAncient.level : 0);
-    text += deltaLine(gold_calc(siyaAncient.level), "Mammon", mamAncient ? mamAncient.level : 0);
-    text += deltaLine(gold_calc(siyaAncient.level), "Mimzee", mimAncient ? mimAncient.level : 0);
-    text += deltaLine(idle_solomon_calc(siyaAncient.level), "Solomon", soloAncient ? soloAncient.level : 0);
+    text += deltaLine(siyaLevel, siyaName, clDto.ancientMap[siyaName].level);
+    text += deltaLine(siyaLevel, argName, clDto.ancientMap.hasOwnProperty(argName) ? clDto.ancientMap[argName].level : 0);
+    text += deltaLine(idle_or_hybrid_morg_calc(siyaLevel), morgName, clDto.ancientMap.hasOwnProperty(morgName) ? clDto.ancientMap[morgName].level : 0);
+    text += deltaLine(gold_calc(siyaLevel), libName, clDto.ancientMap.hasOwnProperty(libName) ? clDto.ancientMap[libName].level : 0);
+    text += deltaLine(gold_calc(siyaLevel), mamName, clDto.ancientMap.hasOwnProperty(mamName) ? clDto.ancientMap[mamName].level : 0);
+    text += deltaLine(gold_calc(siyaLevel), mimName, clDto.ancientMap.hasOwnProperty(mimName) ? clDto.ancientMap[mimName].level : 0);
+    text += deltaLine(idle_solomon_calc(siyaLevel), soloName, clDto.ancientMap.hasOwnProperty(soloName) ? clDto.ancientMap[soloName].level : 0);
 
     return text;
 }
@@ -542,12 +542,10 @@ function effectPower(ability, upgradeLevels) {
     if(ability.ancient == "Solomon")
     {
         var solomonLevel = 0;
-        clDto.ancients.forEach( function (oneAncient) {
-            if(oneAncient.name=="Solomon")
-            {
-                solomonLevel = oneAncient.level;
-            }
-        });
+        if(clDto.ancientMap.hasOwnProperty("Solomon"))
+        {
+            solomonLevel = clDto.ancientMap["Solomon"].level;
+        }
                       
         return solomonBonus(solomonLevel + upgradeLevels) - solomonBonus(solomonLevel);
     }
@@ -555,12 +553,10 @@ function effectPower(ability, upgradeLevels) {
     if(ability.ancient == "Siyalatas")
     {
         var siyaLevel = 0;
-        clDto.ancients.forEach( function (oneAncient) {
-            if(oneAncient.name=="Siyalatas")
-            {
-                siyaLevel = oneAncient.level;
-            }
-        });
+        if(clDto.ancientMap.hasOwnProperty("Siyalatas"))
+        {
+            siyaLevel = clDto.ancientMap["Siyalatas"].level;
+        }
 
         return siyLibBonus(siyaLevel + upgradeLevels) - siyLibBonus(siyaLevel);
     }
@@ -568,12 +564,10 @@ function effectPower(ability, upgradeLevels) {
     if(ability.ancient == "Libertas")
     {
         var libLevel = 0;
-        clDto.ancients.forEach( function (oneAncient) {
-            if(oneAncient.name=="Libertas")
-            {
-                libLevel = oneAncient.level;
-            }
-        });
+        if(clDto.ancientMap.hasOwnProperty("Libertas"))
+        {
+            libLevel = clDto.ancientMap["Libertas"].level;
+        }
 
         return siyLibBonus(libLevel + upgradeLevels) - siyLibBonus(libLevel);
     }
@@ -696,3 +690,13 @@ function formatElapsedTime(time, daysOnly) {
 // };
 
 
+//java map.size();
+function numberOfAncientsSummoned () {
+    var count = 0;
+    for (var key in clDto.ancientMap) {
+        if (clDto.ancientMap.hasOwnProperty(key)) {
+            count++;
+        }
+    }
+    return count;
+}

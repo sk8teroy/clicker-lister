@@ -64,7 +64,10 @@ function readSaveData(data)
     });
 
     //ancients + Level
+    //old way - ancients array
     clDto.ancients = [];
+    //new way ancients map, key = name
+    clDto.ancientMap = {};
     $.each(data.ancients.ancients, function() {
         var ancient = {};
         ancient.id = this.id;
@@ -81,6 +84,7 @@ function readSaveData(data)
             ancient.isMax = this.level == ancientsMap[this.id].maxLevel;
         }
         
+        clDto.ancientMap[ancient.name] = ancient;
         clDto.ancients.push(ancient);
     });
 
