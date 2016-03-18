@@ -477,7 +477,7 @@ function vsActiveText() {
     text += deltaLine(gold_calc(fragLevel), mimName, clDto.ancientMap.hasOwnProperty(mimName) ? clDto.ancientMap[mimName].level : 0);
     text += deltaLine(gold_calc(fragLevel), plutoName, clDto.ancientMap.hasOwnProperty(plutoName) ? clDto.ancientMap[plutoName].level : 0);
     text += deltaLine(active_morg_calc(fragLevel), morgName, clDto.ancientMap.hasOwnProperty(morgName) ? clDto.ancientMap[morgName].level : 0);
-    text += deltaLine(active_solomon_calc(siyaLevel), soloName, clDto.ancientMap.hasOwnProperty(soloName) ? clDto.ancientMap[soloName].level : 0);
+    text += deltaLine(active_solomon_calc(fragLevel), soloName, clDto.ancientMap.hasOwnProperty(soloName) ? clDto.ancientMap[soloName].level : 0);
 
     return text;
 }
