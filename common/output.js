@@ -67,7 +67,16 @@ function getClickerListerText()
         text += vsIdleText();
     }
 
-    //todo hybrid
+    if(outputFormatDto.vs.hybrid)
+    {
+        text += vsHybridText();
+    }
+
+    if(outputFormatDto.vs.active)
+    {
+        text += vsActiveText();
+    }
+
     //todo active
 
 //    text += "\n\n" + headingStyle("Made with") + " [clicker-lister](http://alexbonjour.github.io/clicker-lister)";
@@ -381,16 +390,94 @@ function vsIdleText() {
 
     siyaLevel = clDto.ancientMap[siyaName].level;
 
-    text += "\n\n" + "Ancient | Level | Delta % | Delta Levels" + "\n";
+    text += "\n\n" + "Ancient | Level | &#8710; % | &#8710; Levels" + "\n";
     text += "---|---|---|---" + "\n";
     
-    text += deltaLine(siyaLevel, siyaName, clDto.ancientMap[siyaName].level);
+    text += deltaLine(siyaLevel, "**"+siyaName+"**", clDto.ancientMap[siyaName].level);
     text += deltaLine(siyaLevel, argName, clDto.ancientMap.hasOwnProperty(argName) ? clDto.ancientMap[argName].level : 0);
     text += deltaLine(idle_or_hybrid_morg_calc(siyaLevel), morgName, clDto.ancientMap.hasOwnProperty(morgName) ? clDto.ancientMap[morgName].level : 0);
     text += deltaLine(gold_calc(siyaLevel), libName, clDto.ancientMap.hasOwnProperty(libName) ? clDto.ancientMap[libName].level : 0);
     text += deltaLine(gold_calc(siyaLevel), mamName, clDto.ancientMap.hasOwnProperty(mamName) ? clDto.ancientMap[mamName].level : 0);
     text += deltaLine(gold_calc(siyaLevel), mimName, clDto.ancientMap.hasOwnProperty(mimName) ? clDto.ancientMap[mimName].level : 0);
     text += deltaLine(idle_solomon_calc(siyaLevel), soloName, clDto.ancientMap.hasOwnProperty(soloName) ? clDto.ancientMap[soloName].level : 0);
+
+    return text;
+}
+
+function vsHybridText() {
+    siyaName = ancientsMap[5].name;
+    argName = ancientsMap[28].name;
+    morgName = ancientsMap[16].name;
+    libName = ancientsMap[4].name;
+    mamName = ancientsMap[8].name;
+    mimName = ancientsMap[9].name;
+    soloName = ancientsMap[3].name;
+    bhaalName = ancientsMap[15].name;
+    fragName = ancientsMap[19].name;
+    plutoName = ancientsMap[10].name;
+    juggName = ancientsMap[29].name;
+
+    if(!clDto.ancientMap.hasOwnProperty(siyaName)) {
+        return "";
+    }
+
+    text = "\n\n";
+    text += headingStyle("Vs. Hybrid") + "[Calculator](http://alexbonjour.github.io/rules-of-thumb)";
+
+
+    siyaLevel = clDto.ancientMap[siyaName].level;
+
+    text += "\n\n" + "Ancient | Level | &#8710; % | &#8710; Levels" + "\n";
+    text += "---|---|---|---" + "\n";
+    
+    text += deltaLine(siyaLevel, "**"+siyaName+"**", clDto.ancientMap[siyaName].level);
+    text += deltaLine(siyaLevel, argName, clDto.ancientMap.hasOwnProperty(argName) ? clDto.ancientMap[argName].level : 0);
+    text += deltaLine(idle_or_hybrid_morg_calc(siyaLevel), morgName, clDto.ancientMap.hasOwnProperty(morgName) ? clDto.ancientMap[morgName].level : 0);
+    text += deltaLine(gold_calc(siyaLevel), libName, clDto.ancientMap.hasOwnProperty(libName) ? clDto.ancientMap[libName].level : 0);
+    text += deltaLine(gold_calc(siyaLevel), mamName, clDto.ancientMap.hasOwnProperty(mamName) ? clDto.ancientMap[mamName].level : 0);
+    text += deltaLine(gold_calc(siyaLevel), mimName, clDto.ancientMap.hasOwnProperty(mimName) ? clDto.ancientMap[mimName].level : 0);
+    text += deltaLine(hybrid_solomon_calc(siyaLevel), soloName, clDto.ancientMap.hasOwnProperty(soloName) ? clDto.ancientMap[soloName].level : 0);
+    text += deltaLine(hybrid_click_calc(siyaLevel), bhaalName, clDto.ancientMap.hasOwnProperty(bhaalName) ? clDto.ancientMap[bhaalName].level : 0);
+    text += deltaLine(hybrid_click_calc(siyaLevel), fragName, clDto.ancientMap.hasOwnProperty(fragName) ? clDto.ancientMap[fragName].level : 0);
+    text += deltaLine(hybrid_click_calc(siyaLevel), plutoName, clDto.ancientMap.hasOwnProperty(plutoName) ? clDto.ancientMap[plutoName].level : 0);
+    text += deltaLine(hybrid_jugg_calc(siyaLevel), juggName, clDto.ancientMap.hasOwnProperty(juggName) ? clDto.ancientMap[juggName].level : 0);
+    
+    return text;
+}
+
+function vsActiveText() {
+    fragName = ancientsMap[19].name;
+    argName = ancientsMap[28].name;
+    bhaalName = ancientsMap[15].name;
+    juggName = ancientsMap[29].name;
+    mamName = ancientsMap[8].name;
+    mimName = ancientsMap[9].name;
+    plutoName = ancientsMap[10].name;
+    morgName = ancientsMap[16].name;
+    soloName = ancientsMap[3].name;
+
+    if(!clDto.ancientMap.hasOwnProperty(fragName)) {
+        return "";
+    }
+
+    text = "\n\n";
+    text += headingStyle("Vs. Active") + "[Calculator](http://alexbonjour.github.io/rules-of-thumb)";
+
+
+    fragLevel = clDto.ancientMap[fragName].level;
+
+    text += "\n\n" + "Ancient | Level | &#8710; % | &#8710; Levels" + "\n";
+    text += "---|---|---|---" + "\n";
+    
+    text += deltaLine(fragLevel, "**"+fragName+"**", clDto.ancientMap[fragName].level);
+    text += deltaLine(fragLevel, argName, clDto.ancientMap.hasOwnProperty(argName) ? clDto.ancientMap[argName].level : 0);
+    text += deltaLine(active_bhaal_calc(fragLevel), bhaalName, clDto.ancientMap.hasOwnProperty(bhaalName) ? clDto.ancientMap[bhaalName].level : 0);
+    text += deltaLine(active_jugg_calc(fragLevel), juggName, clDto.ancientMap.hasOwnProperty(juggName) ? clDto.ancientMap[juggName].level : 0);
+    text += deltaLine(gold_calc(fragLevel), mamName, clDto.ancientMap.hasOwnProperty(mamName) ? clDto.ancientMap[mamName].level : 0);
+    text += deltaLine(gold_calc(fragLevel), mimName, clDto.ancientMap.hasOwnProperty(mimName) ? clDto.ancientMap[mimName].level : 0);
+    text += deltaLine(gold_calc(fragLevel), plutoName, clDto.ancientMap.hasOwnProperty(plutoName) ? clDto.ancientMap[plutoName].level : 0);
+    text += deltaLine(active_morg_calc(fragLevel), morgName, clDto.ancientMap.hasOwnProperty(morgName) ? clDto.ancientMap[morgName].level : 0);
+    text += deltaLine(active_solomon_calc(siyaLevel), soloName, clDto.ancientMap.hasOwnProperty(soloName) ? clDto.ancientMap[soloName].level : 0);
 
     return text;
 }
