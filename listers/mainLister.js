@@ -61,12 +61,20 @@ function loadOutputFormatFromGui()
     outputFormatDto.general.maxLineLength250 = $("#maxLineLength250").is(':checked');
     outputFormatDto.general.minMiscSection = $("#minMiscSection").is(':checked');
     outputFormatDto.general.numberFormat = $("#numberFormat option:selected").val();
+
+    outputFormatDto.vs = {};
+    outputFormatDto.vs.idle =  $("#vsIdleRot").is(':checked');
+    outputFormatDto.vs.hybrid =  $("#vsHybridRot").is(':checked');
+    outputFormatDto.vs.active =  $("#vsActiveRot").is(':checked');
+
     outputFormatDto.heroes = {};
     outputFormatDto.heroes.shortNames =  $("#heroShortNames").is(':checked');
+
     outputFormatDto.items = {};
     outputFormatDto.items.showRelicBonusAncients = $("#showRelicBonusAncients").is(':checked'); 
     outputFormatDto.items.showRelicBonusAbilities = $("#showRelicBonusAbilities").is(':checked'); 
     outputFormatDto.items.showRelics = $("#showRelics").is(':checked'); 
+
     outputFormatDto.ancients= {};
     outputFormatDto.ancients.shortNames = $("#ancientShortNames").is(':checked'); 
     outputFormatDto.ancients.ancientSortOrder = $("#ancientSortOrder option:selected").val();  
@@ -110,6 +118,10 @@ function updateOutputStyle(fCurrentStyle) {
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
         $("#separateMaxedAncients").prop('checked', true);
         $("#showUnsummonedAncients").prop('checked', true);
+
+        $("#vsIdleRot").prop('checked', false);
+        $("#vsHybridRot").prop('checked', false);
+        $("#vsActiveRot").prop('checked', false);
     }
     else if(fCurrentStyle=="kong")
     {
@@ -127,6 +139,10 @@ function updateOutputStyle(fCurrentStyle) {
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
         $("#separateMaxedAncients").prop('checked', true);
         $("#showUnsummonedAncients").prop('checked', false);
+
+        $("#vsIdleRot").prop('checked', false);
+        $("#vsHybridRot").prop('checked', false);
+        $("#vsActiveRot").prop('checked', false);
     }
     else //custom
     {

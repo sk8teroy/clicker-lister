@@ -58,6 +58,14 @@ function getClickerListerText()
         text += relicAbilitiesText();
     }
   
+    if(outputFormatDto.vs.idle)
+    {
+        text += vsIdleText();
+    }
+
+    //todo hybrid
+    //todo active
+
 //    text += "\n\n" + headingStyle("Made with") + " [clicker-lister](http://alexbonjour.github.io/clicker-lister)";
 
     return wrapText(text);
@@ -342,6 +350,73 @@ function timeText() {
     text += "Since Start: " + formatElapsedTime(timeSinceCreation, true) + "; ";
     text += "Since Ascension: " + formatElapsedTime(timeSinceAscension, false) + "; ";
     
+    return text;
+}
+
+function vsIdleText() {
+    text = "\n\n";
+    text += headingStyle("Vs. Idle") + "[Calculator](http://alexbonjour.github.io/rules-of-thumb)";
+    
+    var siyaAncient = 0;
+    var argAncient = 0;
+    var morgAncient = 0;
+    var libAncient = 0;
+    var mamAncient = 0;
+    var mimAncient = 0;
+    var soloAncient = 0;
+
+    clDto.ancients.forEach( function (oneAncient) {
+        if(oneAncient.name == ancientsMap[5].name) //Siya
+            siyaAncient = oneAncient;
+        
+        if(oneAncient.name == ancientsMap[28].name) //Argaiv
+            argAncient = oneAncient;
+
+        if(oneAncient.name == ancientsMap[16].name) //Morg
+            morgAncient = oneAncient;
+
+        if(oneAncient.name == ancientsMap[4].name) //Lib
+            libAncient = oneAncient;
+
+        if(oneAncient.name == ancientsMap[8].name) //Mam
+            mamAncient = oneAncient;
+
+        if(oneAncient.name == ancientsMap[9].name) //Mimm
+            mimAncient = oneAncient;
+
+        if(oneAncient.name == ancientsMap[3].name) //Solo
+            soloAncient = oneAncient;
+    });
+
+    if(!siyaAncient) {
+        text += "Summon Siyalatas to see this information.\n";
+        return text;
+    }
+        
+    text += "\n\n" + "Ancient | Level | Delta % | Delta Levels" + "\n";
+    text += "---|---|---|---" + "\n";
+    
+    text += deltaLine(siyaAncient.level, "Siyalatas", siyaAncient.level);
+    text += deltaLine(siyaAncient.level, "Argaiv", argAncient ? argAncient.level : 0);
+    text += deltaLine(idle_or_hybrid_morg_calc(siyaAncient.level), "Morgulis", morgAncient ? morgAncient.level : 0);
+    text += deltaLine(gold_calc(siyaAncient.level), "Libertas", libAncient ? libAncient.level : 0);
+    text += deltaLine(gold_calc(siyaAncient.level), "Mammon", mamAncient ? mamAncient.level : 0);
+    text += deltaLine(gold_calc(siyaAncient.level), "Mimzee", mimAncient ? mimAncient.level : 0);
+    text += deltaLine(idle_solomon_calc(siyaAncient.level), "Solomon", soloAncient ? soloAncient.level : 0);
+
+    return text;
+}
+
+function deltaLine(targetValue, ancientName, ancientLevel) {
+
+    text = "";
+
+    deltaLevels = ancientLevel - targetValue;
+    deltaLevelsString = (deltaLevels >=0 ? "+" : "" ) + formatNumber(deltaLevels);
+    deltaPercent = deltaLevels/targetValue*100;
+    deltaPercentString = (deltaPercent>=0 ? "+" : "") + Math.floor(deltaPercent) + "%";
+    text += ancientName + " | " + formatNumber(ancientLevel) + " | " + deltaPercentString + " | " + deltaLevelsString + "\n";
+
     return text;
 }
 
