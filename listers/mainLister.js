@@ -119,9 +119,10 @@ function updateOutputStyle(fCurrentStyle) {
         $("#separateMaxedAncients").prop('checked', true);
         $("#showUnsummonedAncients").prop('checked', true);
 
-        $("#vsIdleRot").prop('checked', false);
-        $("#vsHybridRot").prop('checked', false);
-        $("#vsActiveRot").prop('checked', false);
+        // vs options now top level, not part of reddit vs. kong styles
+        // $("#vsIdleRot").prop('checked', false);
+        // $("#vsHybridRot").prop('checked', false);
+        // $("#vsActiveRot").prop('checked', false);
     }
     else if(fCurrentStyle=="kong")
     {
@@ -140,9 +141,10 @@ function updateOutputStyle(fCurrentStyle) {
         $("#separateMaxedAncients").prop('checked', true);
         $("#showUnsummonedAncients").prop('checked', false);
 
-        $("#vsIdleRot").prop('checked', false);
-        $("#vsHybridRot").prop('checked', false);
-        $("#vsActiveRot").prop('checked', false);
+        // vs options now top level, not part of reddit vs. kong styles
+        // $("#vsIdleRot").prop('checked', false);
+        // $("#vsHybridRot").prop('checked', false);
+        // $("#vsActiveRot").prop('checked', false);
     }
     else //custom
     {
