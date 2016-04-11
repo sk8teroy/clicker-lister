@@ -12,13 +12,13 @@ function readSaveData(data)
     //misc
     clDto.misc = {};
     var rubies = jsonPath(data, '$..rubies');
-    clDto.misc.rubies = rubies ? rubies[0] : 0;
+    clDto.misc.rubies = rubies ? +rubies[0] : 0;
     
     var titanDamage = jsonPath(data, '$..titanDamage');
-    clDto.misc.immortalDamage = titanDamage ? titanDamage[0] : 0;
+    clDto.misc.immortalDamage = titanDamage ? +titanDamage[0] : 0;
     
     var numWorldResets = jsonPath(data, '$..numWorldResets');
-    clDto.misc.ascensions = numWorldResets ? numWorldResets[0] : 0;
+    clDto.misc.ascensions = numWorldResets ? +numWorldResets[0] : 0;
 
     var achievements = jsonPath(data, '$..achievements[*]');
     clDto.misc.achievementCount = achievements ? achievements.length : 0;
@@ -35,10 +35,10 @@ function readSaveData(data)
     clDto.misc.herosouls = {};
 
     var current = jsonPath(data, '$..heroSouls');
-    clDto.misc.herosouls.current = current ? current[0] : 0;
+    clDto.misc.herosouls.current = current ? +current[0] : 0;
     
     var rerollSpend = jsonPath(data, '$..ancients.rerollSoulsSpent');
-    clDto.misc.herosouls.rerollSpend = rerollSpend ? rerollSpend[0] : 0;
+    clDto.misc.herosouls.rerollSpend = rerollSpend ? +rerollSpend[0] : 0;
 
     //misc.zones
     clDto.misc.zones = {};
@@ -58,7 +58,7 @@ function readSaveData(data)
             var hero = {};
             hero.id = this.id;
             hero.name = heroesMap[hero.id].name;
-            hero.numGilds = this.epicLevel;
+            hero.numGilds = +this.epicLevel;
             clDto.gildedHeroes.push(hero);
         }
     });
@@ -70,8 +70,8 @@ function readSaveData(data)
         var ancient = {};
         ancient.id = this.id;
         ancient.name = ancientsMap[this.id] ? ancientsMap[this.id].name : "ERROR";
-        ancient.level = this.level;
-        ancient.spentHeroSouls = this.spentHeroSouls;
+        ancient.level = +this.level;
+        ancient.spentHeroSouls = +this.spentHeroSouls;
         
         if(ancientsMap[this.id].maxLevel == "None")
         {
@@ -121,28 +121,28 @@ function readSaveData(data)
             {
                 var bonusOne = {};
                 bonusOne.abilityId = v.bonusType1;
-                bonusOne.levels = v.bonus1Level;
+                bonusOne.levels = +v.bonus1Level;
                 oneRelic.bonus.push(bonusOne);
             }
             if(v.bonusType2 > 0)
             {
                 var bonusTwo = {};
                 bonusTwo.abilityId = v.bonusType2;
-                bonusTwo.levels = v.bonus2Level;
+                bonusTwo.levels = +v.bonus2Level;
                 oneRelic.bonus.push(bonusTwo);
             }
             if(v.bonusType3 > 0)
             {
                 var bonusThree = {};
                 bonusThree.abilityId = v.bonusType3;
-                bonusThree.levels = v.bonus3Level;
+                bonusThree.levels = +v.bonus3Level;
                 oneRelic.bonus.push(bonusThree);
             }
             if(v.bonusType4 > 0)
             {
                 var bonusFour = {};
                 bonusFour.abilityId = v.bonusType4;
-                bonusFour.levels = v.bonus4Level;
+                bonusFour.levels = +v.bonus4Level;
                 oneRelic.bonus.push(bonusFour);
             }
  
