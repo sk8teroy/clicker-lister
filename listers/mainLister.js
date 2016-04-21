@@ -33,9 +33,12 @@ function calc(){
 
     var myData = decryptSave(input.value);
 
-    // console.log("**********************************************************************");
-    // console.log(myData);
-    // console.log("**********************************************************************");
+//    console.log("**********************************************************************");
+//    console.log(myData);
+//    console.log("**********************************************************************");
+//    console.log("**********************************************************************");
+//    console.log(JSON.stringify(myData));
+//    console.log("**********************************************************************");
     readSaveData(myData);
     loadOutputFormatFromGui();
     // console.log(JSON.stringify(outputFormatDto));

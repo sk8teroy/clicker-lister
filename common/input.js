@@ -23,13 +23,41 @@ function readSaveData(data)
     var achievements = jsonPath(data, '$..achievements[*]');
     clDto.misc.achievementCount = achievements ? achievements.length : 0;
 
+    var lifetimeAchievements = jsonPath(data, '$..lifetimeAchievements[*]');
+    clDto.misc.lifetimeAchievementCount = lifetimeAchievements ? lifetimeAchievements.length : clDto.misc.achievementCount;
+
     clDto.misc.time = {};
-    var creationTime = jsonPath(data, '$..creationTimestamp')
+    var creationTime = jsonPath(data, '$..creationTimestamp');
     clDto.misc.time.creation = creationTime ? creationTime[0] : 0;
     
     var ascensionTime = jsonPath(data, '$..startTimestamp');
     clDto.misc.time.ascension = ascensionTime ? ascensionTime[0] : 0;
 
+    //Ancient Souls - outsiders, etc.
+    clDto.ancientSouls = {};
+    var currentAncientSouls = jsonPath(data, '$..ancientSouls');
+    clDto.ancientSouls.currentAS = currentAncientSouls ? currentAncientSouls[0] : 0;
+
+    var totalAncientSouls = jsonPath(data, '$..ancientSoulsTotal');
+    clDto.ancientSouls.totalAS = totalAncientSouls ? totalAncientSouls[0] : 0;
+
+    clDto.ancientSouls.outsiders = [];
+
+    var outsidersInSaveFile = jsonPath(data, '$..outsiders.outsiders');
+    if(outsidersInSaveFile) {
+        
+        $.each(data.outsiders.outsiders, function() {
+            if(this.level > 0)
+            {
+                var oneOutsider = {};
+                oneOutsider.id = this.id;
+                oneOutsider.name = outsidersMap[this.id].name;
+                oneOutsider.level = this.level;
+                clDto.ancientSouls.outsiders.push(oneOutsider);
+            }
+        });
+    }
+    
 
     //misc.herosouls
     clDto.misc.herosouls = {};

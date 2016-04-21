@@ -9,6 +9,8 @@ function getClickerListerText()
 {
     var text = "";
 
+    text += outsidersText();
+
     var sortedAncientNames = [];
     for (var key in clDto.ancientMap) {
         sortedAncientNames.push(key);
@@ -33,7 +35,7 @@ function getClickerListerText()
             return clDto.ancientMap[a].level == clDto.ancientMap[b].level ? 0 : +(clDto.ancientMap[a].level < clDto.ancientMap[b].level) || -1;
         });
     }
-    
+
     text += ancientText(sortedAncientNames);
 
     if(outputFormatDto.ancients.separateMaxedAncients)
@@ -113,9 +115,44 @@ function headingStyle(headingText)
     return outputFormatDto.general.redditMarkDown ? "**" + headingText + "**: " : headingText + ": ";
 }
 
+function outsidersText()
+{
+    var text = headingStyle("Outsiders");
+
+    if( clDto.ancientSouls.outsiders.length == 0 ) {
+        text += "None - Unspent AS (" + clDto.ancientSouls.currentAS +");";
+        return text;
+    }
+
+    clDto.ancientSouls.outsiders.forEach( function (oneOutsider) {
+        if(outputFormatDto.ancients.shortNames)
+        {
+            text += oneOutsider.name.substring(0,4);
+            text += ":" + oneOutsider.level;
+            text += ", ";
+        }
+        else
+        {
+            text += oneOutsider.name;
+            text += " (" + oneOutsider.level + ")";
+            text += ", ";
+        }
+        });
+
+    if( clDto.ancientSouls.currentAS > 0 ) {
+        text += "Unspent AS (" + clDto.ancientSouls.currentAS +"), ";
+    }
+    
+    text = text.substring(0,text.length-2);
+    text += ";";
+
+    return text;
+}
+
 function ancientText(sortedAncientNames)
 {
-    var text = headingStyle("Ancients");
+    var text = "\n\n";
+    text += headingStyle("Ancients");
 
     if(sortedAncientNames.length == 0)
     {
@@ -290,12 +327,12 @@ function heroText()
         if(outputFormatDto.heroes.shortNames)
         {
             text += oneHero.name.substring(0,4);
-            text += ":" + formatNumber(oneHero.numGilds) + ", ";
+            text += ":" + formatInteger(oneHero.numGilds) + ", ";
         }
         else
         {
             text += oneHero.name;
-            text += " (" + formatNumber(oneHero.numGilds) + "), ";
+            text += " (" + formatInteger(oneHero.numGilds) + "), ";
         }
         
     });
@@ -305,12 +342,29 @@ function heroText()
     return text;
 }
 
+function getTP()
+{
+    //3 is phan = tp boost
+    //total ancientsouls
+    var phanLevel = 0;
+    clDto.ancientSouls.outsiders.forEach( function (oneOutsider) {
+        if(oneOutsider.id==3)
+        {
+            phanLevel = oneOutsider.level;
+        }
+    });
+
+    return clDto.ancientSouls.totalAS *1.0/100.0 + phanLevel*0.25;
+}
+
 function miscText()
 {
     text ="\n\n";
     text += headingStyle("Misc");
 
-    text += "HS (" + formatNumber(clDto.misc.herosouls.current) + "; ";
+    text += "TP (" + getTP().toFixed(2) + "%); ";
+
+    text += "HS (" + formatInteger(clDto.misc.herosouls.current) + "; ";
 
     ancientSpend = 0;
     for (var key in clDto.ancientMap) {
@@ -321,19 +375,19 @@ function miscText()
     if(outputFormatDto.general.minMiscSection)
     {
         text += "Spent on Ancients: ";
-        text += formatNumber(ancientSpend) + "; ";
+        text += formatInteger(ancientSpend) + "; ";
     }
     else
     {
         text += "Spent on Ancients/Rerolls: ";
-        text += formatNumber(ancientSpend) + "/" + formatNumber(clDto.misc.herosouls.rerollSpend) + "; ";
+        text += formatInteger(ancientSpend) + "/" + formatInteger(clDto.misc.herosouls.rerollSpend) + "; ";
     }
 
-    text += "Total: " + formatNumber(ancientSpend + clDto.misc.herosouls.rerollSpend + clDto.misc.herosouls.current) + ") ";
+    text += "Total: " + formatInteger(ancientSpend + clDto.misc.herosouls.rerollSpend + clDto.misc.herosouls.current) + ") ";
     
-    text += "HZE: " + formatNumber(clDto.misc.zones.hze) + "; ";
-    text += "Current Zone: " + formatNumber(clDto.misc.zones.current) + "; ";
-    text += "Ascensions: " + formatNumber(clDto.misc.ascensions) + "; ";
+    text += "HZE: " + formatInteger(clDto.misc.zones.hze) + "; ";
+    text += "Current Zone: " + formatInteger(clDto.misc.zones.current) + "; ";
+    text += "Ascensions: " + formatInteger(clDto.misc.ascensions) + "; ";
 
     if(outputFormatDto.general.minMiscSection)
     {
@@ -343,14 +397,15 @@ function miscText()
     {
         text += "Immortal Damage: " 
     }
-    text += formatNumber(clDto.misc.immortalDamage) + "; ";
+    text += formatInteger(clDto.misc.immortalDamage) + "; ";
 
     if(!outputFormatDto.general.minMiscSection)
     {
-        text += "Rubies: " + formatNumber(clDto.misc.rubies) + "; ";
-        text += "Forge Cores: " + formatNumber(clDto.relics.forgeCores) + "; ";
-        text += "Total Relics Found: " + formatNumber(clDto.relics.totalRelicsReceived) + "; ";
+        text += "Rubies: " + formatInteger(clDto.misc.rubies) + "; ";
+        text += "Forge Cores: " + formatInteger(clDto.relics.forgeCores) + "; ";
+        text += "Total Relics Found: " + formatInteger(clDto.relics.totalRelicsReceived) + "; ";
         text += "Achievements: " + Math.floor(clDto.misc.achievementCount/numberOfAchievementsPossible*100) +"%; ";
+        text += "Lifetime Achievements: " + Math.floor(clDto.misc.lifetimeAchievementCount/numberOfAchievementsPossible*100) +"%; ";
     }
 
     return text;
@@ -674,6 +729,11 @@ function solomonBonus(level) {
     else if (level >= 81)                return (level-80)*1 + solomonBonus(80);
     
     return level*5; //level 0-20
+}
+
+function formatInteger(number)
+{
+    return formatNumber(Math.round(number));
 }
 
 function formatNumber(number)

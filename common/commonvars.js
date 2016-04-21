@@ -8,6 +8,13 @@
 
 var numberOfAchievementsPossible=149; //counted 2/28/2016 in Steam.
 
+var outsidersMap = {
+    1:{name:"Xyliqil"},
+    2:{name:"Chor'gorloth"},
+    3:{name:"Phandoryss"},
+    4:{name:"Borb"},
+    5:{name:"Ponyboy"}};
+
 // map from game id to object describing ancient.   Allows for game to change id scheme.
 var ancientsMap = {
     3:{name:"Solomon"       ,maxLevel:"None"},
