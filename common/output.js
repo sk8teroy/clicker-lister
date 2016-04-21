@@ -566,10 +566,10 @@ function relicText() {
         text += outputFormatDto.general.redditMarkDown ? "* " : "";
         text += oneRelic.name.split(" of")[0] + ": ";
         text += oneRelic.rarity + " ";
-        text += "Lvl " + oneRelic.level + ", ";
+        text += "Lvl " + oneRelic.level.toFixed(2) + ", ";
 
         oneRelic.bonus.forEach(function (oneBonus) {
-            text += "+" + oneBonus.levels + " ";
+            text += "+" + oneBonus.levels.toFixed(2) + " ";
             ancientName = abilitiesMap[oneBonus.abilityId].ancient;
             text += outputFormatDto.ancients.shortNames ? ancientName.substring(0,4) : ancientName;
             text += ", ";
@@ -633,14 +633,14 @@ function relicAbilitiesText() {
         text += outputFormatDto.general.redditMarkDown ? "* " : "";
         if(outputFormatDto.items.showRelicBonusAncients)
         {
-            text += "+" + oneBonus.level + " ";
+            text += "+" + oneBonus.level.toFixed(2) + " ";
             text += outputFormatDto.ancients.shortNames ? ability.ancient.substring(0,4) : ability.ancient;
             text += " ";
         }        
 
         if(outputFormatDto.items.showRelicBonusAbilities)
         {
-            var boost = effectPower(ability, oneBonus.level);
+            var boost = effectPower(ability, oneBonus.level).toFixed(2);
             effectText = ability.effectDescription.replace("%1", boost);
             
             if(outputFormatDto.general.redditMarkDown)
