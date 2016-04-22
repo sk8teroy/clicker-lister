@@ -200,7 +200,7 @@ function oneAncientText(oneAncient, showLevel)
             }
             else
             {
-                text += ":" + formatNumber(oneAncient.level.toFixed(2));
+                text += ":" + formatInteger(oneAncient.level);
             }
         }
         else
@@ -211,7 +211,7 @@ function oneAncientText(oneAncient, showLevel)
             }
             else
             {
-                text += " (" + formatNumber(oneAncient.level.toFixed(2)) + ")";
+                text += " (" + formatInteger(oneAncient.level) + ")";
             }
         }
     }
