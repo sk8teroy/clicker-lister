@@ -62,17 +62,12 @@ function updateOutputStyle(fCurrentStyle) {
         $('#numberFormat option[value="Comma"]').prop('selected', true);
         $("#heroShortNames").prop('checked', false);
         $("#showRelicBonusAncients").prop('checked', true);
-        $("#showRelicBonusAbilities").prop('checked', true);
+        $("#showRelicBonusAbilities").prop('checked', false); //turn off for beta because calcs are off
         $("#showRelics").prop('checked', false);
         $("#ancientShortNames").prop('checked', false);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
         $("#separateMaxedAncients").prop('checked', true);
         $("#showUnsummonedAncients").prop('checked', true);
-
-        // vs options now top level, not part of reddit vs. kong styles
-        // $("#vsIdleRot").prop('checked', false);
-        // $("#vsHybridRot").prop('checked', false);
-        // $("#vsActiveRot").prop('checked', false);
     }
     else if(fCurrentStyle=="kong")
     {
