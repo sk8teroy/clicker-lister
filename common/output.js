@@ -354,7 +354,7 @@ function getTP()
         }
     });
 
-    return clDto.ancientSouls.totalAS *1.0/100.0 + phanLevel*0.25;
+    return clDto.ancientSouls.totalAS * 5.0/100.0 + phanLevel*0.1;
 }
 
 function miscText()
