@@ -542,10 +542,10 @@ function deltaLine(targetValue, ancientName, ancientLevel) {
     text = "";
 
     deltaLevels = ancientLevel - targetValue;
-    deltaLevelsString = (deltaLevels >=0 ? "+" : "" ) + formatNumber(deltaLevels);
+    deltaLevelsString = (deltaLevels >=0 ? "+" : "" ) + formatInteger(deltaLevels);
     deltaPercent = deltaLevels/targetValue*100;
     deltaPercentString = (deltaPercent>=0 ? "+" : "") + Math.floor(deltaPercent) + "%";
-    text += ancientName + " | " + formatNumber(ancientLevel) + " | " + deltaPercentString + " | " + deltaLevelsString + "\n";
+    text += ancientName + " | " + formatInteger(ancientLevel) + " | " + deltaPercentString + " | " + deltaLevelsString + "\n";
 
     return text;
 }
