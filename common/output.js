@@ -405,7 +405,7 @@ function miscText()
         text += "Forge Cores: " + formatInteger(clDto.relics.forgeCores) + "; ";
         text += "Total Relics Found: " + formatInteger(clDto.relics.totalRelicsReceived) + "; ";
         text += "Achievements: " + Math.floor(clDto.misc.achievementCount/numberOfAchievementsPossible*100) +"%; ";
-        text += "Lifetime Achievements: " + Math.floor(clDto.misc.lifetimeAchievementCount/numberOfAchievementsPossible*100) +"%; ";
+//        text += "Lifetime Achievements: " + Math.floor(clDto.misc.lifetimeAchievementCount/numberOfAchievementsPossible*100) +"%; ";
     }
 
     return text;
