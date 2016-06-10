@@ -73,9 +73,9 @@ var abilitiesMap = {
     22:{ "id":22 ,"name":"Greed"        ,"ancient":"Mammon"       ,"upgradePerLevel":5     ,"effectDescription":"+%1% Gold Dropped"          ,"sortOrder":79},
     24:{ "id":24 ,"name":"Freedom"      ,"ancient":"Libertas"     ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% Idle Gold"             ,"sortOrder":80},
     25:{ "id":25 ,"name":"Wisdom"       ,"ancient":"Solomon"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% Primal Hero Souls"     ,"sortOrder":81},
-    26:{ "id":26 ,"name":"Momentum"       ,"ancient":"Juggernaut"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":82}, //guess on spot
+    26:{ "id":26 ,"name":"Momentum"     ,"ancient":"Juggernaut"   ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":82}, 
     27:{ "id":27 ,"name":"Shadows"      ,"ancient":"Kumawakamaru" ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":83},
-    28:{ "id":28 ,"name":"Impatience"   ,"ancient":"Vaagur"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":84},
+    28:{ "id":28 ,"name":"Impatience"   ,"ancient":"Vaagur"       ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":84},
     29:{ "id":29 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":85},
     30:{ "id":30 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":86},
     31:{ "id":31 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":87},
