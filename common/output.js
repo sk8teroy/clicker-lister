@@ -354,7 +354,7 @@ function getTP()
         }
     });
 
-    return clDto.ancientSouls.totalAS * 5.0/100.0 + phanLevel*0.1;
+    return 1 + 49*(1 - Math.pow(Math.E,(-0.0001*clDto.ancientSouls.totalAS))) + 50*(1 - Math.pow(Math.E,(-0.001*phanLevel)))
 }
 
 function miscText()
