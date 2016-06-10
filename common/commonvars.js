@@ -54,7 +54,7 @@ var abilitiesMap = {
     3:{  "id":3  ,"name":"Time"         ,"ancient":"Chronos"      ,"upgradePerLevel":5     ,"effectDescription":"+%1s Boss timers"           ,"sortOrder":72},
     4:{  "id":4  ,"name":"Agitation"    ,"ancient":"Chawedo"      ,"upgradePerLevel":2     ,"effectDescription":"+%1s Clickstorm"            ,"sortOrder":40},
     5:{  "id":5  ,"name":"Luck"         ,"ancient":"Revolc"       ,"upgradePerLevel":1     ,"effectDescription":"+%1% Double Rubies Chance"  ,"sortOrder":3},
-    6:{  "id":6  ,"name":"Vision"       ,"ancient":"Iris"         ,"upgradePerLevel":1     ,"effectDescription":"+%1 Starting Zone"          ,"sortOrder":73},
+    6:{  "id":6  ,"name":"Vision"       ,"ancient":"Iris"         ,"upgradePerLevel":1     ,"effectDescription":"+%1 Starting Zone"          ,"sortOrder":73}, //out in 1.0
     7:{  "id":7  ,"name":"Enhancement"  ,"ancient":"Argaiv"       ,"upgradePerLevel":2     ,"effectDescription":"+%1% Gild Damage"           ,"sortOrder":74},
     8:{  "id":8  ,"name":"Battery Life" ,"ancient":"Energon"      ,"upgradePerLevel":2     ,"effectDescription":"+%1s Metal Detector"        ,"sortOrder":41},
     9:{  "id":9  ,"name":"Thieves"      ,"ancient":"Kleptos"      ,"upgradePerLevel":2     ,"effectDescription":"+%1s Golden Clicks"         ,"sortOrder":42},
@@ -72,7 +72,14 @@ var abilitiesMap = {
     21:{ "id":21 ,"name":"Riches"       ,"ancient":"Mimzee"       ,"upgradePerLevel":50    ,"effectDescription":"+%1% Treasure Chest Gold"   ,"sortOrder":78},
     22:{ "id":22 ,"name":"Greed"        ,"ancient":"Mammon"       ,"upgradePerLevel":5     ,"effectDescription":"+%1% Gold Dropped"          ,"sortOrder":79},
     24:{ "id":24 ,"name":"Freedom"      ,"ancient":"Libertas"     ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% Idle Gold"             ,"sortOrder":80},
-    25:{ "id":25 ,"name":"Wisdom"       ,"ancient":"Solomon"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% Primal Hero Souls"     ,"sortOrder":81}
+    25:{ "id":25 ,"name":"Wisdom"       ,"ancient":"Solomon"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% Primal Hero Souls"     ,"sortOrder":81},
+    26:{ "id":26 ,"name":"Momentum"       ,"ancient":"Juggernaut"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":82}, //guess on spot
+    27:{ "id":27 ,"name":"Shadows"      ,"ancient":"Kumawakamaru" ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":83},
+    28:{ "id":28 ,"name":"Impatience"   ,"ancient":"Vaagur"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":84},
+    29:{ "id":29 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":85},
+    30:{ "id":30 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":86},
+    31:{ "id":31 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":87},
+    32:{ "id":32 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":88}
 };
 
 
