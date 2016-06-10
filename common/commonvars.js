@@ -76,6 +76,7 @@ var abilitiesMap = {
     26:{ "id":26 ,"name":"Momentum"     ,"ancient":"Juggernaut"   ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"                  ,"sortOrder":82}, 
     27:{ "id":27 ,"name":"Shadows"      ,"ancient":"Kumawakamaru" ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"                  ,"sortOrder":83},
     28:{ "id":28 ,"name":"Impatience"   ,"ancient":"Vaagur"       ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"                  ,"sortOrder":84},
+//following lines allow more relic abilities without breaking the clicker lister.   They are non-functional in 1.0
     29:{ "id":29 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":85},
     30:{ "id":30 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":86},
     31:{ "id":31 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":87},
