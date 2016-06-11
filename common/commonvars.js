@@ -74,7 +74,7 @@ var abilitiesMap = {
     24:{ "id":24 ,"name":"Freedom"      ,"ancient":"Libertas"     ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% Idle Gold"             ,"sortOrder":80},
     25:{ "id":25 ,"name":"Wisdom"       ,"ancient":"Solomon"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% Primal Hero Souls"     ,"sortOrder":81},
     26:{ "id":26 ,"name":"Momentum"     ,"ancient":"Juggernaut"   ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"                  ,"sortOrder":82}, 
-    27:{ "id":27 ,"name":"Shadows"      ,"ancient":"Kumawakamaru" ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"                  ,"sortOrder":83},
+    27:{ "id":27 ,"name":"Shadows"      ,"ancient":"Kumawakamaru" ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"                  ,"sortOrder":3},
     28:{ "id":28 ,"name":"Impatience"   ,"ancient":"Vaagur"       ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"                  ,"sortOrder":84},
 //following lines allow more relic abilities without breaking the clicker lister.   They are non-functional in 1.0
     29:{ "id":29 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":85},
