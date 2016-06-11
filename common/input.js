@@ -33,6 +33,9 @@ function readSaveData(data)
     var ascensionTime = jsonPath(data, '$..startTimestamp');
     clDto.misc.time.ascension = ascensionTime ? ascensionTime[0] : 0;
 
+    var transcensionTime = jsonPath(data, '$..transcensionTimestamp');
+    clDto.misc.time.transcension = transcensionTime ? transcensionTime[0] : 0;
+
     //Ancient Souls - outsiders, etc.
     clDto.ancientSouls = {};
     var currentAncientSouls = jsonPath(data, '$..ancientSouls');

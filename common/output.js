@@ -417,12 +417,21 @@ function timeText() {
 
     currentTime = new Date().getTime();
     timeSinceCreation = +currentTime - +clDto.misc.time.creation;
+    timeSinceTranscension = +currentTime - +clDto.misc.time.transcension;
     timeSinceAscension = +currentTime - +clDto.misc.time.ascension;
 
     
     text += "Since Start: " + formatElapsedTime(timeSinceCreation, true) + "; ";
-    text += "Since Ascension: " + formatElapsedTime(timeSinceAscension, false) + "; ";
-    
+
+    if(clDto.misc.time.transcension > 0)
+    {
+        text += "Since Transcension: " + formatElapsedTime(timeSinceAscension, false) + "; ";
+    }
+    if(clDto.misc.time.ascension > 0)
+    {
+        text += "Since Ascension: " + formatElapsedTime(timeSinceAscension, false) + "; ";
+    }
+
     return text;
 }
 
