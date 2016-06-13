@@ -6,7 +6,8 @@
 	==================================================
 */
 
-var numberOfAchievementsPossible=149; //counted 2/28/2016 in Steam.
+//var numberOfAchievementsPossible=149; //counted 2/28/2016 in Steam. v0.26
+var numberOfAchievementsPossible=161; //counted 6/13/2016 in Steam. v1.0
 
 var outsidersMap = {
     1:{name:"Xyliqil"},
