@@ -425,7 +425,7 @@ function timeText() {
 
     if(clDto.misc.time.transcension > 0)
     {
-        text += "Since Transcension: " + formatElapsedTime(timeSinceAscension, false) + "; ";
+        text += "Since Transcension: " + formatElapsedTime(timeSinceTranscension, false) + "; ";
     }
     if(clDto.misc.time.ascension > 0)
     {
