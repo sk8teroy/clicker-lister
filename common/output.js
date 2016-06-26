@@ -79,8 +79,6 @@ function getClickerListerText()
         text += vsActiveText();
     }
 
-    //todo active
-
 //    text += "\n\n" + headingStyle("Made with") + " [clicker-lister](http://alexbonjour.github.io/clicker-lister)";
 
     return wrapText(text);
@@ -219,7 +217,7 @@ function oneAncientText(oneAncient, showLevel)
     return text;
 }
 
-function maxText()
+function maxText() //unused as of 1.0.  no max ancients.
 {
     if(numberOfAncientsSummoned() == 0)
     {
@@ -268,12 +266,14 @@ function unsummonedText()
 
     unsummonedNames = [];
     for (var key in ancientsMap) {
-        if (ancientsMap.hasOwnProperty(key)) {
+        if (ancientsMap.hasOwnProperty(key)
+           && ancientsMap[key].showInUnsummoned) {
             unsummonedNames.push(ancientsMap[key].name);
         }
     }
     
     //unsummonedNames contains all ancient names now.
+
     for (var key in clDto.ancientMap) {
         var index = unsummonedNames.indexOf(key);
         if( index >= 0 )

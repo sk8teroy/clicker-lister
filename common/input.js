@@ -103,15 +103,15 @@ function readSaveData(data)
         ancient.name = ancientsMap[this.id] ? ancientsMap[this.id].name : "ERROR";
         ancient.level = +this.level;
         ancient.spentHeroSouls = +this.spentHeroSouls;
-        
-        if(ancientsMap[this.id].maxLevel == "None")
-        {
-            ancient.isMax = false;
-        }
-        else
-        {
-            ancient.isMax = this.level == ancientsMap[this.id].maxLevel;
-        }
+        ancient.isMax = false; //all ancients in 1.0 are not at max level
+        // if(ancientsMap[this.id].maxLevel == "None")
+        // {
+        //     ancient.isMax = false;
+        // }
+        // else
+        // {
+        //     ancient.isMax = this.level == ancientsMap[this.id].maxLevel;
+        // }
         
         clDto.ancientMap[ancient.name] = ancient;
     });
