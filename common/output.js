@@ -38,11 +38,6 @@ function getClickerListerText()
 
     text += ancientText(sortedAncientNames);
 
-    if(outputFormatDto.ancients.separateMaxedAncients)
-    {
-        text += maxText();
-    }
-
     if(outputFormatDto.ancients.showUnsummonedAncients)
     {
         text += unsummonedText();
@@ -160,13 +155,8 @@ function ancientText(sortedAncientNames)
 
     sortedAncientNames.forEach( function (oneName) {
         oneAncient = clDto.ancientMap[oneName];
-        if(!outputFormatDto.ancients.separateMaxedAncients
-           || 
-           !oneAncient.isMax)
-        {
-            text += oneAncientText(oneAncient, true);
-            text += ", ";
-        }    
+        text += oneAncientText(oneAncient, true);
+        text += ", ";
     });
 
     text = text.substring(0,text.length-2);
@@ -192,68 +182,14 @@ function oneAncientText(oneAncient, showLevel)
     {
         if(outputFormatDto.ancients.shortNames)
         {
-            if(oneAncient.isMax)
-            {
-                text += ":MAX";
-            }
-            else
-            {
-                text += ":" + formatInteger(oneAncient.level);
-            }
+            text += ":" + formatInteger(oneAncient.level);
         }
         else
         {
-            if(oneAncient.isMax)
-            {
-                text += " (MAX)";
-            }
-            else
-            {
-                text += " (" + formatInteger(oneAncient.level) + ")";
-            }
+            text += " (" + formatInteger(oneAncient.level) + ")";
         }
     }
     
-    return text;
-}
-
-function maxText() //unused as of 1.0.  no max ancients.
-{
-    if(numberOfAncientsSummoned() == 0)
-    {
-        return "";
-    }
-
-    maxedAncients = [];
-    
-    for (var key in clDto.ancientMap) {
-        if(outputFormatDto.ancients.separateMaxedAncients
-           && 
-           clDto.ancientMap.hasOwnProperty(key)
-           &&
-           clDto.ancientMap[key].isMax)
-        {
-            maxedAncients.push(clDto.ancientMap[key]);
-        }   
-    }
-    
-    if(maxedAncients.length == 0)
-    {
-        return "";
-    }
-
-    text = "\n\n";
-    text += headingStyle("Max");
-
-    maxedAncients.sort(function(a, b){
-        return a.name == b.name ? 0 : +(a.name > b.name) || -1;
-    });
-    
-    maxedAncients.forEach( function (oneAncient) {
-        text += oneAncientText(oneAncient, false) + ", ";            
-    });
-
-    text = text.substring(0,text.length-2) + ";";
     return text;
 }
 

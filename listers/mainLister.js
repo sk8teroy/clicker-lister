@@ -25,7 +25,6 @@ function loadOutputFormatFromGui()
     outputFormatDto.ancients= {};
     outputFormatDto.ancients.shortNames = $("#ancientShortNames").is(':checked'); 
     outputFormatDto.ancients.ancientSortOrder = $("#ancientSortOrder option:selected").val();  
-    outputFormatDto.ancients.separateMaxedAncients = $("#separateMaxedAncients").is(':checked'); 
     outputFormatDto.ancients.showUnsummonedAncients = $("#showUnsummonedAncients").is(':checked'); 
 }
 
@@ -66,7 +65,6 @@ function updateOutputStyle(fCurrentStyle) {
         $("#showRelics").prop('checked', false);
         $("#ancientShortNames").prop('checked', false);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
-        $("#separateMaxedAncients").prop('checked', true);
         $("#showUnsummonedAncients").prop('checked', true);
     }
     else if(fCurrentStyle=="kong")
@@ -83,7 +81,6 @@ function updateOutputStyle(fCurrentStyle) {
         $("#showRelics").prop('checked', false);
         $("#ancientShortNames").prop('checked', true);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
-        $("#separateMaxedAncients").prop('checked', true);
         $("#showUnsummonedAncients").prop('checked', false);
 
         // vs options now top level, not part of reddit vs. kong styles
