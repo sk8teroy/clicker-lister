@@ -671,7 +671,7 @@ function formula10Bonus(ancientName,level) {
     if(!formula10Parameters.hasOwnProperty(ancientName))
         return 0;
 
-    return formula10Parameters[ancientName].a * (1 - Math.exp(-1*formula10Parameters[ancientName].c*level));
+    return formula10Parameters[ancientName].a * (1.0 - Math.exp(-1.0*formula10Parameters[ancientName].c*level));
 }
 
 function siyLibBonus(level) {
