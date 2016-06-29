@@ -66,7 +66,7 @@ var abilitiesMap = {
     6:{  "id":6  ,"name":"Vision"       ,"ancient":"Iris"         ,"upgradePerLevel":1            ,"effectDescription":"+%1 Starting Zone"          ,"sortOrder":73}, //out in 1.0
     26:{ "id":26 ,"name":"Momentum"     ,"ancient":"Juggernaut"   ,"upgradePerLevel":0.01         ,"effectDescription":"+%1% DPS/Click"             ,"sortOrder":82},
     9:{  "id":9  ,"name":"Thieves"      ,"ancient":"Kleptos"      ,"upgradePerLevel":2            ,"effectDescription":"+%1s Golden Clicks"         ,"sortOrder":42},
-    27:{ "id":27 ,"name":"Shadows"      ,"ancient":"Kumawakamaru" ,"upgradePerLevel":"1.0formula" ,"effectDescription":"-%1% Monsters/Level"        ,"sortOrder":3}, 
+    27:{ "id":27 ,"name":"Shadows"      ,"ancient":"Kumawakamaru" ,"upgradePerLevel":"1.0formula" ,"effectDescription":"-%1 Monsters/Level"        ,"sortOrder":3}, 
     24:{ "id":24 ,"name":"Freedom"      ,"ancient":"Libertas"     ,"upgradePerLevel":"siylib"     ,"effectDescription":"+%1% Idle Gold"             ,"sortOrder":80}, //check
     22:{ "id":22 ,"name":"Greed"        ,"ancient":"Mammon"       ,"upgradePerLevel":5            ,"effectDescription":"+%1% Gold Dropped"          ,"sortOrder":79},
     21:{ "id":21 ,"name":"Riches"       ,"ancient":"Mimzee"       ,"upgradePerLevel":50           ,"effectDescription":"+%1% Treasure Chest Gold"   ,"sortOrder":78},
