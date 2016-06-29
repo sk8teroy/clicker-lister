@@ -608,12 +608,28 @@ function relicAbilitiesText() {
 }
 
 function effectPower(ability, upgradeLevels) {
-    if(ability.upgradePerLevel != "n/a")
+
+
+    if(!isNaN(ability.upgradePerLevel))
     {
         return upgradeLevels * ability.upgradePerLevel;
     }
 
-   
+    if(ability.upgradePerLevel == "1.0formula")
+    {
+        var baseLevel = 0;
+        if(clDto.ancientMap.hasOwnProperty(ability.ancient))
+        {
+            baseLevel = clDto.ancientMap[ability.ancient].level;
+        }
+
+        console.log(ability.ancient + " base:  " + formula10Bonus(ability.ancient, baseLevel));
+        console.log(ability.ancient + " base+: " + formula10Bonus(ability.ancient, baseLevel + upgradeLevels));
+
+        return formula10Bonus(ability.ancient, baseLevel + upgradeLevels) - formula10Bonus(ability.ancient, baseLevel);
+    }
+
+
     if(ability.ancient == "Solomon")
     {
         var solomonLevel = 0;
@@ -648,6 +664,14 @@ function effectPower(ability, upgradeLevels) {
     }
 
     return 0;
+}
+
+function formula10Bonus(ancientName,level) {
+
+    if(!formula10Parameters.hasOwnProperty(ancientName))
+        return 0;
+
+    return formula10Parameters[ancientName].a * (1 - Math.exp(-1*formula10Parameters[ancientName].c*level));
 }
 
 function siyLibBonus(level) {

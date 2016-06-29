@@ -50,33 +50,33 @@ var ancientsMap = {
 };
 
 var abilitiesMap = {
-    1:{  "id":1  ,"name":"Abandonment"  ,"ancient":"Siyalatas"    ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% Idle DPS"              ,"sortOrder":70},
-    2:{  "id":2  ,"name":"Wrath"        ,"ancient":"Fragsworth"   ,"upgradePerLevel":20    ,"effectDescription":"+%1% Click Damage"          ,"sortOrder":71},
-    3:{  "id":3  ,"name":"Time"         ,"ancient":"Chronos"      ,"upgradePerLevel":5     ,"effectDescription":"+%1s Boss timers"           ,"sortOrder":72},
-    4:{  "id":4  ,"name":"Agitation"    ,"ancient":"Chawedo"      ,"upgradePerLevel":2     ,"effectDescription":"+%1s Clickstorm"            ,"sortOrder":40},
-    5:{  "id":5  ,"name":"Luck"         ,"ancient":"Revolc"       ,"upgradePerLevel":1     ,"effectDescription":"+%1% Double Rubies Chance"  ,"sortOrder":6},
-    6:{  "id":6  ,"name":"Vision"       ,"ancient":"Iris"         ,"upgradePerLevel":1     ,"effectDescription":"+%1 Starting Zone"          ,"sortOrder":73}, //out in 1.0
-    7:{  "id":7  ,"name":"Enhancement"  ,"ancient":"Argaiv"       ,"upgradePerLevel":2     ,"effectDescription":"+%1% Gild Damage"           ,"sortOrder":74},
-    8:{  "id":8  ,"name":"Battery Life" ,"ancient":"Energon"      ,"upgradePerLevel":2     ,"effectDescription":"+%1s Metal Detector"        ,"sortOrder":41},
-    9:{  "id":9  ,"name":"Thieves"      ,"ancient":"Kleptos"      ,"upgradePerLevel":2     ,"effectDescription":"+%1s Golden Clicks"         ,"sortOrder":42},
-    10:{ "id":10 ,"name":"Accuracy"     ,"ancient":"Sniperino"    ,"upgradePerLevel":2     ,"effectDescription":"+%1s Lucky Strikes"         ,"sortOrder":43},
-    11:{ "id":11 ,"name":"Rage"         ,"ancient":"Berserker"    ,"upgradePerLevel":2     ,"effectDescription":"+%1s Powersurge"            ,"sortOrder":44},
-    12:{ "id":12 ,"name":"Wallops"      ,"ancient":"Hecatoncheir" ,"upgradePerLevel":2     ,"effectDescription":"+%1s Super Clicks"          ,"sortOrder":45},
-    13:{ "id":13 ,"name":"Diseases"     ,"ancient":"Bubos"        ,"upgradePerLevel":2     ,"effectDescription":"-%1% Boss Life"             ,"sortOrder":12},
-    14:{ "id":14 ,"name":"Death"        ,"ancient":"Morgulis"     ,"upgradePerLevel":11    ,"effectDescription":"+%1% Hero Soul DPS"         ,"sortOrder":75},
-    15:{ "id":15 ,"name":"Murder"       ,"ancient":"Bhaal"        ,"upgradePerLevel":15    ,"effectDescription":"+%1% Critical Click Damage" ,"sortOrder":76},
-    16:{ "id":16 ,"name":"Discovery"    ,"ancient":"Dora"         ,"upgradePerLevel":20    ,"effectDescription":"+%1% Treasure Chests"       ,"sortOrder":10},
-    17:{ "id":17 ,"name":"Souls"        ,"ancient":"Atman"        ,"upgradePerLevel":1     ,"effectDescription":"+%1% Primal Boss Chance"    ,"sortOrder":2},
-    18:{ "id":18 ,"name":"Chance"       ,"ancient":"Fortuna"      ,"upgradePerLevel":0.25  ,"effectDescription":"+%1% 10x Gold Chance"       ,"sortOrder":8},
-    19:{ "id":19 ,"name":"Thrift"       ,"ancient":"Dogcog"       ,"upgradePerLevel":2     ,"effectDescription":"-%1% Hero Cost"             ,"sortOrder":4},
-    20:{ "id":20 ,"name":"Wealth"       ,"ancient":"Pluto"        ,"upgradePerLevel":30    ,"effectDescription":"+%1% Golden Clicks Gold"    ,"sortOrder":77},
-    21:{ "id":21 ,"name":"Riches"       ,"ancient":"Mimzee"       ,"upgradePerLevel":50    ,"effectDescription":"+%1% Treasure Chest Gold"   ,"sortOrder":78},
-    22:{ "id":22 ,"name":"Greed"        ,"ancient":"Mammon"       ,"upgradePerLevel":5     ,"effectDescription":"+%1% Gold Dropped"          ,"sortOrder":79},
-    24:{ "id":24 ,"name":"Freedom"      ,"ancient":"Libertas"     ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% Idle Gold"             ,"sortOrder":80},
-    25:{ "id":25 ,"name":"Wisdom"       ,"ancient":"Solomon"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% Primal Hero Souls"     ,"sortOrder":81},
-    26:{ "id":26 ,"name":"Momentum"     ,"ancient":"Juggernaut"   ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"                  ,"sortOrder":82}, 
-    27:{ "id":27 ,"name":"Shadows"      ,"ancient":"Kumawakamaru" ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"                  ,"sortOrder":3},
-    28:{ "id":28 ,"name":"Impatience"   ,"ancient":"Vaagur"       ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"                  ,"sortOrder":84},
+    7:{  "id":7  ,"name":"Enhancement"  ,"ancient":"Argaiv"       ,"upgradePerLevel":2            ,"effectDescription":"+%1% Gild Damage"           ,"sortOrder":74},
+    17:{ "id":17 ,"name":"Souls"        ,"ancient":"Atman"        ,"upgradePerLevel":"1.0formula" ,"effectDescription":"+%1% Primal Boss Chance"    ,"sortOrder":2}, 
+    11:{ "id":11 ,"name":"Rage"         ,"ancient":"Berserker"    ,"upgradePerLevel":2            ,"effectDescription":"+%1s Powersurge"            ,"sortOrder":44},
+    15:{ "id":15 ,"name":"Murder"       ,"ancient":"Bhaal"        ,"upgradePerLevel":15           ,"effectDescription":"+%1% Critical Click Damage" ,"sortOrder":76},
+    13:{ "id":13 ,"name":"Diseases"     ,"ancient":"Bubos"        ,"upgradePerLevel":"1.0formula" ,"effectDescription":"-%1% Boss Life"             ,"sortOrder":12},
+    4:{  "id":4  ,"name":"Agitation"    ,"ancient":"Chawedo"      ,"upgradePerLevel":2            ,"effectDescription":"+%1s Clickstorm"            ,"sortOrder":40},
+    3:{  "id":3  ,"name":"Time"         ,"ancient":"Chronos"      ,"upgradePerLevel":"1.0formula" ,"effectDescription":"+%1s Boss timers"           ,"sortOrder":72},
+    19:{ "id":19 ,"name":"Thrift"       ,"ancient":"Dogcog"       ,"upgradePerLevel":"1.0formula" ,"effectDescription":"-%1% Hero Cost"             ,"sortOrder":4}, 
+    16:{ "id":16 ,"name":"Discovery"    ,"ancient":"Dora"         ,"upgradePerLevel":"1.0formula" ,"effectDescription":"+%1% Treasure Chests"       ,"sortOrder":10},
+    8:{  "id":8  ,"name":"Battery Life" ,"ancient":"Energon"      ,"upgradePerLevel":2            ,"effectDescription":"+%1s Metal Detector"        ,"sortOrder":41},
+    18:{ "id":18 ,"name":"Chance"       ,"ancient":"Fortuna"      ,"upgradePerLevel":"1.0formula" ,"effectDescription":"+%1% 10x Gold Chance"       ,"sortOrder":8},
+    2:{  "id":2  ,"name":"Wrath"        ,"ancient":"Fragsworth"   ,"upgradePerLevel":20           ,"effectDescription":"+%1% Click Damage"          ,"sortOrder":71},
+    12:{ "id":12 ,"name":"Wallops"      ,"ancient":"Hecatoncheir" ,"upgradePerLevel":2            ,"effectDescription":"+%1s Super Clicks"          ,"sortOrder":45},
+    6:{  "id":6  ,"name":"Vision"       ,"ancient":"Iris"         ,"upgradePerLevel":1            ,"effectDescription":"+%1 Starting Zone"          ,"sortOrder":73}, //out in 1.0
+    26:{ "id":26 ,"name":"Momentum"     ,"ancient":"Juggernaut"   ,"upgradePerLevel":0.01         ,"effectDescription":"+%1% DPS/Click"             ,"sortOrder":82},
+    9:{  "id":9  ,"name":"Thieves"      ,"ancient":"Kleptos"      ,"upgradePerLevel":2            ,"effectDescription":"+%1s Golden Clicks"         ,"sortOrder":42},
+    27:{ "id":27 ,"name":"Shadows"      ,"ancient":"Kumawakamaru" ,"upgradePerLevel":"1.0formula" ,"effectDescription":"-%1  Monsters/Level"        ,"sortOrder":3}, 
+    24:{ "id":24 ,"name":"Freedom"      ,"ancient":"Libertas"     ,"upgradePerLevel":"siylib"     ,"effectDescription":"+%1% Idle Gold"             ,"sortOrder":80}, //check
+    22:{ "id":22 ,"name":"Greed"        ,"ancient":"Mammon"       ,"upgradePerLevel":5            ,"effectDescription":"+%1% Gold Dropped"          ,"sortOrder":79},
+    21:{ "id":21 ,"name":"Riches"       ,"ancient":"Mimzee"       ,"upgradePerLevel":50           ,"effectDescription":"+%1% Treasure Chest Gold"   ,"sortOrder":78},
+    14:{ "id":14 ,"name":"Death"        ,"ancient":"Morgulis"     ,"upgradePerLevel":11           ,"effectDescription":"+%1% Hero Soul DPS"         ,"sortOrder":75},
+    20:{ "id":20 ,"name":"Wealth"       ,"ancient":"Pluto"        ,"upgradePerLevel":30           ,"effectDescription":"+%1% Golden Clicks Gold"    ,"sortOrder":77},
+    5:{  "id":5  ,"name":"Luck"         ,"ancient":"Revolc"       ,"upgradePerLevel":"1.0formula" ,"effectDescription":"+%1% Double Rubies Chance"  ,"sortOrder":6}, 
+    1:{  "id":1  ,"name":"Abandonment"  ,"ancient":"Siyalatas"    ,"upgradePerLevel":"siylib"     ,"effectDescription":"+%1% Idle DPS"              ,"sortOrder":70}, //check
+    10:{ "id":10 ,"name":"Accuracy"     ,"ancient":"Sniperino"    ,"upgradePerLevel":2            ,"effectDescription":"+%1s Lucky Strikes"         ,"sortOrder":43},
+    25:{ "id":25 ,"name":"Wisdom"       ,"ancient":"Solomon"      ,"upgradePerLevel":"solomon"    ,"effectDescription":"+%1% Primal Hero Souls"     ,"sortOrder":81}, //check
+    28:{ "id":28 ,"name":"Impatience"   ,"ancient":"Vaagur"       ,"upgradePerLevel":"1.0formula" ,"effectDescription":"-%1% Cooldown Cost"         ,"sortOrder":84}, 
 //following lines allow more relic abilities without breaking the clicker lister.   They are non-functional in 1.0
     29:{ "id":29 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":85},
     30:{ "id":30 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":86},
@@ -84,6 +84,17 @@ var abilitiesMap = {
     32:{ "id":32 ,"name":"???"       ,"ancient":"???"      ,"upgradePerLevel":"n/a" ,"effectDescription":"+%1% ????"     ,"sortOrder":88}
 };
 
+var formula10Parameters = {
+    Atman:{ a:75, c:0.013},
+    Bubos:{ a:50, c:0.02},
+    Chronos:{ a:30, c:0.034},
+    Dogcog:{ a:99, c:0.01},
+    Dora:{ a:9900, c:0.002},
+    Fortuna:{ a:100, c:0.0025},
+    Kumawakamaru:{ a:8, c:0.01},
+    Revolc:{ a:100, c:0.01},
+    Vaagur:{ a:75, c:0.026},
+};
 
 var heroesMap = {  //game-id:info about hereos
     1:{name: "Cid", cost: 5, damage: 0, level: 0, upgradeCosts: [100, 250, 1e3, 8e3, 80e3, 400e3, 4e6]/*,upgradeIDs:[,,,,]*/}, 
