@@ -298,6 +298,7 @@ function miscText()
     text ="\n\n";
     text += headingStyle("Misc");
 
+    text += "AS (" + clDto.ancientSouls.totalAS + "); ";
     text += "TP (" + getTP().toFixed(2) + "%); ";
 
     text += "HS (" + formatInteger(clDto.misc.herosouls.current) + "; ";
