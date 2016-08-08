@@ -301,9 +301,14 @@ function miscText()
     text += "AS (" + clDto.ancientSouls.totalAS;
     if( outputFormatDto.outsiders.show ) {
         text += outputFormatDto.general.redditMarkDown ? " *+" : " +";
-        var allAS = Math.floor(5.0 * Math.log10(clDto.misc.herosouls.sacrificed));
-        var deltaAS = allAS - clDto.ancientSouls.totalAS;
-        text += deltaAS;
+        if( clDto.misc.herosouls.sacrificed > 0 ) {
+            var allAS = Math.floor(5.0 * Math.log10(clDto.misc.herosouls.sacrificed));
+            var deltaAS = allAS - clDto.ancientSouls.totalAS;
+            text += deltaAS;
+        }
+        else {
+            text += "0";
+        }
         text += outputFormatDto.general.redditMarkDown ? "*" : "";
     }
     text += "); ";
