@@ -22,19 +22,22 @@ function loadOutputFormatFromGui()
     outputFormatDto.items.showRelicBonusAbilities = $("#showRelicBonusAbilities").is(':checked'); 
     outputFormatDto.items.showRelics = $("#showRelics").is(':checked'); 
 
-    outputFormatDto.ancients= {};
+    outputFormatDto.ancients = {};
     outputFormatDto.ancients.shortNames = $("#ancientShortNames").is(':checked'); 
     outputFormatDto.ancients.ancientSortOrder = $("#ancientSortOrder option:selected").val();  
     outputFormatDto.ancients.showUnsummonedAncients = $("#showUnsummonedAncients").is(':checked'); 
+
+    outputFormatDto.outsiders = {};
+    outputFormatDto.outsiders.show = $("#showFutureAS").is(':checked');
 }
 
 function calc(){
 
     var myData = decryptSave(input.value);
 
-    // console.log("**********************************************************************");
-    // console.log(myData);
-    // console.log("**********************************************************************");
+//    console.log("**********************************************************************");
+//    console.log(myData);
+//    console.log("**********************************************************************");
 //    console.log("**********************************************************************");
 //    console.log(JSON.stringify(myData));
 //    console.log("**********************************************************************");
@@ -63,6 +66,7 @@ function updateOutputStyle(fCurrentStyle) {
         $("#showRelicBonusAncients").prop('checked', true);
         $("#showRelicBonusAbilities").prop('checked', false); //turn off for beta because calcs are off
         $("#showRelics").prop('checked', false);
+        $("#showFutureAS").prop('checked', true);
         $("#ancientShortNames").prop('checked', false);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);
         $("#showUnsummonedAncients").prop('checked', true);
@@ -78,6 +82,7 @@ function updateOutputStyle(fCurrentStyle) {
         $("#heroShortNames").prop('checked', true);
         $("#showRelicBonusAncients").prop('checked', true);
         $("#showRelicBonusAbilities").prop('checked', false);
+        $("#showFutureAS").prop('checked', true);
         $("#showRelics").prop('checked', false);
         $("#ancientShortNames").prop('checked', true);
         $('#ancientSortOrder option[value="Descending"]').prop('selected', true);

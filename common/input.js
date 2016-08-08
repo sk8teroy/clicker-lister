@@ -71,6 +71,9 @@ function readSaveData(data)
     var rerollSpend = jsonPath(data, '$..ancients.rerollSoulsSpent');
     clDto.misc.herosouls.rerollSpend = rerollSpend ? +rerollSpend[0] : 0;
 
+    var heroSoulsSacrificed = jsonPath(data, '$..heroSoulsSacrificed');
+    clDto.misc.herosouls.sacrificed = heroSoulsSacrificed ? +heroSoulsSacrificed[0] : 0;
+
     //misc.zones
     clDto.misc.zones = {};
     
