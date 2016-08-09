@@ -80,6 +80,13 @@ function readSaveData(data)
     var highestFinishedZonePersist  = jsonPath(data, '$..highestFinishedZonePersist');
     clDto.misc.zones.hze = highestFinishedZonePersist ? highestFinishedZonePersist[0] : 0;
 
+    var transcendentHighestFinishedZone  = jsonPath(data, '$..transcendentHighestFinishedZone');
+    clDto.misc.zones.hzeEver = transcendentHighestFinishedZone ? transcendentHighestFinishedZone[0] : 0;
+    
+    if( clDto.misc.zones.hzeEver < clDto.misc.zones.hze ) {
+        clDto.misc.zones.hzeEver = clDto.misc.zones.hze;
+    }
+
     var currentZoneHeight  = jsonPath(data, '$..currentZoneHeight');
     clDto.misc.zones.current = currentZoneHeight ? currentZoneHeight[0] : 1;
     

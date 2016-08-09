@@ -335,7 +335,8 @@ function miscText()
 
     text += "Total: " + formatInteger(ancientSpend + clDto.misc.herosouls.rerollSpend + clDto.misc.herosouls.current) + ") ";
     
-    text += "HZE: " + formatInteger(clDto.misc.zones.hze) + "; ";
+    
+    text += "HZE: " + formatInteger(clDto.misc.zones.hze) + "/" + formatInteger(clDto.misc.zones.hzeEver) + "; ";
     text += "Current Zone: " + formatInteger(clDto.misc.zones.current) + "; ";
     text += "Ascensions: " + formatInteger(clDto.misc.ascensions) + "; ";
 
