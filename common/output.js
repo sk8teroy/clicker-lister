@@ -302,7 +302,8 @@ function miscText()
     if( outputFormatDto.outsiders.show ) {
         text += outputFormatDto.general.redditMarkDown ? " *+" : " +";
         if( clDto.misc.herosouls.sacrificed > 0 ) {
-            var allAS = Math.floor(5.0 * Math.log10(clDto.misc.herosouls.sacrificed));
+            var allHS = clDto.misc.herosouls.sacrificed + spentOnAncients() + clDto.misc.herosouls.rerollSpend;
+            var allAS = Math.floor(5.0 * Math.log10(allHS));
             var deltaAS = allAS - clDto.ancientSouls.totalAS;
             text += deltaAS;
         }
@@ -316,11 +317,7 @@ function miscText()
 
     text += "HS (" + formatInteger(clDto.misc.herosouls.current) + "; ";
 
-    ancientSpend = 0;
-    for (var key in clDto.ancientMap) {
-        if(clDto.ancientMap.hasOwnProperty(key))
-            ancientSpend += clDto.ancientMap[key].spentHeroSouls;
-    }
+    ancientSpend = spentOnAncients();
 
     if(outputFormatDto.general.minMiscSection)
     {
@@ -362,6 +359,17 @@ function miscText()
 
     return text;
 }
+
+function spentOnAncients() {
+    
+    var ancientSpend = 0;
+    for (var key in clDto.ancientMap) {
+        if(clDto.ancientMap.hasOwnProperty(key))
+            ancientSpend += clDto.ancientMap[key].spentHeroSouls;
+    }
+    return ancientSpend;
+}
+
 
 function timeText() {
     text = "\n\n";
