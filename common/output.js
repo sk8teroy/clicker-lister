@@ -737,22 +737,34 @@ function formatNumber(number)
     }
 
     var formatter = "";
-    var digits = number.toString().length;
-    var ACCURACY = 4; //Constant
     
-    if( outputFormatDto.general.numberFormat == "Comma" || digits < 6)
+    if( outputFormatDto.general.numberFormat == "Comma" )
     {
-        var gamenumber = number.toString().toLowerCase();
-        if( gamenumber.includes("e") )
-        {
-            formatter = number.toExponential(3);
-        }
-        else
-        {
-            formatter = numeral(number).format('0,0');
-        }
-    } 
+        formatter = formatExponential( number, 50 );
+    }
     else if (outputFormatDto.general.numberFormat == "Scientific")
+    {
+        formatter = formatExponential( number, 9 );
+    }
+    
+    return formatter;
+}
+
+function formatExponential( number, maxDigits )
+{
+    var formatter = "";
+
+    var digits = number.toString().length;
+    var gamenumber = number.toString().toLowerCase();
+    if( gamenumber.includes("e") )
+    {
+        formatter = number.toExponential(3);
+    }
+    else if( digits <= maxDigits )
+    {
+        formatter = numeral(number).format('0,0');
+    }
+    else
     {
         formatter = number.toExponential(3);
     }
