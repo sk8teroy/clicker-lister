@@ -61,7 +61,7 @@ function updateOutputStyle(fCurrentStyle) {
         $("#redditMarkDown").prop('checked', true);
         $("#maxLineLength250").prop('checked', false);
         $("#minMiscSection").prop('checked', false);
-        $('#numberFormat option[value="Comma"]').prop('selected', true);
+        $('#numberFormat option[value="Scientific"]').prop('selected', true);
         $("#heroShortNames").prop('checked', false);
         $("#showRelicBonusAncients").prop('checked', true);
         $("#showRelicBonusAbilities").prop('checked', false); //turn off for beta because calcs are off
