@@ -740,21 +740,37 @@ function formatNumber(number)
     var digits = number.toString().length;
     var ACCURACY = 4; //Constant
     
-    if(outputFormatDto.general.numberFormat == "Comma" || digits < 6){
+    if( digits < 6 )
+    {
         formatter = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }else{
+    } 
+    else if( outputFormatDto.general.numberFormat == "Comma" )
+    {
+        formatter = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    } 
+    else if (outputFormatDto.general.numberFormat == "Scientific")
+    {
+        formatter = number.toExponential(3);
+    }
+    else 
+    {
         var num = Math.round(number/(Math.pow(10,digits-ACCURACY))).toString();
-        while(num.length < ACCURACY || num.length < 3){
+        while( num.length < ACCURACY || num.length < 3 )
+        {
             num += "0";
         }
         
         //Scientific defaults
         var period = 1;
         var delimiter = 'e';
-        //Scientific
-        if(outputFormatDto.general.numberFormat == "Scientific") {
+        
+        
+        if(outputFormatDto.general.numberFormat == "Scientific") 
+        { //Scientific
             digits -= 1;
-        }else{ //Engineering
+        } 
+        else 
+        { //Engineering
             var mod = digits % 3;
             delimiter = 'E';
             if(mod == 0){
@@ -765,12 +781,14 @@ function formatNumber(number)
                 digits -= mod;
             }
         }
+
         formatter = num.substring(0,period);
         if(period < ACCURACY){
             formatter += '.' + num.substring(period,num.length);
         }
         formatter += delimiter + digits;
     }
+    
     return formatter;
 }
 
