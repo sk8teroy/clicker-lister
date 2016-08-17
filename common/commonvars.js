@@ -25,7 +25,7 @@ var ancientsMap = {
     7:{name:"Thusia"        , showInUnsummoned:false},
     8:{name:"Mammon"        , showInUnsummoned:true},
     9:{name:"Mimzee"        , showInUnsummoned:true},
-    10:{name:"Pluto"        , showInUnsummoned:true},
+    10:{name:"Pluto"        , showInUnsummoned:false},
     11:{name:"Dogcog"       , showInUnsummoned:true},
     12:{name:"Fortuna"      , showInUnsummoned:true},
     13:{name:"Atman"        , showInUnsummoned:true},
