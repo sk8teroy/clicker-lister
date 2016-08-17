@@ -769,6 +769,8 @@ function formatExponential( number, maxDigits )
         formatter = number.toExponential(3);
     }
     
+    formatter = formatter.replace( "+", "" );
+
     return formatter;
 }
 
