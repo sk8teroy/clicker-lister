@@ -302,7 +302,10 @@ function miscText()
     if( outputFormatDto.outsiders.show ) {
         text += outputFormatDto.general.redditMarkDown ? " *+" : " +";
         if( clDto.misc.herosouls.sacrificed > 0 ) {
-            var allHS = clDto.misc.herosouls.sacrificed + spentOnAncients() + clDto.misc.herosouls.rerollSpend;
+            var allHS = clDto.misc.herosouls.current 
+                + clDto.misc.herosouls.sacrificed 
+                + spentOnAncients() 
+                + clDto.misc.herosouls.rerollSpend;
             var allAS = Math.floor(5.0 * Math.log10(allHS));
             var deltaAS = allAS - clDto.ancientSouls.totalAS;
             text += deltaAS;
