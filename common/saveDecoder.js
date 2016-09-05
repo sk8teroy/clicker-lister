@@ -97,7 +97,7 @@ function sprinkle(string) {
 
 function encryptSave(string) {
     codedStr = btoa(string);
-    uniqueCode = md5(codedStr + SALT);
+    uniqueCode = CryptoJS.MD5(codedStr + SALT);
     result = sprinkle(codedStr) + ANTI_CHEAT_CODE + uniqueCode;
     return result;
 }
