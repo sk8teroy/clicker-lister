@@ -64,6 +64,8 @@ function unSprinkle(string)
     return result.join("");
 }
 
+
+
 function getHash(string)
 {
     // Split the string up. Again, not strictly necessary, might
@@ -79,3 +81,24 @@ function getHash(string)
     // functional and suitable for our uses.
     return CryptoJS.MD5(sortedcharacters + SALT);
 }
+
+function sprinkle(string) {
+    // Sprinkle adds randomized elements after every character
+    // Empty array for the result.
+    var result = "";
+    var chars =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+    for (i = 0; i < string.length; i++) {
+        result += string[i] + chars[Math.floor(Math.random() * (chars.length -
+            1))];
+    }
+    return result;
+}
+
+function encryptSave(string) {
+    codedStr = btoa(string);
+    uniqueCode = md5(codedStr + SALT);
+    result = sprinkle(codedStr) + ANTI_CHEAT_CODE + uniqueCode;
+    return result;
+}
+
